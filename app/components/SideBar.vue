@@ -1,14 +1,14 @@
 <template>
   <aside
-    class="fixed left-0 pt-8 top-0 h-screen w-72 bg-white border-r border-gray-200 flex flex-col shadow-sm">
+    class="fixed left-0 pt-8 top-0 h-screen w-72 bg-white border-r border-gray-200 flex flex-col shadow-2xl">
     <!-- Header -->
     <div class="flex items-center gap-3 p-4 border-b border-gray-100">
       <div
-        class="w-10 h-10 bg-primary/20 flex items-center justify-center rounded-md">
-        <Icon name="lucide:school" class="w-6 h-6 text-primary" />
+        class="w-10 h-10 bg-blue-600 text-white flex items-center justify-center rounded-md">
+        <Icon name="lucide:graduation-cap" class="w-6 h-6" />
       </div>
       <div>
-        <p class="font-semibold text-gray-800 leading-tight">Ibn Khaldun</p>
+        <p class="font-semibold text-blue-900 font">Ibn Khaldun</p>
         <p class="text-sm text-gray-500">Schools Management</p>
       </div>
     </div>

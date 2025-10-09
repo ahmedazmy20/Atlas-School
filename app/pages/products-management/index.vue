@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto py-5 px-32 space-y-6">
+  <div class="container mx-auto py-5 2xl:px-32 space-y-6">
     <ConfirmDelete
       :show="showDeleteModal"
       :product="selectedProduct"
