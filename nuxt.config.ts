@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     "@nuxt/ui",
     "@nuxtjs/i18n",
     "@nuxtjs/color-mode",
+    '@pinia/nuxt',
     // The correct configuration for vee-validate
     ["@vee-validate/nuxt", { autoImports: true }],
   ],
@@ -18,7 +19,7 @@ export default defineNuxtConfig({
       { code: "en", file: "en.json", iso: "en-US", name: "English" },
       { code: "ar", file: "ar.json", iso: "ar-EG", name: "العربية" },
     ],
-    strategy: "prefix_except_default",
+    strategy: "no_prefix",
     defaultLocale: "en",
     langDir: "lang/",
     detectBrowserLanguage: {

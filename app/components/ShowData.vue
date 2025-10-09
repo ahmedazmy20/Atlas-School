@@ -1,10 +1,10 @@
 <script setup>
-import { ref } from "vue";
+// import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { School, BookOpen, User } from "lucide-vue-next";
 
-const id = ref("");
-const password = ref("");
+// const id = ref("");
+// const password = ref("");
 const router = useRouter();
 
 const user = useState("user", () => ({
@@ -16,12 +16,12 @@ const user = useState("user", () => ({
 }));
 
 function goHome() {
-  user.value.id = "";
-  user.value.role = "";
-  user.value.branch = "";
-  id.value = "";
-  password.value = "";
-  router.push("/");
+  // user.value.id = "";
+  // user.value.role = "";
+  // user.value.branch = "";
+  // id.value = "";
+  // password.value = "";
+  router.push("/dash-board");
 }
 </script>
 
