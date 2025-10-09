@@ -4,13 +4,14 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <!-- left -->
       <div class="">
-        <p class="text-sm text-blue-600 font-semibold">2025 September 01</p>
+        <p class="text-sm text-blue-600 font-semibold">
+          {{ t("dashboard.date") }}
+        </p>
         <h2 class="text-3xl text-blue-900 font-bold mt-2">
-          Hello International ✌️
+          {{ t("dashboard.greeting") }}
         </h2>
         <p class="text-blue-600 mt-3 pe-5">
-          Welcome back to your dashboard, here's what's happening at your school
-          today.
+          {{ t("dashboard.welcome") }}
         </p>
       </div>
 
@@ -18,11 +19,14 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div
           class="flex bg-[#002be9c2] hover:shadow-lg hover:-translate-y-1 transition-all duration-300 items-center justify-between text-white px-6 py-10 rounded-2xl shadow-sm border">
-          <div class="text-left">
-            <p class="text-sm">Total Students</p>
-            <h3 class="text-3xl py-1 font-extrabold">1,247</h3>
+          <div class="text-left rtl:text-right">
+            <p class="text-sm">{{ t("dashboard.students.title") }}</p>
+            <h3 class="text-3xl py-1 font-extrabold">
+              {{ t("dashboard.students.count") }}
+            </h3>
             <p class="text-sm">
-              <Icon name="lucide:trending-up" /> +5.2% from last month
+              <Icon name="lucide:trending-up" />
+              {{ t("dashboard.students.change") }}
             </p>
           </div>
           <div class="ml-4">
@@ -35,10 +39,12 @@
 
         <div
           class="flex group hover:bg-[#002be9c2] hover:shadow-lg hover:-translate-y-1 transition-all duration-300 items-center justify-between bg-[#00AFE9] text-white px-6 py-10 rounded-2xl shadow-sm border">
-          <div class="text-left">
-            <p class="text-sm">Active Staff</p>
-            <h3 class="text-3xl py-1 font-extrabold">89</h3>
-            <p class="text-sm">All present today</p>
+          <div class="text-left rtl:text-right">
+            <p class="text-sm">{{ t("dashboard.staff.title") }}</p>
+            <h3 class="text-3xl py-1 font-extrabold">
+              {{ t("dashboard.staff.count") }}
+            </h3>
+            <p class="text-sm">{{ t("dashboard.staff.status") }}</p>
           </div>
           <div class="ml-4">
             <div
@@ -56,7 +62,9 @@
       <div class="bg-white p-6 rounded-2xl border border-gray-300 shadow-sm">
         <div class="flex items-center gap-2 mb-4">
           <span class="w-2 h-2 rounded-full bg-blue-500" />
-          <h3 class="text-blue-900 font-semibold">Quick Action</h3>
+          <h3 class="text-blue-900 font-semibold">
+            {{ t("dashboard.quickAction.title") }}
+          </h3>
         </div>
 
         <div class="space-y-3">
@@ -66,7 +74,7 @@
             class="w-full border border-gray-200 text-[#455ecb] flex items-center gap-3 p-3 rounded-lg hover:bg-blue-50 transition">
             <Icon :name="a.icon" class="w-5 h-5" />
             <div class="text-right">
-              <div class="font-medium">{{ a.label }}</div>
+              <div class="font-medium">{{ t(a.label) }}</div>
             </div>
           </button>
         </div>
@@ -77,7 +85,9 @@
         class="lg:col-span-2 bg-white p-6 rounded-2xl border border-gray-300 shadow-sm">
         <div class="flex items-center gap-2 mb-4">
           <span class="w-2 h-2 rounded-full bg-blue-500" />
-          <h3 class="text-blue-900 font-semibold">Recent Activity</h3>
+          <h3 class="text-blue-900 font-semibold">
+            {{ t("dashboard.activity.title") }}
+          </h3>
         </div>
 
         <div class="space-y-3">
@@ -100,10 +110,10 @@
                     act.dotColor,
                   ]" />
               </div>
-              <div class="flex-1 text-left">
-                <div class="font-medium text-gray-700">{{ act.title }}</div>
-                <div class="text-sm text-gray-600">{{ act.subtitle }}</div>
-                <div class="text-xs text-gray-400 mt-1">{{ act.time }}</div>
+              <div class="flex-1 text-left rtl:text-right">
+                <div class="font-medium text-gray-700">{{ t(act.title) }}</div>
+                <div class="text-sm text-gray-600">{{ t(act.subtitle) }}</div>
+                <div class="text-xs text-gray-400 mt-1">{{ t(act.time) }}</div>
               </div>
             </div>
           </div>
@@ -121,17 +131,19 @@
             <Icon name="lucide:bell" class="w-5 h-5" />
           </div>
           <h3 class="text-lg font-semibold text-[#1C398E]">
-            Notification Center
+            {{ t("dashboard.notifications.title") }}
           </h3>
         </div>
 
         <div class="flex items-center gap-3">
           <button class="bg-blue-600 text-white text-sm px-3 py-1 rounded-md">
-            All
+            {{ t("dashboard.notifications.buttons.all") }}
           </button>
           <span
             class="text-sm text-gray-600 border border-gray-300 px-3 py-1 rounded-md"
-            >Unread ({{ unreadCount }})</span
+            >{{ t("dashboard.notifications.buttons.unread") }} ({{
+              unreadCount
+            }})</span
           >
         </div>
       </div>
@@ -145,8 +157,8 @@
           <!-- date box -->
           <div
             class="min-w-[130px] flex gap-1 bg-blue-50 text-blue-700 text-xs rounded-md p-2 border border-blue-200 text-center">
-            <div>{{ note.dateShort }}</div>
-            <div class="text-xs">{{ note.time }}</div>
+            <div>{{ t(note.dateShort) }}</div>
+            <div class="text-xs">{{ t(note.time) }}</div>
           </div>
 
           <!-- icon & text -->
@@ -155,9 +167,9 @@
               class="w-10 h-10 rounded-full bg-blue-400 text-white flex items-center justify-center">
               <Icon name="lucide:alert-circle" class="w-5 h-5" />
             </div>
-            <div class="text-left">
-              <div class="font-medium text-[#193CB8]">{{ note.title }}</div>
-              <div class="text-sm text-[#155DFC]">{{ note.message }}</div>
+            <div class="text-left rtl:text-right">
+              <div class="font-medium text-[#193CB8]">{{ t(note.title) }}</div>
+              <div class="text-sm text-[#155DFC]">{{ t(note.message) }}</div>
             </div>
           </div>
 
@@ -165,7 +177,7 @@
           <div class="flex items-center gap-2">
             <button
               class="text-xs px-3 py-1 border border-gray-300 text-[#294db8] font-semibold rounded-md">
-              View
+              {{ t("dashboard.notifications.view") }}
             </button>
             <span class="w-3 h-3 rounded-full bg-blue-600" />
           </div>
@@ -177,7 +189,9 @@
         <button
           class="px-3 py-1 rounded-md hover:bg-gray-100"
           @click="prevPage">
-          <Icon name="lucide:chevron-left" class="w-4 h-4" />
+          <Icon
+            name="lucide:chevron-left"
+            :class="['w-4 h-4', locale === 'ar' ? 'rotate-180' : '']" />
         </button>
 
         <div class="flex items-center gap-2 mx-3">
@@ -198,7 +212,9 @@
         <button
           class="px-3 py-1 rounded-md hover:bg-gray-100"
           @click="nextPage">
-          <Icon name="lucide:chevron-right" class="w-4 h-4" />
+          <Icon
+            name="lucide:chevron-right"
+            :class="['w-4 h-4', locale === 'ar' ? 'rotate-180' : '']" />
         </button>
       </div>
     </div>
@@ -207,46 +223,56 @@
 
 <script setup lang="ts">
 import { ref, computed } from "vue";
+import { useI18n } from "vue-i18n";
+// import locale for pagination direction
+const { locale } = useI18n();
 definePageMeta({
   layout: "dashboard",
 });
+
+// translation
+const { t } = useI18n();
 
 // Quick Actions
 const quickActions = [
   {
     icon: "lucide:users",
-    label: "Manage Students",
+    label: "dashboard.quickAction.actions.manageStudents",
   },
   {
     icon: "lucide:book-open",
-    label: "Manage Courses",
+    label: "dashboard.quickAction.actions.manageCourses",
   },
   {
     icon: "lucide:calendar",
-    label: "Attendance",
+    label: "dashboard.quickAction.actions.attendance",
   },
-  { icon: "lucide:settings", label: "Settings" },
+  {
+    icon: "lucide:settings",
+    label: "dashboard.quickAction.actions.settings",
+  },
 ];
+
 // Recent Activities
 const activities = [
   {
-    title: "New Student enrollment",
-    subtitle: "Ahmed Azmy enrollment in Grade 10A",
-    time: "2 hours ago",
+    title: "dashboard.activity.item1.title",
+    subtitle: "dashboard.activity.item1.subtitle",
+    time: "dashboard.activity.item1.time",
     type: "success",
     dotColor: "bg-green-600",
   },
   {
-    title: "New Student enrollment",
-    subtitle: "Sara Ali enrollment in Grade 8B",
-    time: "3 hours ago",
+    title: "dashboard.activity.item2.title",
+    subtitle: "dashboard.activity.item2.subtitle",
+    time: "dashboard.activity.item2.time",
     type: "accent",
     dotColor: "bg-blue-600",
   },
   {
-    title: "Payment failed",
-    subtitle: "Payment for Ahmed Azmy failed",
-    time: "5 hours ago",
+    title: "dashboard.activity.item3.title",
+    subtitle: "dashboard.activity.item3.subtitle",
+    time: "dashboard.activity.item3.time",
     type: "danger",
     dotColor: "bg-red-600",
   },
@@ -258,77 +284,71 @@ const notifications = ref([
     id: 1,
     dateShort: "Mon, Sep 1, 2025",
     time: "12:23 PM",
-    title: "You have withdraw request of student أحمد عزمي",
-    message:
-      "You have withdraw request of student أحمد عزمي, please confirm it",
+    title: "dashboard.notifications.items.withdrawRequest",
+    message: "dashboard.notifications.items.withdrawRequest",
   },
   {
     id: 2,
     dateShort: "Tue, Sep 2, 2025",
     time: "09:15 AM",
-    title: "New student registration: زياد الكيلاني",
-    message:
-      "A new student named زياد الكيلاني has registered. Please review the details.",
+    title: "dashboard.notifications.items.newStudent",
+    message: "dashboard.notifications.items.newStudent",
   },
   {
     id: 3,
     dateShort: "Wed, Sep 3, 2025",
     time: "04:50 PM",
-    title: "Payment received from student عبدالرحمن كامل ",
-    message:
-      "Payment confirmation received from student عبدالرحمن كامل  for course fees.",
+    title: "dashboard.notifications.items.paymentReceived",
+    message: "dashboard.notifications.items.paymentReceived",
   },
   {
     id: 4,
     dateShort: "Thu, Sep 4, 2025",
     time: "10:32 AM",
-    title: "Course update: React Fundamentals",
-    message: "The course React Fundamentals has been updated with new lessons.",
+    title: "dashboard.notifications.items.courseUpdate",
+    message: "dashboard.notifications.items.courseUpdate",
   },
   {
     id: 5,
     dateShort: "Fri, Sep 5, 2025",
     time: "02:10 PM",
-    title: "You have a new message from student كريم حسن",
-    message:
-      "Student كريم حسن sent you a new message. Please check your inbox.",
+    title: "dashboard.notifications.items.newMessage",
+    message: "dashboard.notifications.items.newMessage",
   },
   {
     id: 6,
     dateShort: "Sat, Sep 6, 2025",
     time: "08:45 AM",
-    title: "Withdrawal approved for student منى خالد",
-    message:
-      "Withdrawal request for student منى خالد has been approved successfully.",
+    title: "dashboard.notifications.items.withdrawalApproved",
+    message: "dashboard.notifications.items.withdrawalApproved",
   },
   {
     id: 7,
     dateShort: "Sun, Sep 7, 2025",
     time: "06:20 PM",
-    title: "New comment on your post",
-    message: "Student يوسف محمد commented on your latest course update post.",
+    title: "dashboard.notifications.items.newComment",
+    message: "dashboard.notifications.items.newComment",
   },
   {
     id: 8,
     dateShort: "Mon, Sep 8, 2025",
     time: "11:55 AM",
-    title: "System maintenance scheduled",
-    message: "The system will be under maintenance tonight from 11 PM to 2 AM.",
+    title: "dashboard.notifications.items.maintenance",
+    message: "dashboard.notifications.items.maintenance",
   },
   {
     id: 9,
     dateShort: "Tue, Sep 9, 2025",
     time: "03:37 PM",
-    title: "New enrollment in your course",
-    message: "Student ليلى سمير has enrolled in your JavaScript Basics course.",
+    title: "dashboard.notifications.items.newEnrollment",
+    message: "dashboard.notifications.items.newEnrollment",
   },
   {
     id: 10,
     dateShort: "Wed, Sep 10, 2025",
     time: "09:10 AM",
-    title: "Reminder: Pending withdrawal request",
-    message:
-      "You still have a pending withdrawal request to review for student أحمد عزمي.",
+    title: "dashboard.notifications.items.pendingRequest",
+    message: "dashboard.notifications.items.pendingRequest",
   },
 ]);
 

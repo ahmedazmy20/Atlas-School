@@ -46,5 +46,90 @@
     "branchlocation": "Branch Location",
 
     "Continue": "Continue to Dashboard"
+  },
+
+  "dashboard": {
+    "date": "2025 September 01",
+    "greeting": "Hello International ✌️",
+    "welcome": "Welcome back to your dashboard, here's what's happening at your school today.",
+    "students": {
+      "title": "Total Students",
+      "count": "1,247",
+      "change": "+5.2% from last month"
+    },
+    "staff": {
+      "title": "Active Staff",
+      "count": "89",
+      "status": "All present today"
+    },
+    "quickAction": {
+      "title": "Quick Action",
+      "actions": {
+        "manageStudents": "Manage Students",
+        "manageCourses": "Manage Courses",
+        "attendance": "Attendance",
+        "settings": "Settings"
+      }
+    },
+    "activity": {
+      "title": "Recent Activity",
+      "item1": {
+        "title": "New Student Enrollment",
+        "subtitle": "Ahmed Azmy enrollment in Grade 10A",
+        "time": "2 hours ago"
+      },
+      "item2": {
+        "title": "New Student Enrollment",
+        "subtitle": "Sara Ali enrollment in Grade 8B",
+        "time": "3 hours ago"
+      },
+      "item3": {
+        "title": "Payment failed",
+        "subtitle": "Payment for Ahmed Azmy failed",
+        "time": "5 hours ago"
+      }
+    },
+    "notifications": {
+      "title": "Notification Center",
+      "buttons": {
+        "all": "All",
+        "unread": "Unread"
+      },
+      "items": {
+        "withdrawRequest": "You have withdraw request of student Ahmed Azmy, please confirm it",
+        "newStudent": "A new student named Ziad El-Kilany has registered. Please review the details.",
+        "paymentReceived": "Payment confirmation received from student Abdelrahman Kamel for course fees.",
+        "courseUpdate": "The course React Fundamentals has been updated with new lessons.",
+        "newMessage": "Student Karim Hassan sent you a new message. Please check your inbox.",
+        "withdrawalApproved": "Withdrawal request for student Mona Khaled has been approved successfully.",
+        "newComment": "Student Youssef Mohamed commented on your latest course update post.",
+        "maintenance": "The system will be under maintenance tonight from 11 PM to 2 AM.",
+        "newEnrollment": "Student Laila Sameer has enrolled in your JavaScript Basics course.",
+        "pendingRequest": "You still have a pending withdrawal request to review for student Ahmed Azmy."
+      },
+      "view": "View"
+    }
+  },
+   "sidebar": {
+    "title": "Ibn Khaldun",
+    "subtitle": "Schools Management",
+    "dashboard": "Dashboard",
+    "products": "Products Management"
+  },
+  "header": {
+    "schoolManager": "School Manager",
+    "branch": "Testing Branch",
+    "year": "2025 / 2026",
+    "searchPlaceholder": "Search...",
+    "language": {
+      "english": "English",
+      "arabic": "Arabic"
+    },
+    "notifications": "Notifications",
+    "unreadCount": "32",
+    "user": {
+      "name": "International Manager",
+      "role": "Administrator"
+    }
   }
 }

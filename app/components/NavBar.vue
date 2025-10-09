@@ -1,7 +1,7 @@
 <template>
   <header
     class="flex justify-between items-center bg-white border-b border-gray-200 px-6 py-3 shadow-sm">
-    <!-- 🔹 الجزء الشمال -->
+    <!-- الجزء الشمال -->
     <div class="flex items-center gap-4">
       <!-- Menu Button -->
       <UButton
@@ -15,7 +15,7 @@
       <UDropdown class="min-w-[170px]">
         <UButton
           class="border border-gray-200 text-gray-700 font-medium px-3 py-1.5 rounded-md bg-white hover:bg-gray-50">
-          School Manager
+          {{ t("header.schoolManager") }}
           <Icon name="lucide:chevron-down" class="w-4 h-4 ml-1" />
         </UButton>
       </UDropdown>
@@ -24,7 +24,7 @@
       <UDropdown class="min-w-[170px]">
         <UButton
           class="border border-gray-200 text-gray-700 font-medium px-3 py-1.5 rounded-md bg-white hover:bg-gray-50">
-          Testing Branch
+          {{ t("header.branch") }}
           <Icon name="lucide:chevron-down" class="w-4 h-4 ml-1" />
         </UButton>
       </UDropdown>
@@ -33,7 +33,7 @@
       <UDropdown class="min-w-[150px]">
         <UButton
           class="border border-gray-200 text-gray-700 font-medium px-3 py-1.5 rounded-md bg-white hover:bg-gray-50">
-          2025 / 2026
+          {{ t("header.year") }}
           <Icon name="lucide:chevron-down" class="w-4 h-4 ml-1" />
         </UButton>
       </UDropdown>
@@ -49,15 +49,40 @@
 
     <!-- 🔹 الجزء اليمين -->
     <div class="flex items-center gap-5">
-      <!-- Translation Button -->
-      <UButton
-        variant="ghost"
-        size="sm"
-        class="hover:bg-gray-100 rounded-md text-gray-700"
-        @click="toggleLocale">
-        <Icon name="lucide:languages" class="w-5 h-5" />
-        <span class="ml-2 capitalize">{{ localeLabel }}</span>
-      </UButton>
+      <!--  Dropdown تغيير اللغة -->
+      <div ref="dropdownRef" class="relative">
+        <UButton
+          variant="ghost"
+          size="sm"
+          class="hover:bg-gray-100 rounded-md text-gray-700 flex items-center gap-2"
+          @click.stop="toggle">
+          <img
+            :src="current.flag"
+            alt="flag"
+            class="w-5 h-5 rounded-full object-cover" />
+          <span class="capitalize">{{ current.label }}</span>
+          <Icon name="lucide:chevron-down" class="w-4 h-4 ml-1" />
+        </UButton>
+
+        <!-- القائمة -->
+        <transition name="fade">
+          <div
+            v-if="open"
+            class="absolute right-0 mt-2 w-40 bg-white border rounded-md shadow-lg overflow-hidden z-50">
+            <button
+              v-for="lang in languages"
+              :key="lang.code"
+              class="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-100"
+              @click="select(lang.code)">
+              <img
+                :src="lang.flag"
+                alt="flag"
+                class="w-5 h-5 rounded-full object-cover" />
+              <span class="text-sm">{{ lang.label }}</span>
+            </button>
+          </div>
+        </transition>
+      </div>
 
       <!-- Notification Bell -->
       <div class="relative">
@@ -66,7 +91,7 @@
         </UButton>
         <span
           class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-semibold rounded-full px-1.5 py-0.5"
-          >32</span
+          >{{ t("header.unreadCount") }}</span
         >
       </div>
 
@@ -79,27 +104,63 @@
         </div>
         <div class="flex flex-col text-right">
           <span class="font-semibold text-gray-800 text-sm"
-            >International Manager</span
+            >{{ t("header.user.name") }}</span
           >
-          <span class="text-xs text-gray-500">Administrator</span>
+          <span class="text-xs text-gray-500">{{ t("header.user.role") }}</span>
         </div>
       </div>
     </div>
   </header>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { ref, computed, onMounted, onBeforeUnmount } from "vue";
+import { useLanguage } from "~/composables/useLanguage";
 import { useI18n } from "vue-i18n";
 
-const { locale } = useI18n();
 
-// دالة لتبديل اللغة
-const toggleLocale = () => {
-  locale.value = locale.value === "en" ? "ar" : "en";
-};
+const { t } = useI18n();
 
-// نص اللغة الحالية لعرضها بجانب الأيقونة
-const localeLabel = computed(() =>
-  locale.value === "en" ? "English" : "العربية"
-);
+const { locale, switchLanguage } = useLanguage();
+
+const languages = [
+  { code: "ar", label: "العربية", flag: "https://flagcdn.com/sa.svg" },
+  { code: "en", label: "English", flag: "https://flagcdn.com/us.svg" },
+];
+
+const open = ref(false);
+const dropdownRef = ref<HTMLDivElement | null>(null);
+
+const current = computed(() => {
+  return languages.find((l) => l.code === locale.value) ?? languages[0];
+});
+
+function toggle() {
+  open.value = !open.value;
+}
+
+function select(langCode: string) {
+  switchLanguage(langCode);
+  open.value = false;
+}
+
+function onDocClick(e: MouseEvent) {
+  if (!dropdownRef.value) return;
+  const target = e.target as Node;
+  if (open.value && !dropdownRef.value.contains(target)) open.value = false;
+}
+
+onMounted(() => document.addEventListener("click", onDocClick));
+onBeforeUnmount(() => document.removeEventListener("click", onDocClick));
 </script>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.15s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

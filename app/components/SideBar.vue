@@ -8,8 +8,8 @@
         <Icon name="lucide:graduation-cap" class="w-6 h-6" />
       </div>
       <div>
-        <p class="font-semibold text-blue-900 font">Ibn Khaldun</p>
-        <p class="text-sm text-gray-500">Schools Management</p>
+        <p class="font-semibold text-blue-900 font">{{ t("sidebar.title") }}</p>
+        <p class="text-sm text-gray-500">{{ t("sidebar.subtitle") }}</p>
       </div>
     </div>
 
@@ -20,7 +20,7 @@
         to="/dash-board"
         class="group flex items-center gap-3 px-3 py-2 rounded-lg text-lg font-semibold text-blue-700 transition-colors hover:bg-gray-100 [&.router-link-exact-active]:bg-blue-700 [&.router-link-exact-active]:text-white [&.router-link-exact-active:hover]:bg-blue-700">
         <Icon name="lucide:home" class="w-5 h-5" />
-        <span>Dashboard</span>
+        <span>{{ t("sidebar.dashboard") }}</span>
       </NuxtLink>
 
       <!-- Products Management -->
@@ -28,14 +28,17 @@
         to="/products-management"
         class="group flex items-center gap-3 px-3 py-2 rounded-lg text-lg font-semibold text-blue-700 transition-colors hover:bg-gray-100 [&.router-link-exact-active]:bg-blue-700 [&.router-link-exact-active]:text-white [&.router-link-exact-active:hover]:bg-blue-700">
         <Icon name="lucide:package" class="w-5 h-5" />
-        <span>Products Management</span>
+        <span>{{ t("sidebar.products") }}</span>
       </NuxtLink>
     </nav>
   </aside>
 </template>
 
 <script setup>
-// لا تحتاج أي logic هنا حالياً
+// add translation later if needed
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
+
 </script>
 
 <style scoped>
