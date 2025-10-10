@@ -2,7 +2,8 @@
   <div
     v-if="show"
     class="fixed inset-0 mb-0 bg-[#0000003f] bg-opacity-50 flex justify-center items-center z-50">
-    <div class="bg-white rounded-lg w-1/4 p-6 relative shadow-lg">
+    <div
+      class="bg-white rounded-lg w-11/12 sm:w-3/4 lg:w-1/3 p-6 relative shadow-lg max-h-[80vh] overflow-y-auto">
       <h2 class="text-2xl font-semibold mb-4">Product Details</h2>
 
       <!-- Close button -->

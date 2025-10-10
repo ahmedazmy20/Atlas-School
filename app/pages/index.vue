@@ -9,6 +9,8 @@ const user = useState("user", () => ({
   branch: "",
 }));
 
+const isSubmitting = ref(false);
+
 const cards = [
   {
     icon: BookOpen,
@@ -31,16 +33,23 @@ const cards = [
     description: "growthDesc",
   },
 ];
+
+function handleLogin(data) {
+  isSubmitting.value = true;
+  user.value.id = data.id;
+  // احفظ باقي بيانات المستخدم...
+  navigateTo("/choose-role");
+}
 </script>
 
 <template>
   <div class="flex md:flex-row items-center max-h-screen bg-white w-full">
-    
     <!-- left -->
     <div
-      class="left bg-[#FFFFFF] w-full h-screen flex items-center justify-center px-10 md:px-20 py-20">
-      <FormInput v-if="!user?.id" />
-      <ShowData v-else :user="user" />
+      class="left bg-white w-full h-screen flex items-center justify-center px-10 md:px-20 py-20">
+      <FormInput  v-if="!user?.id && !isSubmitting"  @loggedIn="handleLogin"/>
+      <ShowData v-else-if="user?.id && !isSubmitting" :user="user" />
+      <div v-else class="loader">Loading...</div>
     </div>
 
     <!-- right ثابت -->
