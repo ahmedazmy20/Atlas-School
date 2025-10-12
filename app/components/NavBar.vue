@@ -7,7 +7,8 @@
       <UButton
         variant="ghost"
         size="sm"
-        class="p-2 rounded-md hover:bg-gray-100">
+        class="p-2 rounded-md hover:bg-gray-100"
+        @click="toggleMenu">
         <Icon name="lucide:menu" class="w-5 h-5 text-gray-700" />
       </UButton>
 
@@ -103,9 +104,9 @@
           <Icon name="lucide:user" class="w-5 h-5 text-blue-600" />
         </div>
         <div class="flex flex-col text-right">
-          <span class="font-semibold text-gray-800 text-sm"
-            >{{ t("header.user.name") }}</span
-          >
+          <span class="font-semibold text-gray-800 text-sm">{{
+            t("header.user.name")
+          }}</span>
           <span class="text-xs text-gray-500">{{ t("header.user.role") }}</span>
         </div>
       </div>
@@ -117,7 +118,12 @@
 import { ref, computed, onMounted, onBeforeUnmount } from "vue";
 import { useLanguage } from "~/composables/useLanguage";
 import { useI18n } from "vue-i18n";
+import { useUIStore } from "@/stores/ui";
 
+const uiStore = useUIStore();
+function toggleMenu() {
+  uiStore.toggleSidebar();
+}
 
 const { t } = useI18n();
 

@@ -5,7 +5,7 @@
 
     <!-- 🔹 محتوى الصفحة تحت الـ Navbar -->
     <div class="flex pt-[70px]">
-      <SideBar class="w-64 z-10 fixed top-[70px] left-0 rtl:right-0 bottom-0" />
+      <SideBar class=" z-10 fixed top-[75px] left-0 rtl:right-0 bottom-0" />
       <main class="flex-1 ltr:ml-72 rtl:mr-72 p-6 bg-green-50">
         <slot />
       </main>
