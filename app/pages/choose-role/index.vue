@@ -58,7 +58,7 @@ const continueDashboard = () => {
   if (selectedRole.value && selectedBranch.value) {
     user.value.role = selectedRole.value;
     user.value.branch = selectedBranch.value;
-    router.push("/");
+    router.push("/dash-board");
   }
 };
 const BackToLogin = () => {

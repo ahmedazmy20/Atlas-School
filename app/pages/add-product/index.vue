@@ -7,24 +7,24 @@
       <div class="grid md:grid-cols-2 gap-6">
         <!-- اسم المنتج بالعربية -->
         <div>
-          <label class="block text-gray-700 font-medium mb-2 text-end"
-            >اسم المنتج (بالعربية)</label
-          >
+          <label class="block text-gray-700 font-medium mb-2 text-end">{{
+            $t("addProductForm.fields.nameAr")
+          }}</label>
           <input
             v-model="product.name_ar"
             type="text"
-            placeholder="ادخل اسم المنتج"
+            :placeholder="$t('addProductForm.placeholders.nameAr')"
             class="w-full text-end border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" />
         </div>
         <!-- اسم المنتج بالانجليزية -->
         <div>
-          <label class="block text-gray-700 font-medium mb-2 text-end"
-            >اسم المنتج (بالإنجليزية)</label
-          >
+          <label class="block text-gray-700 font-medium mb-2 text-end">{{
+            $t("addProductForm.fields.nameEn")
+          }}</label>
           <input
             v-model="product.name_en"
             type="text"
-            placeholder="Enter Product Name"
+            :placeholder="$t('addProductForm.placeholders.nameEn')"
             class="w-full text-end border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" />
         </div>
       </div>
@@ -33,9 +33,9 @@
 
       <div class="grid md:grid-cols-2 gap-6">
         <div>
-          <label class="block text-gray-700 font-medium mb-2 text-end"
-            >رمز المنتج (SKU)</label
-          >
+          <label class="block text-gray-700 font-medium mb-2 text-end">{{
+            $t("addProductForm.fields.sku")
+          }}</label>
           <input
             v-model="product.sku"
             type="text"
@@ -44,28 +44,38 @@
         </div>
         <!-- الفئة -->
         <div>
-          <label class="block text-gray-700 font-medium mb-2 text-end"
-            >الفئة</label
-          >
+          <label class="block text-gray-700 font-medium mb-2 text-end">{{
+            $t("addProductForm.fields.category")
+          }}</label>
           <select
             v-model="product.category"
             class="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <option disabled value="">اختر الفئة</option>
-            <option value="electronics">إلكترونيات</option>
-            <option value="clothes">ملابس</option>
-            <option value="food">أطعمة</option>
+            <option disabled value="">
+              {{ $t("addProductForm.placeholders.category") }}
+            </option>
+            <option value="electronics">
+              {{ $t("addProductForm.categories.electronics") }}
+            </option>
+            <option value="clothes">
+              {{ $t("addProductForm.categories.clothes") }}
+            </option>
+            <option value="food">
+              {{ $t("addProductForm.categories.food") }}
+            </option>
           </select>
         </div>
       </div>
 
-      <p class="text-gray-500 text-sm text-end">يمكنك البحث باسم الفئة</p>
+      <p class="text-gray-500 text-sm text-end">
+        {{ $t("addProductForm.notes.searchCategory") }}
+      </p>
 
       <!-- السعر -->
       <div class="grid md:grid-cols-2 gap-6">
         <div>
-          <label class="block text-gray-700 font-medium mb-2 text-end"
-            >السعر (ريال)</label
-          >
+          <label class="block text-gray-700 font-medium mb-2 text-end">{{
+            $t("addProductForm.fields.price")
+          }}</label>
           <input
             v-model.number="product.price"
             type="number"
@@ -74,9 +84,9 @@
         </div>
         <!-- الكمية المتوفرة -->
         <div>
-          <label class="block text-gray-700 font-medium mb-2 text-end"
-            >الكمية المتوفرة</label
-          >
+          <label class="block text-gray-700 font-medium mb-2 text-end">{{
+            $t("addProductForm.fields.quantity")
+          }}</label>
           <input
             v-model.number="product.quantity"
             type="number"
@@ -87,27 +97,33 @@
 
       <!-- الوصف -->
       <div>
-        <label class="block text-gray-700 font-medium mb-2 text-end"
-          >الوصف</label
-        >
+        <label class="block text-gray-700 font-medium mb-2 text-end">{{
+          $t("addProductForm.fields.description")
+        }}</label>
         <textarea
           v-model="product.description"
           rows="3"
-          placeholder="أدخل وصف المنتج"
+          :placeholder="$t('addProductForm.placeholders.description')"
           class="w-full border text-end border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" />
       </div>
 
       <!-- الحالة -->
       <div>
-        <label class="block text-gray-700 font-medium mb-2 text-end"
-          >الحالة</label
-        >
+        <label class="block text-gray-700 font-medium mb-2 text-end">{{
+          $t("addProductForm.fields.status")
+        }}</label>
         <select
           v-model="product.status"
           class="border w-fit border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
-          <option disabled value="" class="text-end">اختر الحالة</option>
-          <option value="Active">نشط (Active)</option>
-          <option value="Inactive">غير نشط (Inactive)</option>
+          <option disabled value="" class="text-end">
+            {{ $t("addProductForm.fields.status") }}
+          </option>
+          <option value="Active">
+            {{ $t("addProductForm.statuses.active") }}
+          </option>
+          <option value="Inactive">
+            {{ $t("addProductForm.statuses.inactive") }}
+          </option>
         </select>
       </div>
 
@@ -116,7 +132,7 @@
         <button
           type="submit"
           class="bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition">
-          إضافة المنتج
+          {{ $t("addProductForm.buttons.submit") }}
         </button>
       </div>
     </form>

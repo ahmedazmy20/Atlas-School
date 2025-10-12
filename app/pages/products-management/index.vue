@@ -9,16 +9,18 @@
     <!-- first part -->
     <div class="flex justify-between items-center">
       <div class="text-start">
-        <h1 class="text-3xl font-bold text-[#1C398E]">Products Management</h1>
+        <h1 class="text-3xl font-bold text-[#1C398E]">
+          {{ t("products.title") }}
+        </h1>
         <p class="text-md text-[#1447E6] mt-1">
-          Manage school products, inventory, and pricing
+          {{ t("products.subtitle") }}
         </p>
       </div>
       <UButton
         to="/dash-board"
         variant="outline"
         class="border border-gray-300 text-[#5881ff] px-4 py-2 rounded-md hover:bg-blue-500 hover:text-white transition-colors">
-        Back to Dashboard
+        {{ t("products.backToDashboard") }}
       </UButton>
     </div>
 
@@ -29,7 +31,7 @@
       <div class="relative flex-1">
         <UInput
           v-model="searchInput"
-          placeholder="Search by product name, SKU..."
+          placeholder="Search by product name"
           icon="lucide:search"
           class="border border-gray-300 bg-white rounded-md w-full" />
       </div>
@@ -67,7 +69,7 @@
         <UButton
           to="/add-product"
           class="text-white bg-blue-500 px-5 py-2 rounded-md">
-          + Add Product
+          {{ t("products.addProduct") }}
         </UButton>
       </div>
     </div>
@@ -84,13 +86,27 @@
         <!-- Table Header -->
         <thead class="bg-blue-50 text-gray-700 font-medium">
           <tr>
-            <th class="px-4 py-3 text-left">SKU</th>
-            <th class="px-4 py-3 text-left">Product Name</th>
-            <th class="px-4 py-3 text-left">Category</th>
-            <th class="px-4 py-3 text-left">Price (SAR)</th>
-            <th class="px-4 py-3 text-left">Stock</th>
-            <th class="px-4 py-3 text-left">Status</th>
-            <th class="px-4 py-3 text-center">Actions</th>
+            <th class="px-4 py-3 text-left rtl:text-right">
+              {{ t("products.table.sku") }}
+            </th>
+            <th class="px-4 py-3 text-left rtl:text-right">
+              {{ t("products.table.name") }}
+            </th>
+            <th class="px-4 py-3 text-left rtl:text-right">
+              {{ t("products.table.category") }}
+            </th>
+            <th class="px-4 py-3 text-left rtl:text-right">
+              {{ t("products.table.price") }}
+            </th>
+            <th class="px-4 py-3 text-left rtl:text-right">
+              {{ t("products.table.stock") }}
+            </th>
+            <th class="px-4 py-3 text-left rtl:text-right">
+              {{ t("products.table.status") }}
+            </th>
+            <th class="px-4 py-3 text-center">
+              {{ t("products.table.actions") }}
+            </th>
           </tr>
         </thead>
 
@@ -155,12 +171,18 @@
       <div
         class="flex justify-between items-center border-t bg-blue-50 px-4 py-3 text-sm">
         <span class="text-blue-600">
-          Showing {{ filteredProducts.length }} of
-          {{ productsStore.products.length }} products
+          {{ t("products.footer.showing") }} {{ filteredProducts.length }}
+          {{ t("products.footer.of") }} {{ productsStore.products.length }}
+          {{ t("products.footer.products") }}
         </span>
         <div class="flex gap-6 text-blue-600">
-          <span>Total Stock: {{ totalStock }} units</span>
-          <span>Total Value: SAR {{ totalValue }}</span>
+          <span
+            >{{ t("products.footer.totalStock") }}: {{ totalStock }}
+            {{ t("products.footer.units") }}</span
+          >
+          <span
+            >{{ t("products.footer.totalValue") }}: SAR {{ totalValue }}</span
+          >
         </div>
       </div>
     </div>
@@ -170,6 +192,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed, onBeforeUnmount } from "vue";
 import { useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
 import { useProductsStore } from "@/stores/products";
 import ConfirmDelete from "~/components/ConfirmDelete.vue";
 import ViewProduct from "~/components/ViewProduct.vue";
@@ -179,13 +202,13 @@ definePageMeta({
 });
 
 const productsStore = useProductsStore();
-
 // State
 const searchInput = ref("");
 const selectedCategory = ref("All Categories");
 const showDropdown = ref(false);
 const dropdownRef = ref<HTMLElement | null>(null);
 const router = useRouter();
+const { t } = useI18n();
 
 const categories = [
   "All Categories",

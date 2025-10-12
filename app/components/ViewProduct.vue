@@ -4,7 +4,7 @@
     class="fixed inset-0 mb-0 bg-[#0000003f] bg-opacity-50 flex justify-center items-center z-50">
     <div
       class="bg-white rounded-lg w-11/12 sm:w-3/4 lg:w-1/3 p-6 relative shadow-lg max-h-[80vh] overflow-y-auto">
-      <h2 class="text-2xl font-semibold mb-4">Product Details</h2>
+      <h2 class="text-2xl font-semibold mb-4">{{ $t("viewProduct.title") }}</h2>
 
       <!-- Close button -->
       <button
@@ -26,25 +26,33 @@
           <!-- Left side -->
           <div class="space-y-5">
             <div>
-              <h3 class="text-blue-500">Product Name(English)</h3>
+              <h3 class="text-blue-500">
+                {{ $t("viewProduct.leftSide.nameEn") }}
+              </h3>
               <p class="p-2 bg-gray-200 rounded-md">
                 {{ product?.name?.slice(0, 20) }}...
               </p>
             </div>
             <div>
-              <h3 class="text-blue-500">SKU</h3>
+              <h3 class="text-blue-500">
+                {{ $t("viewProduct.leftSide.sku") }}
+              </h3>
               <p class="p-2 bg-gray-200 rounded-md">
                 {{ product?.sku }}
               </p>
             </div>
             <div>
-              <h3 class="text-blue-500">Category(English)</h3>
+              <h3 class="text-blue-500">
+                {{ $t("viewProduct.leftSide.categoryEn") }}
+              </h3>
               <p class="p-2 bg-gray-200 rounded-md">
                 {{ product?.category }}
               </p>
             </div>
             <div>
-              <h3 class="text-blue-500">Price</h3>
+              <h3 class="text-blue-500">
+                {{ $t("viewProduct.leftSide.price") }}
+              </h3>
               <p class="p-2 bg-gray-200 rounded-md">{{ product?.price }} SAR</p>
             </div>
           </div>
@@ -53,27 +61,35 @@
           <div>
             <div class="space-y-5">
               <div>
-                <h3 class="text-blue-500">Product Name(Arabic)</h3>
+                <h3 class="text-blue-500">
+                  {{ $t("viewProduct.rightSide.nameAr") }}
+                </h3>
                 <p class="p-2 bg-gray-200 rounded-md">
                   {{ product?.name?.slice(0, 20) }}...
                 </p>
               </div>
               <div>
-                <h3 class="text-blue-500">Status</h3>
+                <h3 class="text-blue-500">
+                  {{ $t("viewProduct.rightSide.status") }}
+                </h3>
                 <p class="p-2 bg-gray-200 rounded-md">
                   {{ product?.status }}
                 </p>
               </div>
               <div>
-                <h3 class="text-blue-500">Category(Arabic)</h3>
+                <h3 class="text-blue-500">
+                  {{ $t("viewProduct.rightSide.categoryAr") }}
+                </h3>
                 <p class="p-2 bg-gray-200 rounded-md">
                   {{ product?.category }}
                 </p>
               </div>
               <div>
-                <h3 class="text-blue-500">Stock Quantity</h3>
+                <h3 class="text-blue-500">
+                  {{ $t("viewProduct.rightSide.stock") }}
+                </h3>
                 <p class="p-2 bg-gray-200 rounded-md">
-                  {{ product?.stock }} units
+                  {{ product?.stock }} {{ $t("viewProduct.units") }}
                 </p>
               </div>
             </div>
@@ -81,14 +97,14 @@
         </div>
 
         <div>
-          <h3 class="text-blue-500">Description</h3>
+          <h3 class="text-blue-500">{{ $t("viewProduct.description") }}</h3>
           <p class="p-2 bg-gray-200 rounded-md">
             {{ product?.name?.slice(0, 30) }}...
           </p>
         </div>
 
         <div class="flex justify-between p-2 bg-gray-200 rounded-md">
-          <h3 class="text-blue-500">Total inventory Value</h3>
+          <h3 class="text-blue-500">{{ $t("viewProduct.totalInventoryValue") }}</h3>
           <p class="">
             {{ totalInventoryValue(product?.price, product?.stock) }} SAR
           </p>
@@ -100,14 +116,14 @@
           <button
             class="w-sm text-blue-500 border border-gray-200 py-2 rounded-md hover:bg-blue-600 hover:text-white transition-all"
             @click="$emit('close')">
-            Close
+            {{ $t("viewProduct.close") }}
           </button>
           <!-- add Edit Product button -->
           <button
             class="w-sm flex items-center justify-center gap-3 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-700 transition-colors"
             @click="goToEdit(product?.id)">
             <Icon name="lucide:edit" class="w-5 h-5" />
-            Edit Product
+            {{ $t("viewProduct.editProduct") }}
           </button>
         </div>
       </div>

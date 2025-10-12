@@ -1,16 +1,18 @@
 <template>
   <nav
-    class="w-full bg-white shadow-sm py-4 px-8 flex items-center justify-start">
+    class="w-full bg-white shadow-sm py-4 px-8 flex gap-6 items-center justify-start">
     <!-- Back Button -->
     <button
       class="flex items-center gap-2 text-gray-700 hover:text-blue-600 font-medium"
       @click="goBack">
-      <Icon name="lucide:arrow-left" class="w-5 h-5" />
-      Back
+      <Icon
+        name="lucide:arrow-left"
+        class="w-5 h-5 rtl:rotate-180" />
+      {{ $t("productNav.back") }}
     </button>
 
     <!-- Icon + Titles -->
-    <div class="flex items-center gap-3 ml-8">
+    <div class="flex items-center gap-3">
       <!-- Blue Box with Icon -->
       <div class="bg-blue-100 p-2 rounded-lg flex items-center justify-center">
         <Icon
@@ -61,8 +63,10 @@ const iconName = computed(() =>
 // titles change based on page
 const mainTitle = computed(() =>
   isEdit.value
-    ? `تعديل المنتج ${product.value ? `(${product.value.name})` : ""}`
-    : "إضافة منتج جديد"
+    ? `  ${$t("productNav.edit.mainTitle")} ${
+        product.value ? `(${product.value.name})` : ""
+      }`
+    : ` ${$t("productNav.add.mainTitle")}`
 );
 
 const subTitle = computed(() =>

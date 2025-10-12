@@ -125,5 +125,120 @@
       "name": "المدير الدولي",
       "role": "مسؤول النظام"
     }
+  },
+  "products": {
+    "title": "إدارة المنتجات",
+    "subtitle": "إدارة منتجات المدرسة، المخزون، وتسعير المنتجات",
+    "backToDashboard": "العودة إلى لوحة التحكم",
+    "searchPlaceholder": "ابحث باسم المنتج أو رقم SKU...",
+    "allCategories": "كل الفئات",
+    "addProduct": "+ إضافة منتج",
+
+    "table": {
+      "sku": "رمز المنتج (SKU)",
+      "name": "اسم المنتج",
+      "category": "الفئة",
+      "price": "السعر (ريال سعودي)",
+      "stock": "المخزون",
+      "status": "الحالة",
+      "actions": "الإجراءات",
+      "active": "نشط",
+      "inactive": "غير نشط"
+    },
+
+    "footer": {
+      "showing": "يتم عرض",
+      "of": "من",
+      "products": "منتج",
+      "totalStock": "إجمالي المخزون",
+      "units": "وحدة",
+      "totalValue": "إجمالي القيمة"
+    },
+
+    "modals": {
+      "deleteTitle": "تأكيد الحذف",
+      "deleteMessage": "هل أنت متأكد أنك تريد حذف هذا المنتج؟",
+      "cancel": "إلغاء",
+      "confirm": "تأكيد",
+      "viewTitle": "تفاصيل المنتج"
+    }
+  },
+  "viewProduct": {
+    "title": "تفاصيل المنتج",
+    "close": "إغلاق",
+    "editProduct": "تعديل المنتج",
+
+    "leftSide": {
+      "nameEn": "اسم المنتج (بالإنجليزية)",
+      "sku": "رمز المنتج (SKU)",
+      "categoryEn": "الفئة (بالإنجليزية)",
+      "price": "السعر"
+    },
+
+    "rightSide": {
+      "nameAr": "اسم المنتج (بالعربية)",
+      "status": "الحالة",
+      "categoryAr": "الفئة (بالعربية)",
+      "stock": "الكمية في المخزون"
+    },
+
+    "description": "الوصف",
+    "totalInventoryValue": "إجمالي قيمة المخزون",
+
+    "units": "وحدة",
+    "currency": "ريال سعودي"
+  },
+  "confirmDeletion": {
+    "title": "تأكيد الحذف",
+    "message": "هل أنت متأكد أنك تريد حذف",
+    "cancel": "إلغاء",
+    "delete": "حذف"
+  },
+  "productNav": {
+    "back": "رجوع",
+    "add": {
+      "mainTitle": "إضافة منتج جديد",
+      "subTitle": "إضافة منتج"
+    },
+    "edit": {
+      "mainTitle": "تعديل المنتج",
+      "subTitle": "تعديل المنتج"
+    }
+  },
+  "addProductForm": {
+    "fields": {
+      "nameAr": "اسم المنتج (بالعربية)",
+      "nameEn": "اسم المنتج (بالإنجليزية)",
+      "sku": "رمز المنتج (SKU)",
+      "category": "الفئة",
+      "price": "السعر (ريال)",
+      "quantity": "الكمية المتوفرة",
+      "description": "الوصف",
+      "status": "الحالة"
+    },
+    "placeholders": {
+      "nameAr": "أدخل اسم المنتج",
+      "nameEn": "Enter Product Name",
+      "category": "اختر الفئة",
+      "description": "أدخل وصف المنتج"
+    },
+    "categories": {
+      "electronics": "إلكترونيات",
+      "clothes": "ملابس",
+      "food": "أطعمة"
+    },
+    "statuses": {
+      "active": "نشط (Active)",
+      "inactive": "غير نشط (Inactive)"
+    },
+    "notes": {
+      "searchCategory": "يمكنك البحث باسم الفئة"
+    },
+    "buttons": {
+      "submit": "إضافة المنتج"
+    },
+    "alerts": {
+      "missingFields": "يرجى ملء جميع الحقول المطلوبة!"
+    }
   }
 }

@@ -225,13 +225,10 @@
 import { ref, computed } from "vue";
 import { useI18n } from "vue-i18n";
 // import locale for pagination direction
-const { locale } = useI18n();
+const { locale, t } = useI18n();
 definePageMeta({
   layout: "dashboard",
 });
-
-// translation
-const { t } = useI18n();
 
 // Quick Actions
 const quickActions = [

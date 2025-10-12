@@ -11,22 +11,22 @@
             class="text-red-500 bg-red-200 rounded-full w-8 h-8 flex items-center justify-center"
             >!</span
           >
-          Confirm Deletion
+          {{ $t("confirmDeletion.title") }}
         </h2>
         <p class="text-gray-600 mb-6">
-          Are you sure you want to delete
+          {{ $t("confirmDeletion.message") }}
           <span class="font-medium">{{ product?.name }}</span
           >?
         </p>
         <div class="flex justify-end gap-3">
           <UButton variant="outline" class="px-4 py-2" @click="$emit('cancel')">
-            Cancel
+            {{ $t("confirmDeletion.cancel") }}
           </UButton>
           <UButton
             class="px-4 py-2 text-white bg-red-500 hover:bg-red-800"
             @click="$emit('confirm')">
             <Icon name="lucide:trash-2" class="w-4 h-4 mr-1" />
-            Delete
+            {{ $t("confirmDeletion.delete") }}
           </UButton>
         </div>
       </div>
