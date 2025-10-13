@@ -10,13 +10,16 @@
             {{ $t("addProductForm.fields.nameAr") }}
           </label>
           <Field v-slot="{ field, errorMessage, meta }" name="name_ar">
-            <input
+            <UInput
               v-bind="field"
               type="text"
-              :placeholder="$t('addProductForm.placeholders.nameAr')"
-              class="w-full text-end border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+              class="w-full"
+              :ui="{
+                base: 'rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-4 py-3.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
+              }"
+              :placeholder="$t('addProductForm.placeholders.nameAr')" />
             <p
-              v-if="meta.touched && errorMessage"
+              v-if="meta.touched || errorMessage"
               class="text-red-500 text-sm text-end">
               {{ errorMessage }}
             </p>
@@ -28,13 +31,16 @@
             {{ $t("addProductForm.fields.nameEn") }}
           </label>
           <Field v-slot="{ field, errorMessage, meta }" name="name_en">
-            <input
+            <UInput
               v-bind="field"
               type="text"
               :placeholder="$t('addProductForm.placeholders.nameEn')"
-              class="w-full text-end border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+              class="w-full"
+              :ui="{
+                base: 'rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-4 py-3.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
+              }" />
             <p
-              v-if="meta.touched && errorMessage"
+              v-if="meta.touched || errorMessage"
               class="text-red-500 text-sm text-end">
               {{ errorMessage }}
             </p>
@@ -49,13 +55,16 @@
             {{ $t("addProductForm.fields.sku") }}
           </label>
           <Field v-slot="{ field, errorMessage, meta }" name="sku">
-            <input
+            <UInput
               v-bind="field"
               type="text"
               placeholder="PROD-001"
-              class="w-full text-end border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+              class="w-full"
+              :ui="{
+                base: 'rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-4 py-3.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
+              }" />
             <p
-              v-if="meta.touched && errorMessage"
+              v-if="meta.touched || errorMessage"
               class="text-red-500 text-sm text-end">
               {{ errorMessage }}
             </p>
@@ -84,7 +93,7 @@
               </option>
             </select>
             <p
-              v-if="meta.touched && errorMessage"
+              v-if="meta.touched || errorMessage"
               class="text-red-500 text-sm text-end">
               {{ errorMessage }}
             </p>
@@ -99,13 +108,16 @@
             {{ $t("addProductForm.fields.price") }}
           </label>
           <Field v-slot="{ field, errorMessage, meta }" name="price">
-            <input
+            <UInput
               v-bind="field"
               type="number"
               min="0"
-              class="w-full text-end border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+              class="w-full"
+              :ui="{
+                base: 'rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-4 py-3.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
+              }" />
             <p
-              v-if="meta.touched && errorMessage"
+              v-if="meta.touched || errorMessage"
               class="text-red-500 text-sm text-end">
               {{ errorMessage }}
             </p>
@@ -117,13 +129,16 @@
             {{ $t("addProductForm.fields.quantity") }}
           </label>
           <Field v-slot="{ field, errorMessage, meta }" name="quantity">
-            <input
+            <UInput
               v-bind="field"
               type="number"
               min="0"
-              class="w-full text-end border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+              class="w-full"
+              :ui="{
+                base: 'rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-4 py-3.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary',
+              }" />
             <p
-              v-if="meta.touched && errorMessage"
+              v-if="meta.touched || errorMessage"
               class="text-red-500 text-sm text-end">
               {{ errorMessage }}
             </p>
@@ -143,7 +158,7 @@
             :placeholder="$t('addProductForm.placeholders.description')"
             class="w-full border text-end border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" />
           <p
-            v-if="meta.touched && errorMessage"
+            v-if="meta.touched || errorMessage"
             class="text-red-500 text-sm text-end">
             {{ errorMessage }}
           </p>
@@ -170,7 +185,7 @@
             </option>
           </select>
           <p
-            v-if="meta.touched && errorMessage"
+            v-if="meta.touched || errorMessage"
             class="text-red-500 text-sm text-end">
             {{ errorMessage }}
           </p>
@@ -209,11 +224,12 @@ const schema = toTypedSchema(
     name_ar: z
       .string()
       .nonempty("الاسم بالعربية مطلوب")
-      .min(3, "يجب أن يكون الاسم 3 أحرف على الأقل")
+      .min(2, "يجب أن يكون الاسم حرفين على الأقل")
       .regex(/^[\u0600-\u06FF\s]+$/, "يجب إدخال حروف عربية فقط"),
     name_en: z
       .string()
-      .nonempty("Product name in English is required")
+      .nonempty("Name in English is required")
+      .min(3, "Name must be at least 2 characters")
       .regex(/^[A-Za-z\s]+$/, "Only English letters allowed"),
     sku: z.string().nonempty("رمز المنتج مطلوب"),
     category: z.string().nonempty("يجب اختيار الفئة"),

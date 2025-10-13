@@ -108,7 +108,15 @@
     "title": "ابن خلدون",
     "subtitle": "إدارة المدارس",
     "dashboard": "لوحة التحكم",
-    "products": "إدارة المنتجات"
+    "products": "إدارة المنتجات",
+    "Administration": "إدارة الشؤون الإدارية",
+    "classrooms": "إدارة الفصول الدراسية",
+    "Acadimic": "إدارة التعليمية",
+    "behavior": "ملاحظات السلوك",
+    "printing": "الطباعة",
+    "withdrawals": "طلبات الانسحاب",
+    "studentAcademic": "الأداء الأكاديمي للطلاب",
+    "dropout": "الطلاب المنسحبون"
   },
   "header": {
     "schoolManager": "مدير المدرسة",

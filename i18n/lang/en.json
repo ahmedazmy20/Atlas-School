@@ -114,7 +114,15 @@
     "title": "Ibn Khaldun",
     "subtitle": "Schools Management",
     "dashboard": "Dashboard",
-    "products": "Products Management"
+    "products": "Products Management",
+    "Administration": "Administration Assi..",
+    "classrooms": "Classroom Management",
+    "Acadimic": "Academic Management",
+    "behavior": "Behavior Notes",
+    "printing": "Printing Press",
+    "withdrawals": "Withdrawals",
+    "studentAcademic": "Student Academic Pe...",
+    "dropout": "Dropout Students"
   },
   "header": {
     "schoolManager": "School Manager",

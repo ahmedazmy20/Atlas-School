@@ -28,7 +28,7 @@
       <div
         v-for="note in pagedNotifications"
         :key="note.id"
-        class="flex items-center gap-3 p-3 rounded-lg hover:bg-blue-50 transition cursor-pointer">
+        class="flex flex-col lg:flex-row lg:items-center gap-3 p-3 rounded-lg hover:bg-blue-50 transition cursor-pointer">
         <!-- date box -->
         <div
           class="min-w-[130px] flex gap-1 bg-blue-50 text-blue-700 text-xs rounded-md p-2 border border-blue-200 text-center">
@@ -61,7 +61,9 @@
 
     <!-- pagination controls -->
     <div class="flex items-center bg-blue-50 py-3 justify-center mt-4">
-      <button class="px-3 py-2 flex rounded-md  border border-gray-400 hover:border-blue-400 hover:text-blue-400 transition-all" @click="prevPage">
+      <button
+        class="px-3 py-2 flex rounded-md border border-gray-400 hover:border-blue-400 hover:text-blue-400 transition-all"
+        @click="prevPage">
         <Icon
           name="lucide:chevron-left"
           :class="['w-4 h-4', locale === 'ar' ? 'rotate-180' : '']" />

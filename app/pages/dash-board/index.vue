@@ -3,14 +3,14 @@
     <!-- sec 1 top -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <!-- left -->
-      <div class="">
-        <p class="text-sm text-blue-600 font-semibold">
+      <div>
+        <p class="text-sm text-blue-600  font-semibold">
           {{ t("dashboard.date") }}
         </p>
-        <h2 class="text-3xl text-blue-900 font-bold mt-2">
+        <h2 class="text-xl lg:text-3xl text-blue-900 font-bold mt-2">
           {{ t("dashboard.greeting") }}
         </h2>
-        <p class="text-blue-600 mt-3 pe-5">
+        <p class="text-blue-600 w-[100%] mt-3 pe-5">
           {{ t("dashboard.welcome") }}
         </p>
       </div>
@@ -18,7 +18,7 @@
       <!-- right -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div
-          class="flex bg-[#002be9c2] hover:shadow-lg hover:-translate-y-1 transition-all duration-300 items-center justify-between text-white px-6 py-10 rounded-2xl shadow-sm border">
+          class="flex bg-[#002be9c2] w-[100%] mx-auto lg:w-full hover:shadow-lg hover:-translate-y-1 transition-all duration-300 items-center justify-between text-white px-6 py-10 rounded-2xl shadow-sm border">
           <div class="text-left rtl:text-right">
             <p class="text-sm">{{ t("dashboard.students.title") }}</p>
             <h3 class="text-3xl py-1 font-extrabold">
@@ -38,7 +38,7 @@
         </div>
 
         <div
-          class="flex group hover:bg-[#002be9c2] hover:shadow-lg hover:-translate-y-1 transition-all duration-300 items-center justify-between bg-[#00AFE9] text-white px-6 py-10 rounded-2xl shadow-sm border">
+          class="flex group hover:bg-[#002b100c2] w-[100%] mx-auto lg:w-full hover:shadow-lg hover:-translate-y-1 transition-all duration-300 items-center justify-between bg-[#00AFE9] text-white px-6 py-10 rounded-2xl shadow-sm border">
           <div class="text-left rtl:text-right">
             <p class="text-sm">{{ t("dashboard.staff.title") }}</p>
             <h3 class="text-3xl py-1 font-extrabold">
@@ -59,7 +59,8 @@
     <!-- sec 2 middle -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
       <!-- left -->
-      <div class="bg-white p-6 rounded-2xl border border-gray-300 shadow-sm">
+      <div
+        class="bg-white w-[100%] mx-auto lg:w-full p-6 rounded-2xl border border-gray-300 shadow-sm">
         <div class="flex items-center gap-2 mb-4">
           <span class="w-2 h-2 rounded-full bg-blue-500" />
           <h3 class="text-blue-900 font-semibold">
@@ -82,7 +83,7 @@
 
       <!-- right -->
       <div
-        class="lg:col-span-2 bg-white p-6 rounded-2xl border border-gray-300 shadow-sm">
+        class="lg:col-span-2 w-[100%] mx-auto lg:w-full bg-white p-6 rounded-2xl border border-gray-300 shadow-sm">
         <div class="flex items-center gap-2 mb-4">
           <span class="w-2 h-2 rounded-full bg-blue-500" />
           <h3 class="text-blue-900 font-semibold">
@@ -121,7 +122,6 @@
       </div>
     </div>
 
-    <!-- sec 3 bottom -->
     <!-- pagination -->
     <PaginationSwip />
   </div>

@@ -38,7 +38,6 @@
 
       <!-- Categories Dropdown -->
       <div class="flex justify-start items-center gap-3">
-        <!-- Dropdown -->
         <div ref="dropdownRef" class="relative">
           <button
             class="border border-gray-300 text-gray-700 font-medium px-3 py-2 rounded-md bg-white hover:bg-gray-50 flex items-center gap-1"
@@ -65,7 +64,6 @@
           </transition>
         </div>
 
-        <!-- Add Product -->
         <UButton
           to="/add-product"
           class="text-white bg-blue-500 px-5 py-2 rounded-md">
@@ -83,7 +81,6 @@
     <div
       class="border border-gray-200 rounded-md bg-white shadow-sm overflow-x-auto">
       <table class="min-w-full border-collapse text-sm">
-        <!-- Table Header -->
         <thead class="bg-blue-50 text-gray-700 font-medium">
           <tr>
             <th class="px-4 py-3 text-left rtl:text-right">
@@ -110,10 +107,9 @@
           </tr>
         </thead>
 
-        <!-- Table Body -->
         <tbody>
           <tr
-            v-for="product in filteredProducts"
+            v-for="product in paginatedProducts"
             :key="product.id"
             class="border-b border-gray-200 hover:bg-gray-50">
             <td class="px-4 py-3 text-blue-600">{{ product.sku }}</td>
@@ -134,8 +130,6 @@
                 {{ product.status }}
               </span>
             </td>
-
-            <!-- Actions -->
             <td class="px-4 py-3">
               <div class="flex gap-2 justify-center">
                 <UButton
@@ -145,7 +139,6 @@
                   @click="deleteProduct(product)">
                   <Icon name="lucide:trash-2" class="w-4 h-4 text-red-600" />
                 </UButton>
-
                 <UButton
                   variant="ghost"
                   size="sm"
@@ -153,7 +146,6 @@
                   @click="editProduct(product.id)">
                   <Icon name="lucide:edit-3" class="w-4 h-4 text-blue-600" />
                 </UButton>
-
                 <UButton
                   variant="ghost"
                   size="sm"
@@ -167,19 +159,49 @@
         </tbody>
       </table>
 
-      <!-- Table Footer -->
+      <!-- Footer -->
       <div
-        class="flex justify-between items-center border-t bg-blue-50 px-4 py-3 text-sm">
+        class="flex justify-between items-center bg-blue-50 px-4 py-3 text-sm">
         <span class="text-blue-600">
-          {{ t("products.footer.showing") }} {{ filteredProducts.length }}
-          {{ t("products.footer.of") }} {{ productsStore.products.length }}
+          {{ t("products.footer.showing") }} {{ paginatedProducts.length }}
+          {{ t("products.footer.of") }} {{ filteredProducts.length }}
           {{ t("products.footer.products") }}
         </span>
+
+        <!-- Pagination -->
+        <div
+          v-if="totalPages > 1"
+          class="flex justify-center items-center gap-2 py-4">
+          <button
+            class="px-3 py-2 rounded-md border border-gray-300 hover:bg-gray-100 disabled:opacity-50"
+            :disabled="currentPage === 1"
+            @click="prevPage">
+            <Icon name="lucide:chevron-left" class="w-4 h-4" />
+          </button>
+
+          <button
+            v-for="page in totalPages"
+            :key="page"
+            :class="[
+              'w-9 h-9 flex items-center justify-center rounded-md border transition-all',
+              currentPage === page
+                ? 'bg-blue-600 text-white border-blue-600'
+                : 'bg-white text-gray-700 border-gray-200 hover:border-blue-400',
+            ]"
+            @click="goToPage(page)">
+            {{ page }}
+          </button>
+
+          <button
+            class="px-3 py-2 rounded-md border border-gray-300 hover:bg-gray-100 disabled:opacity-50"
+            :disabled="currentPage === totalPages"
+            @click="nextPage">
+            <Icon name="lucide:chevron-right" class="w-4 h-4" />
+          </button>
+        </div>
+
         <div class="flex gap-6 text-blue-600">
-          <span
-            >{{ t("products.footer.totalStock") }}: {{ totalStock }}
-            {{ t("products.footer.units") }}</span
-          >
+          <span>{{ t("products.footer.totalStock") }}: {{ totalStock }}</span>
           <span
             >{{ t("products.footer.totalValue") }}: SAR {{ totalValue }}</span
           >
@@ -190,26 +212,24 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed, onBeforeUnmount } from "vue";
+import { ref, onMounted, onBeforeUnmount, computed } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { useProductsStore } from "@/stores/products";
 import ConfirmDelete from "~/components/ConfirmDelete.vue";
 import ViewProduct from "~/components/ViewProduct.vue";
 
-definePageMeta({
-  layout: "dashboard",
-});
+definePageMeta({ layout: "dashboard" });
 
 const productsStore = useProductsStore();
-// State
+const router = useRouter();
+const { t } = useI18n();
+
+//
 const searchInput = ref("");
 const selectedCategory = ref("All Categories");
 const showDropdown = ref(false);
 const dropdownRef = ref<HTMLElement | null>(null);
-const router = useRouter();
-const { t } = useI18n();
-
 const categories = [
   "All Categories",
   "electronics",
@@ -223,7 +243,7 @@ function selectCategory(cat: string) {
   selectedCategory.value = cat;
 }
 
-// ✅ يقفل لما تضغط برا الـ dropdown
+// Handle click outside of dropdown
 function handleClickOutside(event: MouseEvent) {
   if (dropdownRef.value && !dropdownRef.value.contains(event.target as Node)) {
     showDropdown.value = false;
@@ -231,6 +251,7 @@ function handleClickOutside(event: MouseEvent) {
 }
 
 onMounted(() => {
+  if (productsStore.products.length === 0) productsStore.fetchProducts();
   document.addEventListener("click", handleClickOutside);
 });
 
@@ -238,55 +259,7 @@ onBeforeUnmount(() => {
   document.removeEventListener("click", handleClickOutside);
 });
 
-// Delete & View modals
-const showDeleteModal = ref(false);
-const showViewModal = ref(false);
-const viewedProduct = ref<null | (typeof productsStore.products)[0]>(null);
-const selectedProduct = ref<null | { id: number; name: string }>(null);
-
-// Fetch data
-onMounted(() => {
-  if (productsStore.products.length === 0) {
-    productsStore.fetchProducts();
-  }
-});
-
-// Delete
-function deleteProduct(product: { id: number; name: string }) {
-  selectedProduct.value = product;
-  showDeleteModal.value = true;
-}
-function cancelDelete() {
-  showDeleteModal.value = false;
-  selectedProduct.value = null;
-}
-function confirmDelete() {
-  if (selectedProduct.value) {
-    productsStore.deleteProduct(selectedProduct.value.id);
-    showDeleteModal.value = false;
-    selectedProduct.value = null;
-  }
-}
-
-// Edit / View
-function editProduct(id: number) {
-  const product = productsStore.viewProduct(id);
-  if (product) console.log("Edit Product:", product);
-  router.push(`/edit-product/${id}`);
-}
-function viewProduct(id: number) {
-  const product = productsStore.viewProduct(id);
-  if (product) {
-    viewedProduct.value = product;
-    showViewModal.value = true;
-  }
-}
-function closeViewModal() {
-  showViewModal.value = false;
-  viewedProduct.value = null;
-}
-
-// ✅ Filter logic (Search + Category)
+// filtered products based on search and category
 const filteredProducts = computed(() => {
   return productsStore.products.filter((product) => {
     const matchSearch = product.name
@@ -299,6 +272,74 @@ const filteredProducts = computed(() => {
   });
 });
 
+//  Pagination
+const pageSize = 5;
+const currentPage = ref(1);
+
+const totalPages = computed(() =>
+  Math.ceil(filteredProducts.value.length / pageSize)
+);
+
+const paginatedProducts = computed(() => {
+  const start = (currentPage.value - 1) * pageSize;
+  const end = start + pageSize;
+  return filteredProducts.value.slice(start, end);
+});
+
+function goToPage(page: number) {
+  if (page >= 1 && page <= totalPages.value) currentPage.value = page;
+}
+function nextPage() {
+  if (currentPage.value < totalPages.value) currentPage.value++;
+}
+function prevPage() {
+  if (currentPage.value > 1) currentPage.value--;
+}
+
+// Modals
+const showDeleteModal = ref(false);
+const showViewModal = ref(false);
+type Product = {
+  id: number;
+  sku: string;
+  name: string;
+  category: string;
+  price: number | string;
+  stock: number;
+  status: string;
+  image: string;
+};
+
+const viewedProduct = ref<Product | null>(null); // Replace 'Product' with the actual type
+const selectedProduct = ref<Product | null>(null);
+
+function deleteProduct(product: Product) {
+  selectedProduct.value = product;
+  showDeleteModal.value = true;
+}
+function cancelDelete() {
+  showDeleteModal.value = false;
+}
+function confirmDelete() {
+  if (selectedProduct.value) {
+    productsStore.deleteProduct(selectedProduct.value.id);
+    showDeleteModal.value = false;
+  }
+}
+function editProduct(id: number) {
+  router.push(`/edit-product/${id}`);
+}
+function viewProduct(id: number) {
+  const product = productsStore.viewProduct(id);
+  if (product) {
+    viewedProduct.value = product;
+    showViewModal.value = true;
+  }
+}
+function closeViewModal() {
+  showViewModal.value = false;
+}
+
 // Totals
 const totalStock = computed(() =>
   productsStore.products.reduce((acc, p) => acc + p.stock, 0)
@@ -309,14 +350,3 @@ const totalValue = computed(() =>
     .toFixed(2)
 );
 </script>
-
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.2s;
-}
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>

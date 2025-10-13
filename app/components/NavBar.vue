@@ -1,7 +1,7 @@
 <template>
   <header
     class="flex justify-between items-center bg-white border-b border-gray-200 px-6 py-3 shadow-sm">
-    <!-- الجزء الشمال -->
+    <!-- Left Side -->
     <div class="flex items-center gap-4">
       <!-- Menu Button -->
       <UButton
@@ -13,7 +13,7 @@
       </UButton>
 
       <!-- School Manager Dropdown -->
-      <UDropdown class="min-w-[170px]">
+      <UDropdown class="min-w-[10rem] hidden xl:block">
         <UButton
           class="border border-gray-200 text-gray-700 font-medium px-3 py-1.5 rounded-md bg-white hover:bg-gray-50">
           {{ t("header.schoolManager") }}
@@ -22,7 +22,7 @@
       </UDropdown>
 
       <!-- Branch Dropdown -->
-      <UDropdown class="min-w-[170px]">
+      <UDropdown class="min-w-[170px] hidden xl:block">
         <UButton
           class="border border-gray-200 text-gray-700 font-medium px-3 py-1.5 rounded-md bg-white hover:bg-gray-50">
           {{ t("header.branch") }}
@@ -31,7 +31,7 @@
       </UDropdown>
 
       <!-- Year Dropdown -->
-      <UDropdown class="min-w-[150px]">
+      <UDropdown class="min-w-[150px] hidden xl:block">
         <UButton
           class="border border-gray-200 text-gray-700 font-medium px-3 py-1.5 rounded-md bg-white hover:bg-gray-50">
           {{ t("header.year") }}
@@ -40,7 +40,7 @@
       </UDropdown>
 
       <!-- Search -->
-      <div class="relative">
+      <div class="relative hidden sm:block">
         <UInput
           placeholder="Search..."
           icon="lucide:search"
@@ -48,7 +48,7 @@
       </div>
     </div>
 
-    <!-- 🔹 الجزء اليمين -->
+    <!-- Right Side  -->
     <div class="flex items-center gap-5">
       <!--  Dropdown تغيير اللغة -->
       <div ref="dropdownRef" class="relative">
@@ -65,7 +65,7 @@
           <Icon name="lucide:chevron-down" class="w-4 h-4 ml-1" />
         </UButton>
 
-        <!-- القائمة -->
+        <!-- Dropdown -->
         <transition name="fade">
           <div
             v-if="open"
@@ -98,13 +98,13 @@
 
       <!-- User Info -->
       <div
-        class="flex items-center gap-3 border border-gray-200 rounded-md px-3 py-2 bg-white hover:bg-gray-50 cursor-pointer">
+        class="hidden xl:flex items-center gap-3 border border-gray-200 rounded-md px-3 py-2 bg-white hover:bg-gray-50 cursor-pointer">
         <div
           class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
           <Icon name="lucide:user" class="w-5 h-5 text-blue-600" />
         </div>
         <div class="flex flex-col text-right">
-          <span class="font-semibold text-gray-800 text-sm">{{
+          <span class="font-semibold text-gray-800 text-xs 2xl:text-sm">{{
             t("header.user.name")
           }}</span>
           <span class="text-xs text-gray-500">{{ t("header.user.role") }}</span>
