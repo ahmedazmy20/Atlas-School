@@ -21,7 +21,7 @@
     <nav class="flex-1 p-4 space-y-2 overflow-hidden">
       <NuxtLink
         to="/dash-board"
-        class="group overflow-hidden flex items-center gap-3 px-3 py-2 rounded-lg text-lg font-semibold text-blue-700 transition-colors hover:bg-gray-100 [&.router-link-exact-active]:bg-blue-700 [&.router-link-exact-active]:text-white [&.router-link-exact-active:hover]:bg-blue-700">
+        class="group overflow-hidden flex items-center gap-3 px-3 py-3 rounded-lg font-semibold text-blue-700 transition-colors hover:bg-gray-100 [&.router-link-exact-active]:bg-blue-700 [&.router-link-exact-active]:text-white [&.router-link-exact-active:hover]:bg-blue-700">
         <Icon name="lucide:home" class="w-5 h-5" />
         <span v-if="!collapsed" class="transition-opacity duration-200">{{
           t("sidebar.dashboard")
@@ -29,12 +29,93 @@
       </NuxtLink>
 
       <NuxtLink
+        to=""
+        class="group overflow-hidden flex items-center gap-3 px-3 py-3 rounded-lg font-semibold text-blue-700 transition-colors hover:bg-gray-100 [&.router-link-exact-active]:bg-blue-700 [&.router-link-exact-active]:text-white [&.router-link-exact-active:hover]:bg-blue-700">
+        <Icon name="lucide:graduation-cap" class="w-5 h-5" />
+        <span v-if="!collapsed" class="transition-opacity duration-200"
+          >School Manager</span
+        >
+      </NuxtLink>
+
+      <NuxtLink
+        to=""
+        class="group overflow-hidden flex items-center gap-3 px-3 py-3 rounded-lg font-semibold text-blue-700 transition-colors hover:bg-gray-100 [&.router-link-exact-active]:bg-blue-700 [&.router-link-exact-active]:text-white [&.router-link-exact-active:hover]:bg-blue-700">
+        <Icon name="lucide:library" class="w-5 h-5" />
+        <span v-if="!collapsed" class="transition-opacity duration-200"
+          >Administration Assi...</span
+        >
+      </NuxtLink>
+
+      <NuxtLink
+        to=""
+        class="group overflow-hidden flex items-center gap-3 px-3 py-3 rounded-lg font-semibold text-blue-700 transition-colors hover:bg-gray-100 [&.router-link-exact-active]:bg-blue-700 [&.router-link-exact-active]:text-white [&.router-link-exact-active:hover]:bg-blue-700">
+        <Icon name="lucide:users" class="w-5 h-5" />
+        <span v-if="!collapsed" class="transition-opacity duration-200"
+          >Classroom Management</span
+        >
+      </NuxtLink>
+
+      <NuxtLink
+        to=""
+        class="group overflow-hidden flex items-center gap-3 px-3 py-3 rounded-lg font-semibold text-blue-700 transition-colors hover:bg-gray-100 [&.router-link-exact-active]:bg-blue-700 [&.router-link-exact-active]:text-white [&.router-link-exact-active:hover]:bg-blue-700">
+        <Icon name="lucide:book" class="w-5 h-5" />
+        <span v-if="!collapsed" class="transition-opacity duration-200"
+          >Acadimic Managent</span
+        >
+      </NuxtLink>
+
+      <NuxtLink
         to="/products-management"
-        class="group flex items-center gap-3 px-3 py-2 rounded-lg text-lg font-semibold text-blue-700 transition-colors hover:bg-gray-100 [&.router-link-exact-active]:bg-blue-700 [&.router-link-exact-active]:text-white [&.router-link-exact-active:hover]:bg-blue-700">
+        class="group flex items-center gap-3 px-3 py-3 rounded-lg font-semibold text-blue-700 transition-colors hover:bg-gray-100 [&.router-link-exact-active]:bg-blue-700 [&.router-link-exact-active]:text-white [&.router-link-exact-active:hover]:bg-blue-700">
         <Icon name="lucide:package" class="w-5 h-5" />
         <span v-if="!collapsed" class="transition-opacity duration-200">{{
           t("sidebar.products")
         }}</span>
+      </NuxtLink>
+
+      <NuxtLink
+        to=""
+        class="group overflow-hidden flex items-center gap-3 px-3 py-3 rounded-lg font-semibold text-blue-700 transition-colors hover:bg-gray-100 [&.router-link-exact-active]:bg-blue-700 [&.router-link-exact-active]:text-white [&.router-link-exact-active:hover]:bg-blue-700">
+        <Icon name="lucide:library" class="w-5 h-5" />
+        <span v-if="!collapsed" class="transition-opacity duration-200"
+          >Behavior Notes</span
+        >
+      </NuxtLink>
+
+      <NuxtLink
+        to=""
+        class="group overflow-hidden flex items-center gap-3 px-3 py-3 rounded-lg font-semibold text-blue-700 transition-colors hover:bg-gray-100 [&.router-link-exact-active]:bg-blue-700 [&.router-link-exact-active]:text-white [&.router-link-exact-active:hover]:bg-blue-700">
+        <Icon name="lucide:printer" class="w-5 h-5" />
+        <span v-if="!collapsed" class="transition-opacity duration-200"
+          >Printing Press</span
+        >
+      </NuxtLink>
+
+      <NuxtLink
+        to=""
+        class="group overflow-hidden flex items-center gap-3 px-3 py-3 rounded-lg font-semibold text-blue-700 transition-colors hover:bg-gray-100 [&.router-link-exact-active]:bg-blue-700 [&.router-link-exact-active]:text-white [&.router-link-exact-active:hover]:bg-blue-700">
+        <Icon name="lucide:wallet" class="w-5 h-5" />
+        <span v-if="!collapsed" class="transition-opacity duration-200"
+          >Withdrawals</span
+        >
+      </NuxtLink>
+
+      <NuxtLink
+        to=""
+        class="group overflow-hidden flex items-center gap-3 px-3 py-3 rounded-lg font-semibold text-blue-700 transition-colors hover:bg-gray-100 [&.router-link-exact-active]:bg-blue-700 [&.router-link-exact-active]:text-white [&.router-link-exact-active:hover]:bg-blue-700">
+        <Icon name="lucide:line-chart" class="w-5 h-5" />
+        <span v-if="!collapsed" class="transition-opacity duration-200"
+          >Student Academic Pe...</span
+        >
+      </NuxtLink>
+
+      <NuxtLink
+        to=""
+        class="group overflow-hidden flex items-center gap-3 px-3 py-3 rounded-lg font-semibold text-blue-700 transition-colors hover:bg-gray-100 [&.router-link-exact-active]:bg-blue-700 [&.router-link-exact-active]:text-white [&.router-link-exact-active:hover]:bg-blue-700">
+        <Icon name="lucide:users" class="w-5 h-5" />
+        <span v-if="!collapsed" class="transition-opacity duration-200"
+          >Dropout Students</span
+        >
       </NuxtLink>
     </nav>
   </aside>
