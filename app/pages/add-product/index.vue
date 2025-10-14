@@ -1,7 +1,7 @@
 <template>
-  <div class="p-6 bg-[#F6FAFF] min-h-screen px-28">
+  <div class="p-6 bg-[#F6FAFF] min-h-screen md:px-28">
     <form
-      class="bg-white shadow-md md:w-1/2 mx-auto rounded-2xl p-6 space-y-6"
+      class="bg-white shadow-md md:w-11/12 lg:w-9/12 xl:w-6/12 mx-auto rounded-2xl p-6 space-y-6"
       @submit.prevent="onSubmit">
       <!-- name in arabic and english -->
       <div class="grid md:grid-cols-2 gap-6">

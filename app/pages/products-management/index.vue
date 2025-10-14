@@ -123,14 +123,14 @@
             v-for="product in paginatedProducts"
             :key="product.id"
             class="border-b border-gray-200 hover:bg-gray-50">
-            <td class="px-4 py-3 text-blue-600">{{ product.sku }}</td>
-            <td class="px-4 py-3 font-medium">
+            <td class="ps-2 md:px-4 py-3 text-blue-600">{{ product.sku }}</td>
+            <td class="px-2 md:px-4 py-3 md:font-medium">
               {{ product.name.slice(0, 20) }}...
             </td>
-            <td class="px-4 py-3">{{ product.category }}</td>
-            <td class="px-4 py-3">{{ product.price }}</td>
-            <td class="px-4 py-3">{{ product.stock }}</td>
-            <td class="px-4 py-3">
+            <td class="px-2 md:px-4 py-3">{{ product.category }}</td>
+            <td class="px-2 md:px-4 py-3">{{ product.price }}</td>
+            <td class="px-2 md:px-4 py-3">{{ product.stock }}</td>
+            <td class="px-2 md:px-4 py-3">
               <span
                 :class="[
                   'px-2 py-1 rounded-full text-xs font-semibold',
@@ -172,7 +172,7 @@
 
       <!-- Footer -->
       <div
-        class="flex justify-between items-center bg-blue-50 px-4 py-3 text-sm">
+        class="flex w-[40rem] sm:w-full flex-col md:flex-row justify-center md:justify-between items-center bg-blue-50 px-4 py-3 text-sm">
         <span class="text-blue-600">
           {{ t("products.footer.showing") }} {{ paginatedProducts.length }}
           {{ t("products.footer.of") }} {{ filteredProducts.length }}
@@ -334,13 +334,14 @@ function deleteProduct(product: Product) {
   showDeleteModal.value = true;
 }
 function cancelDelete() {
-  showDeleteModal.value = false;    toast.add({
-      title: "تم إلغاء حذف المنتج 🗑️",
-      description: `لم يتم حذف المنتج "${selectedProduct.value?.name}".`,
-      color: "warning",
-      icon: "i-heroicons-trash",
-      duration: 3000,
-    });
+  showDeleteModal.value = false;
+  toast.add({
+    title: "تم إلغاء حذف المنتج 🗑️",
+    description: `لم يتم حذف المنتج "${selectedProduct.value?.name}".`,
+    color: "warning",
+    icon: "i-heroicons-trash",
+    duration: 3000,
+  });
 }
 function confirmDelete() {
   if (selectedProduct.value) {

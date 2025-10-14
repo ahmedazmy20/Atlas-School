@@ -3,7 +3,7 @@
   <transition name="fade">
     <div
       v-if="show"
-      class="fixed inset-0 mb-0 flex items-center justify-center bg-[#0000003f] bg-opacity-50 z-50">
+      class="fixed inset-0 mb-0 flex items-center justify-center px-8 md:px-0 bg-[#0000003f] bg-opacity-50 z-50">
       <div class="bg-white rounded-lg shadow-lg p-6 w-96">
         <h2
           class="flex items-center gap-1 text-lg font-semibold text-gray-800 mb-4">

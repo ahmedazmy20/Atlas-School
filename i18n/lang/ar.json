@@ -248,5 +248,31 @@
     "alerts": {
       "missingFields": "يرجى ملء جميع الحقول المطلوبة!"
     }
+  },
+  "editProduct": {
+    "formTitle": "تعديل المنتج",
+    "nameAr": "اسم المنتج (بالعربية)",
+    "nameEn": "اسم المنتج (بالإنجليزية)",
+    "sku": "رمز المنتج (SKU)",
+    "category": "الفئة",
+    "selectCategory": "اختر الفئة",
+    "price": "السعر (ريال)",
+    "quantity": "الكمية المتوفرة",
+    "status": "الحالة",
+    "selectStatus": "اختر الحالة",
+    "statusActive": "نشط (Active)",
+    "statusInactive": "غير نشط (Inactive)",
+    "description": "الوصف",
+    "descriptionPlaceholder": "أدخل وصف المنتج",
+    "saveChanges": "حفظ التغييرات",
+    "productNotFound": "المنتج غير موجود!",
+    "fillRequired": "يرجى ملء جميع الحقول المطلوبة!",
+    "savedTitle": "تم الحفظ ✅",
+    "savedMessage": "تم حفظ التعديلات على المنتج بنجاح.",
+    "categories": {
+      "electronics": "إلكترونيات",
+      "clothes": "ملابس",
+      "food": "أطعمة"
+    }
   }
 }

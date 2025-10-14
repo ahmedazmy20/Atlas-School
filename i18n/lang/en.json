@@ -254,5 +254,31 @@
     "alerts": {
       "missingFields": "Please fill in all required fields!"
     }
+  },
+  "editProduct": {
+    "formTitle": "Edit Product",
+    "nameAr": "Product Name (Arabic)",
+    "nameEn": "Product Name (English)",
+    "sku": "Product Code (SKU)",
+    "category": "Category",
+    "selectCategory": "Select Category",
+    "price": "Price (SAR)",
+    "quantity": "Available Quantity",
+    "status": "Status",
+    "selectStatus": "Select Status",
+    "statusActive": "Active",
+    "statusInactive": "Inactive",
+    "description": "Description",
+    "descriptionPlaceholder": "Enter product description",
+    "saveChanges": "Save Changes",
+    "productNotFound": "Product not found!",
+    "fillRequired": "Please fill all required fields!",
+    "savedTitle": "Saved ✅",
+    "savedMessage": "Product changes saved successfully.",
+    "categories": {
+      "electronics": "Electronics",
+      "clothes": "Clothes",
+      "food": "Food"
+    }
   }
 }

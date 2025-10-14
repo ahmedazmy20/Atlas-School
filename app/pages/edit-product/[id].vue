@@ -1,14 +1,14 @@
 <template>
-  <div class="p-6 bg-[#F6FAFF] min-h-screen px-28">
+  <div class="p-6 bg-[#F6FAFF] min-h-screen md:px-28">
     <!-- الفورم -->
     <form
-      class="bg-white shadow-md md:w-1/2 mx-auto rounded-2xl p-6 space-y-6"
+      class="bg-white shadow-md md:w-11/12 lg:w-9/12 xl:w-6/12 mx-auto rounded-2xl p-6 space-y-6"
       @submit.prevent="handleSubmit">
-      <!-- الاسم بالعربية والانجليزية -->
+      <!-- name in arabic and english -->
       <div class="grid md:grid-cols-2 gap-6">
         <div>
           <label class="block text-gray-700 font-medium mb-2 text-end">
-            اسم المنتج (بالعربية)
+            {{ $t("editProduct.nameAr") }}
           </label>
           <input
             v-model="product.name_ar"
@@ -18,7 +18,7 @@
         </div>
         <div>
           <label class="block text-gray-700 font-medium mb-2 text-end">
-            اسم المنتج (بالإنجليزية)
+            {{ $t("editProduct.nameEn") }}
           </label>
           <input
             v-model="product.name_en"
@@ -28,11 +28,11 @@
         </div>
       </div>
 
-      <!-- رمز المنتج والفئة -->
+      <!-- sku and category -->
       <div class="grid md:grid-cols-2 gap-6">
         <div>
           <label class="block text-gray-700 font-medium mb-2 text-end">
-            رمز المنتج (SKU)
+            {{ $t("editProduct.sku") }}
           </label>
           <input
             v-model="product.sku"
@@ -42,15 +42,23 @@
         </div>
         <div>
           <label class="block text-gray-700 font-medium mb-2 text-end">
-            الفئة
+            {{ $t("editProduct.category") }}
           </label>
           <select
             v-model="product.category"
             class="border w-full border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <option disabled value="">اختر الفئة</option>
-            <option value="electronics">إلكترونيات</option>
-            <option value="clothes">ملابس</option>
-            <option value="food">أطعمة</option>
+            <option disabled value="">
+              {{ $t("editProduct.selectCategory") }}
+            </option>
+            <option value="electronics">
+              {{ $t("editProduct.categories.electronics") }}
+            </option>
+            <option value="clothes">
+              {{ $t("editProduct.categories.clothes") }}
+            </option>
+            <option value="food">
+              {{ $t("editProduct.categories.food") }}
+            </option>
           </select>
         </div>
       </div>
@@ -59,7 +67,7 @@
       <div class="grid md:grid-cols-2 gap-6">
         <div>
           <label class="block text-gray-700 font-medium mb-2 text-end">
-            السعر (ريال)
+            {{ $t("editProduct.price") }}
           </label>
           <input
             v-model.number="product.price"
@@ -70,7 +78,7 @@
         </div>
         <div>
           <label class="block text-gray-700 font-medium mb-2 text-end">
-            الكمية المتوفرة
+            {{ $t("editProduct.quantity") }}
           </label>
           <input
             v-model.number="product.quantity"
@@ -83,34 +91,38 @@
       <!-- الحالة -->
       <div>
         <label class="block text-gray-700 font-medium mb-2 text-end">
-          الحالة
+          {{ $t("editProduct.status") }}
         </label>
         <select
           v-model="product.status"
           class="border w-full border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
-          <option disabled value="" class="text-end">اختر الحالة</option>
-          <option value="Active">نشط (Active)</option>
-          <option value="Inactive">غير نشط (Inactive)</option>
+          <option disabled value="" class="text-end">
+            {{ $t("editProduct.selectStatus") }}
+          </option>
+          <option value="Active">{{ $t("editProduct.statusActive") }}</option>
+          <option value="Inactive">
+            {{ $t("editProduct.statusInactive") }}
+          </option>
         </select>
       </div>
       <!-- الوصف -->
       <div>
         <label class="block text-gray-700 font-medium mb-2 text-end">
-          الوصف
+          {{ $t("editProduct.description") }}
         </label>
         <textarea
           v-model="product.description"
           rows="3"
-          placeholder="أدخل وصف المنتج"
+          :placeholder="$t('editProduct.descriptionPlaceholder')"
           class="w-full border text-end border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" />
       </div>
 
-      <!-- زر حفظ التغييرات -->
+      <!-- save changes btn-->
       <div class="flex justify-end">
         <button
           type="submit"
           class="bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition">
-          حفظ التغييرات
+          {{ $t("editProduct.saveChanges") }}
         </button>
       </div>
     </form>
@@ -152,7 +164,7 @@ onMounted(() => {
     Object.assign(product, {
       id: existingProduct.id,
       name_en: existingProduct.name,
-      name_ar: existingProduct.name_ar || existingProduct.name,
+      name_ar: existingProduct.name,
       category: existingProduct.category,
       sku: existingProduct.sku,
       quantity: existingProduct.stock,
