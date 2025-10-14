@@ -1,10 +1,11 @@
 <template>
-  <div class="container mx-auto min-h-screen py-4 2xl:px-32 space-y-8">
+  <div
+    class="container w-[100%] md:w-full mx-auto min-h-screen py-4 2xl:px-32 space-y-8">
     <!-- sec 1 top -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <!-- left -->
       <div>
-        <p class="text-sm text-blue-600  font-semibold">
+        <p class="text-sm text-blue-600 font-semibold">
           {{ t("dashboard.date") }}
         </p>
         <h2 class="text-xl lg:text-3xl text-blue-900 font-bold mt-2">
@@ -38,7 +39,7 @@
         </div>
 
         <div
-          class="flex group hover:bg-[#002b100c2] w-[100%] mx-auto lg:w-full hover:shadow-lg hover:-translate-y-1 transition-all duration-300 items-center justify-between bg-[#00AFE9] text-white px-6 py-10 rounded-2xl shadow-sm border">
+          class="flex group hover:bg-[#002be9c2] w-[100%] mx-auto lg:w-full hover:shadow-lg hover:-translate-y-1 transition-all duration-300 items-center justify-between bg-[#00AFE9] text-white px-6 py-10 rounded-2xl shadow-sm border">
           <div class="text-left rtl:text-right">
             <p class="text-sm">{{ t("dashboard.staff.title") }}</p>
             <h3 class="text-3xl py-1 font-extrabold">

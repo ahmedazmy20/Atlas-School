@@ -217,6 +217,7 @@ definePageMeta({
 
 const router = useRouter();
 const productsStore = useProductsStore();
+const toast = useToast(); // use the toast composable
 
 //  Zod Validation Schema
 const schema = toTypedSchema(
@@ -263,6 +264,13 @@ const { handleSubmit, resetForm } = useForm({
 const onSubmit = handleSubmit((values) => {
   productsStore.addProduct({ ...values });
   resetForm();
+  // add toast
+  toast.add({
+    title: "تمت إضافة المنتج 🎉",
+    description: "تمت إضافة المنتج بنجاح إلى القائمة.",
+    icon: "i-heroicons-check-circle",
+    color: "success",
+  });
   router.push("/products-management");
 });
 </script>

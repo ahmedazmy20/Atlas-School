@@ -37,7 +37,6 @@ const cards = [
 function handleLogin(data) {
   isSubmitting.value = true;
   user.value.id = data.id;
-  // احفظ باقي بيانات المستخدم...
   navigateTo("/choose-role");
 }
 </script>
@@ -49,7 +48,7 @@ function handleLogin(data) {
       class="left bg-white w-full h-screen flex items-center justify-center px-10 md:px-20 py-20">
       <FormInput v-if="!user?.id && !isSubmitting" @loggedIn="handleLogin" />
       <!-- <ShowData v-else-if="user?.id && !isSubmitting" :user="user" /> -->
-      <div v-else class="loader">Loading...</div>
+      <!-- <div v-else class="loader">Loading...</div> -->
     </div>
 
     <!-- right ثابت -->

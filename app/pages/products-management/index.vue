@@ -7,26 +7,27 @@
       @confirm="confirmDelete" />
 
     <!-- first part -->
-    <div class="flex justify-between items-center">
+    <div
+      class="flex flex-col w-[18rem] sm:w-full sm:flex-row sm:justify-between sm:items-center">
       <div class="text-start">
-        <h1 class="text-3xl font-bold text-[#1C398E]">
+        <h1 class="md:text-3xl font-bold text-[#1C398E]">
           {{ t("products.title") }}
         </h1>
-        <p class="text-md text-[#1447E6] mt-1">
+        <p class="text-sm w-[16rem] md:w-full md:text-md text-[#1447E6] mt-1">
           {{ t("products.subtitle") }}
         </p>
       </div>
       <UButton
         to="/dash-board"
         variant="outline"
-        class="border border-gray-300 text-[#5881ff] px-4 py-2 rounded-md hover:bg-blue-500 hover:text-white transition-colors">
+        class="border w-fit border-gray-300 text-[#5881ff] px-4 py-2 rounded-md hover:bg-blue-500 hover:text-white transition-colors">
         {{ t("products.backToDashboard") }}
       </UButton>
     </div>
 
     <!-- second part -->
     <div
-      class="flex items-center gap-4 border border-gray-200 rounded-md p-4 bg-white shadow-sm">
+      class="flex flex-col sm:flex-row md:items-center w-[18rem] sm:w-full gap-4 border border-gray-200 rounded-md p-4 bg-white shadow-sm">
       <!-- Search -->
       <div class="relative flex-1">
         <UInput
@@ -40,7 +41,7 @@
       <div class="flex justify-start items-center gap-3">
         <div ref="dropdownRef" class="relative">
           <button
-            class="border border-gray-300 text-gray-700 font-medium px-3 py-2 rounded-md bg-white hover:bg-gray-50 flex items-center gap-1"
+            class="border border-gray-300 text-gray-700 text-sm md:text-base font-medium px-3 py-2 rounded-md bg-white hover:bg-gray-50 flex items-center gap-1"
             @click.stop="showDropdown = !showDropdown">
             {{ selectedCategory }}
             <Icon name="lucide:chevron-down" class="w-4 h-4" />
@@ -49,7 +50,7 @@
           <transition name="fade">
             <div
               v-if="showDropdown"
-              class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
+              class="absolute left-0 mt-2 w-40 md:w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
               <button
                 v-for="cat in categories"
                 :key="cat"
@@ -66,7 +67,7 @@
 
         <UButton
           to="/add-product"
-          class="text-white bg-blue-500 px-5 py-2 rounded-md">
+          class="text-white md:text-base bg-blue-500 px-5 py-2 rounded-md">
           {{ t("products.addProduct") }}
         </UButton>
       </div>
@@ -79,7 +80,9 @@
 
     <!-- third part (table) -->
     <div
-      class="border border-gray-200 rounded-md bg-white shadow-sm overflow-x-auto">
+      class="border border-gray-200 rounded-md bg-white w-[18rem] overflow-x-scroll sm:w-full shadow-sm md:overflow-x-auto">
+      <!-- Table -->
+
       <table class="min-w-full border-collapse text-sm">
         <thead class="bg-blue-50 text-gray-700 font-medium">
           <tr>
@@ -107,14 +110,22 @@
           </tr>
         </thead>
 
-        <tbody>
+        <tbody v-if="productsStore.loading">
+          <tr v-for="i in 5" :key="i" class="border-b border-gray-200">
+            <td v-for="n in 7" :key="n" class="px-4 py-3">
+              <USkeleton class="h-4 w-full rounded" />
+            </td>
+          </tr>
+        </tbody>
+
+        <tbody v-else>
           <tr
             v-for="product in paginatedProducts"
             :key="product.id"
             class="border-b border-gray-200 hover:bg-gray-50">
             <td class="px-4 py-3 text-blue-600">{{ product.sku }}</td>
             <td class="px-4 py-3 font-medium">
-              {{ product.name.slice(0, 20) }} ...
+              {{ product.name.slice(0, 20) }}...
             </td>
             <td class="px-4 py-3">{{ product.category }}</td>
             <td class="px-4 py-3">{{ product.price }}</td>
@@ -173,10 +184,12 @@
           v-if="totalPages > 1"
           class="flex justify-center items-center gap-2 py-4">
           <button
-            class="px-3 py-2 rounded-md border border-gray-300 hover:bg-gray-100 disabled:opacity-50"
+            class="px-3 py-2.5 flex rounded-md border border-gray-300 hover:text-blue-500 hover:border-blue-400 disabled:border-slate-600 disabled:text-slate-600 disabled:opacity-50 transition-all"
             :disabled="currentPage === 1"
             @click="prevPage">
-            <Icon name="lucide:chevron-left" class="w-4 h-4" />
+            <Icon
+              name="lucide:chevron-left"
+              :class="['w-4 h-4', locale === 'ar' ? 'rotate-180' : '']" />
           </button>
 
           <button
@@ -193,10 +206,12 @@
           </button>
 
           <button
-            class="px-3 py-2 rounded-md border border-gray-300 hover:bg-gray-100 disabled:opacity-50"
+            class="px-3 py-2.5 flex rounded-md border border-gray-300 hover:text-blue-500 hover:border-blue-400 disabled:border-slate-600 disabled:text-slate-600 disabled:opacity-50 transition-all"
             :disabled="currentPage === totalPages"
             @click="nextPage">
-            <Icon name="lucide:chevron-right" class="w-4 h-4" />
+            <Icon
+              name="lucide:chevron-right"
+              :class="['w-4 h-4', locale === 'ar' ? 'rotate-180' : '']" />
           </button>
         </div>
 
@@ -223,7 +238,8 @@ definePageMeta({ layout: "dashboard" });
 
 const productsStore = useProductsStore();
 const router = useRouter();
-const { t } = useI18n();
+const { locale, t } = useI18n();
+const toast = useToast();
 
 //
 const searchInput = ref("");
@@ -304,7 +320,7 @@ type Product = {
   sku: string;
   name: string;
   category: string;
-  price: number | string;
+  price: number;
   stock: number;
   status: string;
   image: string;
@@ -318,12 +334,26 @@ function deleteProduct(product: Product) {
   showDeleteModal.value = true;
 }
 function cancelDelete() {
-  showDeleteModal.value = false;
+  showDeleteModal.value = false;    toast.add({
+      title: "تم إلغاء حذف المنتج 🗑️",
+      description: `لم يتم حذف المنتج "${selectedProduct.value?.name}".`,
+      color: "warning",
+      icon: "i-heroicons-trash",
+      duration: 3000,
+    });
 }
 function confirmDelete() {
   if (selectedProduct.value) {
     productsStore.deleteProduct(selectedProduct.value.id);
     showDeleteModal.value = false;
+
+    toast.add({
+      title: "تم حذف المنتج 🗑️",
+      description: `تم حذف المنتج "${selectedProduct.value.name}" بنجاح.`,
+      color: "success",
+      icon: "i-heroicons-trash",
+      duration: 3000,
+    });
   }
 }
 function editProduct(id: number) {
@@ -332,7 +362,10 @@ function editProduct(id: number) {
 function viewProduct(id: number) {
   const product = productsStore.viewProduct(id);
   if (product) {
-    viewedProduct.value = product;
+    viewedProduct.value = {
+      ...product,
+      price: Number(product.price),
+    };
     showViewModal.value = true;
   }
 }

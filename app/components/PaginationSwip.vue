@@ -1,13 +1,14 @@
 <template>
   <div class="bg-white py-6 rounded-2xl border border-gray-300 shadow-sm">
     <!-- notification header -->
-    <div class="flex items-center bg-blue-50 py-3 px-6 justify-between mb-4">
+    <div
+      class="flex flex-col md:flex-row gap-2 md:gap-0 md:items-center bg-blue-50 py-3 px-6 justify-between mb-4">
       <div class="flex items-center gap-3">
         <div
-          class="w-10 h-10 rounded-md bg-blue-400 text-white flex items-center justify-center">
-          <Icon name="lucide:bell" class="w-5 h-5" />
+          class="p-2 md:p-3 rounded-md bg-blue-400 text-white flex items-center justify-center">
+          <Icon name="lucide:bell" class="md:w-5 md:h-5" />
         </div>
-        <h3 class="text-lg font-semibold text-[#1C398E]">
+        <h3 class="text-sm md:text-lg font-semibold text-[#1C398E]">
           {{ t("dashboard.notifications.title") }}
         </h3>
       </div>
@@ -39,7 +40,7 @@
         <!-- icon & text -->
         <div class="flex items-start gap-3 flex-1">
           <div
-            class="w-10 h-10 rounded-full bg-blue-400 text-white flex items-center justify-center">
+            class="p-2 rounded-full bg-blue-400 text-white flex items-center justify-center">
             <Icon name="lucide:alert-circle" class="w-5 h-5" />
           </div>
           <div class="text-left rtl:text-right">
@@ -62,7 +63,7 @@
     <!-- pagination controls -->
     <div class="flex items-center bg-blue-50 py-3 justify-center mt-4">
       <button
-        class="px-3 py-2 flex rounded-md border border-gray-400 hover:border-blue-400 hover:text-blue-400 transition-all"
+        class="px-1 py-1 md:px-3 md:py-2 flex rounded-md border border-gray-400 hover:border-blue-400 hover:text-blue-400 transition-all"
         @click="prevPage">
         <Icon
           name="lucide:chevron-left"
@@ -74,7 +75,7 @@
           v-for="p in totalPages"
           :key="p"
           :class="[
-            'w-9 h-9 flex items-center justify-center rounded-md border',
+            'w-6 h-6 md:w-9 md:h-9 flex items-center justify-center rounded-md border',
             currentPage === p
               ? 'bg-blue-600 text-white border-blue-600'
               : 'bg-white text-gray-700 border-gray-200',
@@ -85,7 +86,7 @@
       </div>
 
       <button
-        class="px-3 py-2 flex rounded-md hover:bg-gray-100 border border-gray-400 hover:border-blue-400 hover:text-blue-400 transition-all"
+        class="px-1 py-1 md:px-3 md:py-2 flex rounded-md hover:bg-gray-100 border border-gray-400 hover:border-blue-400 hover:text-blue-400 transition-all"
         @click="nextPage">
         <Icon
           name="lucide:chevron-right"

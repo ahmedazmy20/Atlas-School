@@ -11,33 +11,32 @@ export const useProductsStore = defineStore("products", {
       stock: number;
       status: string;
       image: string;
+      description: string;
     }>,
     loading: false,
     error: null as string | null,
   }),
 
   actions: {
-    fetchProducts: async function () {
-      this.loading = true;
-      this.error = null;
-
+    async fetchProducts() {
       try {
-        const response = await fetch("https://fakestoreapi.com/products");
-        const data = await response.json();
+        this.loading = true;
+        const res = await fetch("https://fakestoreapi.com/products");
+        const data = await res.json();
 
-        this.products = data.map((p: any, i: number) => ({
-          id: p.id, // هنا استخدمنا id من API
-          sku: `SKU${String(i + 1).padStart(3, "0")}`,
+        // save to state
+        this.products = data.map((p) => ({
+          id: p.id,
+          sku: `PROD-${p.id}`,
           name: p.title,
           category: p.category,
-          price: Number(p.price).toFixed(2),
-          stock: Math.floor(Math.random() * 100) + 10,
-          status: Math.random() > 0.3 ? "Active" : "Inactive",
+          price: p.price,
+          stock: Math.floor(Math.random() * 100) + 1,
+          status: Math.random() > 0.5 ? "Active" : "Inactive",
           image: p.image,
         }));
-      } catch (err) {
-        this.error = "Failed to load products.";
-        console.error(err);
+      } catch (error) {
+        console.error("Error fetching products:", error);
       } finally {
         this.loading = false;
       }

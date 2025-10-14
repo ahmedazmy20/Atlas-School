@@ -125,6 +125,7 @@ import { useRouter, useRoute } from "vue-router";
 const router = useRouter();
 const route = useRoute();
 const productsStore = useProductsStore();
+const toast = useToast();
 
 // المنتج اللي هيتعدل
 const product = reactive({
@@ -166,7 +167,7 @@ onMounted(() => {
 });
 
 const handleSubmit = () => {
-  // تحقق من الحقول المطلوبة
+  // sure all required fields are filled
   if (
     !product.name_en ||
     !product.name_ar ||
@@ -180,7 +181,7 @@ const handleSubmit = () => {
     return;
   }
 
-  // تحديث المنتج في الـ store
+  // update product in the store
   productsStore.updateProduct({
     id: product.id,
     name: product.name_en,
@@ -190,6 +191,13 @@ const handleSubmit = () => {
     price: Number(product.price).toFixed(2),
     description: product.description,
     status: product.status,
+  });
+  toast.add({
+    title: "تم الحفظ ✅",
+    description: "تم حفظ التعديلات على المنتج بنجاح.",
+    color: "success",
+    icon: "i-heroicons-check-circle",
+    duration: 3000,
   });
   router.push("/products-management");
 };
