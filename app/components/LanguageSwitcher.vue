@@ -12,7 +12,7 @@ const languages = [
 const open = ref(false);
 const dropdownRef = ref<HTMLDivElement | null>(null);
 
-const current: Ref = computed(() => {
+const current = computed(() => {
   return languages.find((l) => l.code === locale.value) ?? languages[0];
 });
 
@@ -39,12 +39,14 @@ onBeforeUnmount(() => document.removeEventListener("click", onDocClick));
   <div
     :class="locale === 'ar' ? 'right-10' : 'left-10'"
     class="absolute top-4 z-10">
-    <div ref="dropdownRef" class="relative inline-block bg-white rounded-lg text-left">
-
+    <div
+      ref="dropdownRef"
+      class="relative inline-block rounded-lg text-left bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm transition">
+      <!-- الزر -->
       <UButton
         size="sm"
         variant="ghost"
-        class="flex items-center gap-2 text-[#000000]"
+        class="flex items-center gap-2 text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700"
         @click.stop="toggle">
         <img
           :src="current.flag"
@@ -53,16 +55,16 @@ onBeforeUnmount(() => document.removeEventListener("click", onDocClick));
         <span class="sm:inline">{{ current.label }}</span>
       </UButton>
 
-      <!-- list -->
+      <!-- القائمة -->
       <transition name="fade">
         <div
           v-if="open"
           :class="locale === 'ar' ? 'right-0' : 'left-0'"
-          class="absolute mt-2 w-40 bg-white border rounded-md shadow-lg overflow-hidden z-50">
+          class="absolute mt-2 w-40 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg overflow-hidden z-50">
           <button
             v-for="lang in languages"
             :key="lang.code"
-            class="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-100"
+            class="w-full flex items-center gap-2 px-3 py-2 text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
             @click="select(lang.code)">
             <img
               :src="lang.flag"

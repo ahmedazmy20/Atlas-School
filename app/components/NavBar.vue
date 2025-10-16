@@ -1,21 +1,23 @@
 <template>
   <header
-    class="flex justify-between items-center bg-white border-b border-gray-200 px-6 py-3 shadow-sm">
+    class="flex justify-between items-center bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 px-6 py-3 shadow-sm transition-colors duration-200">
     <!-- Left Side -->
     <div class="flex items-center gap-4">
       <!-- Menu Button -->
       <UButton
         variant="ghost"
         size="sm"
-        class="p-2 rounded-md hover:bg-gray-100"
+        class="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
         @click="toggleMenu">
-        <Icon name="lucide:menu" class="w-5 h-5 text-gray-700" />
+        <Icon
+          name="lucide:menu"
+          class="w-5 h-5 text-gray-700 dark:text-gray-200" />
       </UButton>
 
       <!-- School Manager Dropdown -->
       <UDropdown class="min-w-[10rem] hidden xl:block">
         <UButton
-          class="border border-gray-200 text-gray-700 font-medium px-3 py-1.5 rounded-md bg-white hover:bg-gray-50">
+          class="border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 font-medium px-3 py-1.5 rounded-md bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
           {{ t("header.schoolManager") }}
           <Icon name="lucide:chevron-down" class="w-4 h-4 ml-1" />
         </UButton>
@@ -24,7 +26,7 @@
       <!-- Branch Dropdown -->
       <UDropdown class="min-w-[170px] hidden xl:block">
         <UButton
-          class="border border-gray-200 text-gray-700 font-medium px-3 py-1.5 rounded-md bg-white hover:bg-gray-50">
+          class="border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 font-medium px-3 py-1.5 rounded-md bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
           {{ t("header.branch") }}
           <Icon name="lucide:chevron-down" class="w-4 h-4 ml-1" />
         </UButton>
@@ -33,7 +35,7 @@
       <!-- Year Dropdown -->
       <UDropdown class="min-w-[150px] hidden xl:block">
         <UButton
-          class="border border-gray-200 text-gray-700 font-medium px-3 py-1.5 rounded-md bg-white hover:bg-gray-50">
+          class="border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 font-medium px-3 py-1.5 rounded-md bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
           {{ t("header.year") }}
           <Icon name="lucide:chevron-down" class="w-4 h-4 ml-1" />
         </UButton>
@@ -44,18 +46,18 @@
         <UInput
           placeholder="Search..."
           icon="lucide:search"
-          class="border border-gray-200 bg-white rounded-md w-56" />
+          class="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-md w-56 text-gray-700 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500" />
       </div>
     </div>
 
-    <!-- Right Side  -->
+    <!-- Right Side -->
     <div class="flex items-center gap-5">
       <!--  Dropdown تغيير اللغة -->
       <div ref="dropdownRef" class="relative">
         <UButton
           variant="ghost"
           size="sm"
-          class="hover:bg-gray-100 rounded-md text-gray-700 flex items-center gap-2"
+          class="hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md text-gray-700 dark:text-gray-200 flex items-center gap-2"
           @click.stop="toggle">
           <img
             :src="current.flag"
@@ -69,11 +71,11 @@
         <transition name="fade">
           <div
             v-if="open"
-            class="absolute right-0 mt-2 w-40 bg-white border rounded-md shadow-lg overflow-hidden z-50">
+            class="absolute right-0 mt-2 w-40 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg overflow-hidden z-50 transition-colors">
             <button
               v-for="lang in languages"
               :key="lang.code"
-              class="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-100"
+              class="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200"
               @click="select(lang.code)">
               <img
                 :src="lang.flag"
@@ -85,10 +87,18 @@
         </transition>
       </div>
 
+      <!-- Dark Mode -->
+      <DarkMode />
+
       <!-- Notification Bell -->
       <div class="relative">
-        <UButton variant="ghost" size="sm" class="hover:bg-gray-100 rounded-md">
-          <Icon name="lucide:bell" class="w-5 h-5 text-gray-700" />
+        <UButton
+          variant="ghost"
+          size="sm"
+          class="hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+          <Icon
+            name="lucide:bell"
+            class="w-5 h-5 text-gray-700 dark:text-gray-200" />
         </UButton>
         <span
           class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-semibold rounded-full px-1.5 py-0.5"
@@ -98,16 +108,21 @@
 
       <!-- User Info -->
       <div
-        class="hidden xl:flex items-center gap-3 border border-gray-200 rounded-md px-3 py-2 bg-white hover:bg-gray-50 cursor-pointer">
+        class="hidden xl:flex items-center gap-3 border border-gray-200 dark:border-gray-700 rounded-md px-3 py-2 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer transition-colors">
         <div
-          class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-          <Icon name="lucide:user" class="w-5 h-5 text-blue-600" />
+          class="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
+          <Icon
+            name="lucide:user"
+            class="w-5 h-5 text-blue-600 dark:text-blue-300" />
         </div>
         <div class="flex flex-col text-right">
-          <span class="font-semibold text-gray-800 text-xs 2xl:text-sm">{{
-            t("header.user.name")
+          <span
+            class="font-semibold text-gray-800 dark:text-gray-100 text-xs 2xl:text-sm"
+            >{{ t("header.user.name") }}</span
+          >
+          <span class="text-xs text-gray-500 dark:text-gray-400">{{
+            t("header.user.role")
           }}</span>
-          <span class="text-xs text-gray-500">{{ t("header.user.role") }}</span>
         </div>
       </div>
     </div>
@@ -126,7 +141,6 @@ function toggleMenu() {
 }
 
 const { t } = useI18n();
-
 const { locale, switchLanguage } = useLanguage();
 
 const languages = [

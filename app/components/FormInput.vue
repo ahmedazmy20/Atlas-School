@@ -1,16 +1,13 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
 import { useLanguage } from "~/composables/useLanguage";
-
 import * as z from "zod";
 import { toTypedSchema } from "@vee-validate/zod";
 import { useI18n } from "vue-i18n";
-const { t } = useI18n();
 
-// function to switch language
+const { t } = useI18n();
 const { locale } = useLanguage();
 
-// schema with required + custom rules
 const schema = toTypedSchema(
   z.object({
     id: z
@@ -23,8 +20,6 @@ const schema = toTypedSchema(
       .nonempty("Password is required")
       .min(4, "Password must be at least 4 characters")
       .max(8, "Password must be less than 9 characters"),
-
-    // test custom validation rules ar / en
     arabicField: z
       .string()
       .nonempty("هذا الحقل مطلوب")
@@ -55,7 +50,6 @@ const user = useState("user", () => ({
   englishField: "",
 }));
 
-// login function with validation  & simulate backend call
 const login = handleSubmit(async (values) => {
   isLoading.value = true;
   setTimeout(() => {
@@ -72,26 +66,34 @@ const login = handleSubmit(async (values) => {
 
 <template>
   <div
-    class="min-h-screen flex flex-col justify-center items-center px-4"
+    class="min-h-screen flex flex-col justify-center items-center px-4 transition-colors duration-300 bg-gray-50 dark:bg-gray-900"
     :dir="locale === 'ar' ? 'rtl' : 'ltr'">
     <form @submit.prevent="login">
       <div
-        class="flex flex-col bg-[#f8f8fc] justify-center items-center gap-3 md:min-w-md rounded-2xl px-8 py-14 mx-auto shadow-2xl">
-        <h1 class="text-xl md:text-3xl font-bold">{{ t("Welcome") }}</h1>
-        <p class="md:font-semibold text-gray-500 text-center">
+        class="flex flex-col justify-center items-center gap-3 md:min-w-md rounded-2xl px-8 py-14 mx-auto shadow-2xl bg-white dark:bg-gray-800 transition-colors duration-300">
+        <!-- العنوان -->
+        <h1
+          class="text-xl md:text-3xl font-bold text-gray-800 dark:text-gray-100">
+          {{ t("Welcome") }}
+        </h1>
+        <p
+          class="md:font-semibold text-gray-500 dark:text-gray-400 text-center">
           {{ t("access") }}
         </p>
 
         <div class="input mt-10 w-full flex flex-col gap-4">
-          <!-- Staff/Student ID -->
+          <!-- ID -->
           <div class="flex flex-col gap-1">
-            <label for="id" class="text-sm font-medium text-gray-700">
+            <label
+              for="id"
+              class="text-sm font-medium text-gray-700 dark:text-gray-300">
               {{ t("staff") }}
             </label>
             <Field v-slot="{ field, errorMessage, meta }" name="id">
               <UInput
                 v-bind="field"
                 type="text"
+                class="dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600"
                 :placeholder="t('idPlaceholder')" />
               <span
                 v-if="meta.touched || errorMessage"
@@ -103,13 +105,16 @@ const login = handleSubmit(async (values) => {
 
           <!-- Password -->
           <div class="flex flex-col gap-1">
-            <label for="password" class="text-sm font-medium text-gray-700">
+            <label
+              for="password"
+              class="text-sm font-medium text-gray-700 dark:text-gray-300">
               {{ t("password") }}
             </label>
             <Field v-slot="{ field, errorMessage, meta }" name="password">
               <UInput
                 v-bind="field"
                 type="password"
+                class="dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600"
                 :placeholder="t('passwordPlaceholder')" />
               <span
                 v-if="meta.touched || errorMessage"
@@ -119,15 +124,18 @@ const login = handleSubmit(async (values) => {
             </Field>
           </div>
 
-          <!-- Arabic Only Input -->
+          <!-- Arabic Name -->
           <div class="flex flex-col gap-1">
-            <label for="arabicField" class="text-sm font-medium text-gray-700">
+            <label
+              for="arabicField"
+              class="text-sm font-medium text-gray-700 dark:text-gray-300">
               {{ t("name-ar") }}
             </label>
             <Field v-slot="{ field, errorMessage, meta }" name="arabicField">
               <UInput
                 v-bind="field"
                 type="text"
+                class="dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600"
                 :placeholder="t('nameArPlaceholder')" />
               <span
                 v-if="meta.touched || errorMessage"
@@ -137,15 +145,18 @@ const login = handleSubmit(async (values) => {
             </Field>
           </div>
 
-          <!-- English Only Input -->
+          <!-- English Name -->
           <div class="flex flex-col gap-1">
-            <label for="englishField" class="text-sm font-medium text-gray-700">
+            <label
+              for="englishField"
+              class="text-sm font-medium text-gray-700 dark:text-gray-300">
               {{ t("name-en") }}
             </label>
             <Field v-slot="{ field, errorMessage, meta }" name="englishField">
               <UInput
                 v-bind="field"
                 type="text"
+                class="dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600"
                 :placeholder="t('nameEnPlaceholder')" />
               <span
                 v-if="meta.touched || errorMessage"
@@ -156,9 +167,9 @@ const login = handleSubmit(async (values) => {
           </div>
         </div>
 
-        <!-- Sign in -->
+        <!-- زر تسجيل الدخول -->
         <UButton
-          class="mt-4 w-full bg-[#2B67EC] hover:bg-[#2B67EC]/90 active:bg-[#2B67EC]/80 flex items-center justify-center py-3"
+          class="mt-4 w-full flex items-center justify-center py-3 bg-[#2B67EC] hover:bg-[#2B67EC]/90 active:bg-[#2B67EC]/80 dark:bg-blue-600 dark:hover:bg-blue-500 transition-colors duration-300"
           type="submit">
           <span v-if="!isLoading">{{ t("signIn") }}</span>
           <span v-else>{{ t("Signing") }}</span>

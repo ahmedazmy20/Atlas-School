@@ -1,20 +1,19 @@
 <template>
   <nav
-    class="w-full bg-white shadow-sm py-4 px-8 flex gap-6 items-center justify-start">
+    class="w-full bg-white dark:bg-gray-800 shadow-sm dark:shadow-gray-800 py-4 px-8 flex gap-6 items-center justify-start transition-colors duration-300">
     <!-- Back Button -->
     <button
-      class="flex items-center gap-2 text-gray-700 hover:text-blue-600 font-medium"
+      class="flex items-center gap-2 text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
       @click="goBack">
-      <Icon
-        name="lucide:arrow-left"
-        class="w-5 h-5 rtl:rotate-180" />
+      <Icon name="lucide:arrow-left" class="w-5 h-5 rtl:rotate-180" />
       {{ $t("productNav.back") }}
     </button>
 
     <!-- Icon + Titles -->
     <div class="flex items-center gap-3">
       <!-- Blue Box with Icon -->
-      <div class="bg-blue-100 p-2 rounded-lg flex items-center justify-center">
+      <div
+        class="p-2 rounded-lg flex items-center justify-center bg-blue-100 dark:bg-blue-900/40 transition-colors">
         <Icon
           :name="iconName"
           class="w-6 h-6"
@@ -23,10 +22,13 @@
 
       <!-- Titles -->
       <div>
-        <h2 class="text-xl font-semibold text-gray-800 leading-tight">
+        <h2
+          class="text-xl font-semibold text-gray-800 dark:text-gray-100 leading-tight">
           {{ mainTitle }}
         </h2>
-        <p class="text-sm text-gray-500">{{ subTitle }}</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+          {{ subTitle }}
+        </p>
       </div>
     </div>
   </nav>
@@ -45,30 +47,31 @@ const goBack = () => {
   router.back();
 };
 
-// add or edit page
+// تحديد إذا كانت الصفحة تعديل أو إضافة
 const isEdit = computed(() => route.name?.toString().includes("edit-product"));
 
-// get product if edit page
+// المنتج الحالي في حالة التعديل
 const product = computed(() => {
   if (!isEdit.value) return null;
   const id = Number(route.params.id);
   return productsStore.products.find((p) => p.id === id);
 });
 
-// icon changes based on page
+// الأيقونة حسب الصفحة
 const iconName = computed(() =>
   isEdit.value ? "lucide:edit-3" : "lucide:plus"
 );
 
-// titles change based on page
+// العنوان الرئيسي حسب الصفحة
 const mainTitle = computed(() =>
   isEdit.value
-    ? `  ${$t("productNav.edit.mainTitle")} ${
+    ? ` ${$t("productNav.edit.mainTitle")} ${
         product.value ? `(${product.value.name})` : ""
       }`
     : ` ${$t("productNav.add.mainTitle")}`
 );
 
+// العنوان الفرعي حسب الصفحة
 const subTitle = computed(() =>
   isEdit.value ? "Edit Product" : "Add New Product"
 );

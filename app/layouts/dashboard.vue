@@ -1,5 +1,6 @@
 <template>
-  <div class="min-h-screen flex flex-col bg-green-50">
+  <div
+    class="min-h-screen flex flex-col bg-green-50 dark:bg-gray-900 transition-colors duration-300">
     <!-- Navbar full width -->
     <UApp :toaster="{ position: 'bottom-right', duration: 4000 }">
       <NavBar class="fixed top-0 left-0 right-0 z-50" />
@@ -9,7 +10,7 @@
         <SideBar />
 
         <main
-          class="flex-1 p-6 bg-green-50 transition-all duration-300"
+          class="flex-1 p-6 bg-green-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-all duration-300"
           :class="{
             'ltr:ml-72 rtl:mr-72': !collapsed, // sidebar open
             'ltr:ml-16 md:ltr:ml-20 rtl:mr-20': collapsed, // sidebar collapsed

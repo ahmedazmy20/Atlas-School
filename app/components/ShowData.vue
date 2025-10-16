@@ -16,11 +16,6 @@ const user = useState("user", () => ({
 }));
 
 function goHome() {
-  // user.value.id = "";
-  // user.value.role = "";
-  // user.value.branch = "";
-  // id.value = "";
-  // password.value = "";
   router.push("/dash-board");
 }
 </script>

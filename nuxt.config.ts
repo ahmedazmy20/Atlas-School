@@ -10,10 +10,13 @@ export default defineNuxtConfig({
     "@nuxt/ui",
     "@nuxtjs/i18n",
     "@nuxtjs/color-mode",
-    '@pinia/nuxt',
+    "@pinia/nuxt",
     // The correct configuration for vee-validate
     ["@vee-validate/nuxt", { autoImports: true }],
   ],
+  colorMode: {
+    classSuffix: "",
+  },
   i18n: {
     locales: [
       { code: "en", file: "en.json", iso: "en-US", name: "English" },
@@ -44,10 +47,10 @@ export default defineNuxtConfig({
     preset: import.meta.env.NUXT_PRESET || undefined,
   },
 
-  colorMode: {
-    preference: "light",
-    fallback: "light",
-    classSuffix: "",
-    storageKey: "nuxt-color-mode",
-  },
+  // colorMode: {
+  //   preference: "light",
+  //   fallback: "light",
+  //   classSuffix: "",
+  //   storageKey: "nuxt-color-mode",
+  // },
 });

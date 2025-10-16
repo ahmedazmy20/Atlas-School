@@ -1,24 +1,27 @@
 <template>
-  <div class="bg-white py-6 rounded-2xl border border-gray-300 shadow-sm">
+  <div
+    class="bg-white dark:bg-[#121023] py-6 rounded-2xl border border-gray-300 dark:border-gray-700 shadow-sm transition-colors duration-300">
     <!-- notification header -->
     <div
-      class="flex flex-col md:flex-row gap-2 md:gap-0 md:items-center bg-blue-50 py-3 px-6 justify-between mb-4">
+      class="flex flex-col md:flex-row gap-2 md:gap-0 md:items-center bg-blue-50 dark:bg-[#2a2a3a] py-3 px-6 justify-between mb-4 transition-colors duration-300">
       <div class="flex items-center gap-3">
         <div
           class="p-2 md:p-3 rounded-md bg-blue-400 text-white flex items-center justify-center">
           <Icon name="lucide:bell" class="md:w-5 md:h-5" />
         </div>
-        <h3 class="text-sm md:text-lg font-semibold text-[#1C398E]">
+        <h3
+          class="text-sm md:text-lg font-semibold text-[#1C398E] dark:text-blue-300 transition-colors duration-300">
           {{ t("dashboard.notifications.title") }}
         </h3>
       </div>
 
       <div class="flex items-center gap-3">
-        <button class="bg-blue-600 text-white text-sm px-3 py-1 rounded-md">
+        <button
+          class="bg-blue-600 text-white text-sm px-3 py-1 rounded-md hover:bg-blue-700 dark:hover:bg-blue-500 transition">
           {{ t("dashboard.notifications.buttons.all") }}
         </button>
         <span
-          class="text-sm text-gray-600 border border-gray-300 px-3 py-1 rounded-md">
+          class="text-sm text-gray-600 dark:text-gray-300 border border-gray-300 dark:border-gray-600 px-3 py-1 rounded-md">
           {{ t("dashboard.notifications.buttons.unread") }} ({{ unreadCount }})
         </span>
       </div>
@@ -29,10 +32,10 @@
       <div
         v-for="note in pagedNotifications"
         :key="note.id"
-        class="flex flex-col lg:flex-row lg:items-center gap-3 p-3 rounded-lg hover:bg-blue-50 transition cursor-pointer">
+        class="flex flex-col lg:flex-row lg:items-center gap-3 p-3 rounded-lg hover:bg-blue-50 dark:hover:bg-[#2f2f3f] transition cursor-pointer">
         <!-- date box -->
         <div
-          class="min-w-[130px] flex gap-1 bg-blue-50 text-blue-700 text-xs rounded-md p-2 border border-blue-200 text-center">
+          class="min-w-[130px] flex gap-1 bg-blue-50 dark:bg-[#2d2d3a] text-blue-700 dark:text-blue-300 text-xs rounded-md p-2 border border-blue-200 dark:border-blue-700 text-center transition-colors duration-300">
           <div>{{ note.dateShort }}</div>
           <div class="text-xs">{{ note.time }}</div>
         </div>
@@ -44,49 +47,68 @@
             <Icon name="lucide:alert-circle" class="w-5 h-5" />
           </div>
           <div class="text-left rtl:text-right">
-            <div class="font-medium text-[#193CB8]">{{ t(note.title) }}</div>
-            <div class="text-sm text-[#155DFC]">{{ t(note.message) }}</div>
+            <div
+              class="font-medium text-[#193CB8] dark:text-blue-300 transition-colors duration-300">
+              {{ t(note.title) }}
+            </div>
+            <div
+              class="text-sm text-[#155DFC] dark:text-blue-400 transition-colors duration-300">
+              {{ t(note.message) }}
+            </div>
           </div>
         </div>
 
         <!-- action -->
         <div class="flex items-center gap-2">
           <button
-            class="text-xs px-3 py-1 border border-gray-300 text-[#294db8] font-semibold rounded-md">
+            class="text-xs px-3 py-1 border border-gray-300 dark:border-gray-600 text-[#294db8] dark:text-blue-300 font-semibold rounded-md hover:border-blue-400 dark:hover:border-blue-500 transition">
             {{ t("dashboard.notifications.view") }}
           </button>
-          <span class="w-3 h-3 rounded-full bg-blue-600" />
+          <span class="w-3 h-3 rounded-full bg-blue-600 dark:bg-blue-400" />
         </div>
       </div>
     </div>
 
     <!-- pagination controls -->
-    <div class="flex items-center bg-blue-50 py-3 justify-center mt-4">
+    <div
+      class="flex items-center bg-blue-50 dark:bg-[#2a2a3a] py-3 justify-center mt-4 transition-colors duration-300">
+      <!-- Prev Button -->
       <button
-        class="px-1 py-1 md:px-3 md:py-2 flex rounded-md border border-gray-400 hover:border-blue-400 hover:text-blue-400 transition-all"
+        class="px-1 py-1 md:px-3 md:py-2 flex rounded-md border border-gray-400 dark:border-gray-600 hover:border-blue-400 hover:text-blue-400 dark:hover:text-blue-300 transition-all"
+        :disabled="currentPage === 1"
         @click="prevPage">
         <Icon
           name="lucide:chevron-left"
           :class="['w-4 h-4', locale === 'ar' ? 'rotate-180' : '']" />
       </button>
 
+      <!-- Page Numbers -->
       <div class="flex items-center gap-2 mx-3">
         <button
-          v-for="p in totalPages"
+          v-for="p in visiblePages"
           :key="p"
           :class="[
-            'w-6 h-6 md:w-9 md:h-9 flex items-center justify-center rounded-md border',
+            'w-6 h-6 md:w-9 md:h-9 flex items-center justify-center rounded-md border transition-all',
             currentPage === p
-              ? 'bg-blue-600 text-white border-blue-600'
-              : 'bg-white text-gray-700 border-gray-200',
+              ? 'bg-blue-600 text-white border-blue-600 dark:bg-blue-500 dark:border-blue-500'
+              : 'bg-white dark:bg-[#1e1e1e] text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-600 hover:border-blue-400 hover:text-blue-500 dark:hover:text-blue-300',
           ]"
           @click="goToPage(p)">
           {{ p }}
         </button>
+
+        <!-- Dots (...) -->
+        <span
+          v-if="endPage < totalPages"
+          class="text-gray-500 dark:text-gray-400"
+          >...</span
+        >
       </div>
 
+      <!-- Next Button -->
       <button
-        class="px-1 py-1 md:px-3 md:py-2 flex rounded-md hover:bg-gray-100 border border-gray-400 hover:border-blue-400 hover:text-blue-400 transition-all"
+        class="px-1 py-1 md:px-3 md:py-2 flex rounded-md border border-gray-400 dark:border-gray-600 hover:border-blue-400 hover:text-blue-400 dark:hover:text-blue-300 transition-all"
+        :disabled="currentPage === totalPages"
         @click="nextPage">
         <Icon
           name="lucide:chevron-right"
@@ -179,10 +201,29 @@ const notifications = ref([
 const unreadCount = computed(() => notifications.value.length); // Example count
 const pageSize = 3; // Notifications per page
 const currentPage = ref(1); // Current page number
+const windowSize = 3; // Number of pages to display
 
+const startPage = computed(() => {
+  // the first page in the current window
+  return Math.floor((currentPage.value - 1) / windowSize) * windowSize + 1;
+});
+
+const endPage = computed(() => {
+  // the last page in the current window
+  return Math.min(startPage.value + windowSize - 1, totalPages.value);
+});
 const totalPages = computed(
   () => Math.max(1, Math.ceil(notifications.value.length / pageSize)) // Ensure at least 1 page
 );
+
+const visiblePages = computed(() => {
+  // Pages to display in pagination
+  const pages = [];
+  for (let i = startPage.value; i <= endPage.value; i++) {
+    pages.push(i);
+  }
+  return pages;
+});
 
 const pagedNotifications = computed(() => {
   const start = (currentPage.value - 1) * pageSize; // Calculate start index
@@ -201,66 +242,3 @@ function nextPage() {
   if (currentPage.value < totalPages.value) currentPage.value++; // Increment page if possible
 }
 </script>
-
-<!-- pagination with NuxtUi UPagination -->
-<!-- 
-<template>
-  <div class="flex flex-col items-center justify-center min-h-screen gap-6 bg-gray-50 py-10">
-    <div class="bg-white shadow p-6 rounded-2xl w-full max-w-md">
-      <h2 class="text-2xl font-semibold mb-4 text-center">
-        الصفحة رقم {{ currentPage }}
-      </h2>
-
-      <ul class="space-y-3">
-        <li
-          v-for="(student, index) in paginatedStudents"
-          :key="index"
-          class="border rounded-lg p-3 text-right bg-gray-50"
-        >
-          <p class="font-bold">👨‍🎓 {{ student.name }}</p>
-          <p class="text-gray-600">{{ student.message }}</p>
-        </li>
-      </ul>
-    </div>
-
-    <UPagination
-      :page="currentPage"
-      :total="students.length"
-      :page-size="itemsPerPage"
-      :show-edges="true"
-      :show-controls="true"
-      class="mt-4"
-      @update:page="handlePageChange"
-    />
-  </div>
-</template> -->
-
-<!-- <script setup>
-import { ref, computed } from "vue";
-
-const students = ref(
-  Array.from({ length: 50 }, (_, i) => ({
-    name: `الطالب رقم ${i + 1}`,
-    message: `هذه رسالة من الطالب رقم ${i + 1}`,
-  }))
-);
-
-const itemsPerPage = ref(5);
-const currentPage = ref(1);
-
-const paginatedStudents = computed(() => {
-  const start = (currentPage.value - 1) * itemsPerPage.value;
-  const end = start + itemsPerPage.value;
-  return students.value.slice(start, end);
-});
-
-function handlePageChange(page) {
-  currentPage.value = page;
-}
-</script> -->
-
-<!-- <style scoped>
-:deep(.u-pagination) {
-  --ui-primary: #2563eb;
-}
-</style> -->
