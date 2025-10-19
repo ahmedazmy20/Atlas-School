@@ -66,11 +66,11 @@ const login = handleSubmit(async (values) => {
 
 <template>
   <div
-    class="min-h-screen flex flex-col justify-center items-center px-4 transition-colors duration-300 dark:bg-gray-900"
+    class="flex flex-col justify-center items-center px-4 transition-colors duration-300 dark:bg-gray-800"
     :dir="locale === 'ar' ? 'rtl' : 'ltr'">
     <form @submit.prevent="login">
       <div
-        class="flex flex-col justify-center items-center gap-3 md:min-w-md rounded-2xl px-8 py-14 mx-auto shadow-2xl bg-white dark:bg-gray-800 transition-colors duration-300">
+        class="flex flex-col justify-center items-center gap-3 md:min-w-md rounded-2xl px-8 py-4 md:py-14 mx-auto shadow-2xl bg-white dark:bg-gray-700 transition-colors duration-300">
         <!-- العنوان -->
         <h1
           class="text-xl md:text-3xl font-bold text-gray-800 dark:text-gray-100">
