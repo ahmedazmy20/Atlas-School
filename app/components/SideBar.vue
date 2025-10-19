@@ -27,7 +27,8 @@
         v-for="(link, index) in sidebarLinks"
         :key="index"
         :to="link.to"
-        class="group flex items-center gap-3 px-3 py-3 rounded-lg font-semibold text-blue-700 dark:text-blue-300 transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-gray-800 [&.router-link-exact-active]:bg-blue-700 [&.router-link-exact-active]:text-white [&.router-link-exact-active:hover]:bg-blue-700">
+        class="group flex items-center gap-3 px-3 py-3 rounded-lg font-semibold text-blue-700 dark:text-blue-300 transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-gray-800 [&.router-link-exact-active]:bg-blue-700 [&.router-link-exact-active]:text-white [&.router-link-exact-active:hover]:bg-blue-700"
+        @click="onLinkClick">
         <Icon :name="link.icon" class="w-5 h-5" />
         <span v-if="!collapsed" class="transition-opacity duration-200">
           {{ t(link.label) }}
@@ -45,6 +46,15 @@ import { computed } from "vue";
 const { t } = useI18n();
 const uiStore = useUIStore();
 const collapsed = computed(() => uiStore.sidebarCollapsed);
+
+const isSmallScreen = () =>
+  typeof window !== "undefined" && window.innerWidth < 1024;
+
+function onLinkClick() {
+  if (isSmallScreen()) {
+    uiStore.sidebarCollapsed = true;
+  }
+}
 
 // Sidebar Links Data
 const sidebarLinks = [

@@ -21,12 +21,10 @@ export const useProductsStore = defineStore("products", {
     async fetchProducts() {
       try {
         this.loading = true;
-        const res = await fetch("https://fakestoreapi.com/products");
-        const data = await res.json();
-
+        const data = await $fetch("https://fakestoreapi.com/products");
         // save to state
         this.products = data.map((p) => {
-          const randomStock = Math.floor(Math.random() * 100); 
+          const randomStock = Math.floor(Math.random() * 100);
           const status =
             randomStock === 0
               ? "Out of Stock"
