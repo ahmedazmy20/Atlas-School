@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="w-full bg-white dark:bg-gray-800 shadow-sm dark:shadow-gray-800 py-4 px-8 flex gap-6 items-center justify-start transition-colors duration-300">
+    class="w-full bg-white dark:bg-gray-900 shadow-sm dark:shadow-gray-800 py-4 px-8 flex gap-6 items-center justify-start transition-colors duration-300">
     <!-- Back Button -->
     <button
       class="flex items-center gap-2 text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"

@@ -1,49 +1,42 @@
 <template>
-  <div class="container mx-auto py-5 2xl:px-32 space-y-6 dark:bg-gray-900">
+  <div
+    class="container mx-auto py-5 2xl:px-32 space-y-6 dark:bg-gray-900">
     <ConfirmDelete
       :show="showDeleteModal"
       :product="selectedProduct"
       @cancel="cancelDelete"
-      @confirm="confirmDelete"
-    />
+      @confirm="confirmDelete" />
 
     <!-- first part -->
     <div
-      class="flex flex-col w-[18rem] sm:w-full sm:flex-row sm:justify-between sm:items-center"
-    >
+      class="flex flex-col w-[100%] sm:w-full sm:flex-row sm:justify-between sm:items-center">
       <div class="text-start">
-        <h1
-          class="md:text-3xl font-bold text-[#1C398E] dark:text-blue-400"
-        >
+        <h1 class="md:text-3xl font-bold text-[#1C398E] dark:text-blue-400">
           {{ t("products.title") }}
         </h1>
         <p
-          class="text-sm w-[16rem] md:w-full md:text-md text-[#1447E6] mt-1 dark:text-blue-300"
-        >
+          class="text-sm w-[16rem] md:w-full md:text-md text-[#1447E6] my-1 dark:text-blue-300">
           {{ t("products.subtitle") }}
         </p>
       </div>
       <UButton
         to="/dash-board"
         variant="outline"
-        class="border w-fit border-gray-300 text-[#5881ff] px-4 py-2 rounded-md hover:bg-blue-500 hover:text-white transition-colors dark:border-gray-600 dark:text-blue-400 dark:hover:bg-blue-600 dark:hover:text-white"
-      >
+        class="border w-fit border-gray-300 text-[#5881ff] px-4 py-2 rounded-md hover:bg-blue-500 hover:text-white transition-colors dark:border-gray-600 dark:text-blue-400 dark:hover:bg-blue-600 dark:hover:text-white">
         {{ t("products.backToDashboard") }}
       </UButton>
     </div>
 
     <!-- second part -->
     <div
-      class="flex flex-col sm:flex-row md:items-center w-[18rem] sm:w-full gap-4 border border-gray-200 rounded-md p-4 bg-white shadow-sm dark:bg-gray-800 dark:border-gray-700"
-    >
+      class="flex flex-col sm:flex-row md:items-center w-[100%] sm:w-full gap-4 border border-gray-200 rounded-md p-4 bg-white shadow-sm dark:bg-gray-800 dark:border-gray-700">
       <!-- Search -->
       <div class="relative flex-1">
         <UInput
           v-model="searchInput"
           placeholder="Search by product name"
           icon="lucide:search"
-          class="border border-gray-300 bg-white rounded-md w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100"
-        />
+          class="border border-gray-300 bg-white rounded-md w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100" />
       </div>
 
       <!-- Categories Dropdown -->
@@ -51,8 +44,7 @@
         <div ref="dropdownRef" class="relative">
           <button
             class="border border-gray-300 text-gray-700 text-sm md:text-base font-medium px-3 py-2 rounded-md bg-white hover:bg-gray-50 flex items-center gap-1 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:hover:bg-gray-600"
-            @click.stop="showDropdown = !showDropdown"
-          >
+            @click.stop="showDropdown = !showDropdown">
             {{ selectedCategory }}
             <Icon name="lucide:chevron-down" class="w-4 h-4" />
           </button>
@@ -60,8 +52,7 @@
           <transition name="fade">
             <div
               v-if="showDropdown"
-              class="absolute left-0 mt-2 w-40 md:w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50 dark:bg-gray-800 dark:border-gray-700"
-            >
+              class="absolute left-0 mt-2 w-40 md:w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50 dark:bg-gray-800 dark:border-gray-700">
               <button
                 v-for="cat in categories"
                 :key="cat"
@@ -69,8 +60,7 @@
                 @click.stop="
                   selectCategory(cat);
                   showDropdown = false;
-                "
-              >
+                ">
                 {{ cat }}
               </button>
             </div>
@@ -79,8 +69,7 @@
 
         <UButton
           to="/add-product"
-          class="text-white md:text-base bg-blue-500 px-5 py-2 rounded-md dark:bg-blue-600 dark:hover:bg-blue-700"
-        >
+          class="text-white md:text-base bg-blue-500 px-5 py-2 rounded-md dark:bg-blue-600 dark:hover:bg-blue-700">
           {{ t("products.addProduct") }}
         </UButton>
       </div>
@@ -89,17 +78,14 @@
     <ViewProduct
       :show="showViewModal"
       :product="viewedProduct"
-      @close="closeViewModal"
-    />
+      @close="closeViewModal" />
 
     <!-- third part (table) -->
     <div
-      class="border border-gray-200 rounded-md bg-white w-[18rem] overflow-x-scroll sm:w-full shadow-sm md:overflow-x-auto dark:bg-gray-800 dark:border-gray-700"
-    >
+      class="border border-gray-200 rounded-md bg-white w-[20rem] overflow-x-scroll sm:w-full shadow-sm md:overflow-x-auto dark:bg-gray-800 dark:border-gray-700">
       <table class="min-w-full border-collapse text-sm">
         <thead
-          class="bg-blue-50 text-gray-700 font-medium dark:bg-gray-700 dark:text-gray-200"
-        >
+          class="bg-blue-50 text-gray-700 font-medium dark:bg-gray-700 dark:text-gray-200">
           <tr>
             <th class="px-4 py-3 text-left rtl:text-right">
               {{ t("products.table.sku") }}
@@ -129,8 +115,7 @@
           <tr
             v-for="i in 5"
             :key="i"
-            class="border-b border-gray-200 dark:border-gray-700"
-          >
+            class="border-b border-gray-200 dark:border-gray-700">
             <td v-for="n in 7" :key="n" class="px-4 py-3">
               <USkeleton class="h-4 w-full rounded" />
             </td>
@@ -141,8 +126,7 @@
           <tr
             v-for="product in paginatedProducts"
             :key="product.id"
-            class="border-b border-gray-200 hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-700"
-          >
+            class="border-b border-gray-200 hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-700">
             <td class="ps-2 md:px-4 py-3 text-blue-600 dark:text-blue-400">
               {{ product.sku }}
             </td>
@@ -165,8 +149,7 @@
                   product.status === 'Active'
                     ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300'
                     : 'bg-red-100 text-red-600 dark:bg-red-900 dark:text-red-300',
-                ]"
-              >
+                ]">
                 {{ product.status }}
               </span>
             </td>
@@ -178,34 +161,28 @@
                   class="p-2 hover:bg-red-50 dark:hover:bg-red-900"
                   @click="
                     deleteProduct({ ...product, price: Number(product.price) })
-                  "
-                >
+                  ">
                   <Icon
                     name="lucide:trash-2"
-                    class="w-4 h-4 text-red-600 dark:text-red-400"
-                  />
+                    class="w-4 h-4 text-red-600 dark:text-red-400" />
                 </UButton>
                 <UButton
                   variant="ghost"
                   size="sm"
                   class="p-2 hover:bg-blue-50 dark:hover:bg-blue-900"
-                  @click="editProduct(product.id)"
-                >
+                  @click="editProduct(product.id)">
                   <Icon
                     name="lucide:edit-3"
-                    class="w-4 h-4 text-blue-600 dark:text-blue-400"
-                  />
+                    class="w-4 h-4 text-blue-600 dark:text-blue-400" />
                 </UButton>
                 <UButton
                   variant="ghost"
                   size="sm"
                   class="p-2 hover:bg-blue-50 dark:hover:bg-blue-900"
-                  @click="viewProduct(product.id)"
-                >
+                  @click="viewProduct(product.id)">
                   <Icon
                     name="lucide:eye"
-                    class="w-4 h-4 text-blue-600 dark:text-blue-400"
-                  />
+                    class="w-4 h-4 text-blue-600 dark:text-blue-400" />
                 </UButton>
               </div>
             </td>
@@ -215,8 +192,7 @@
 
       <!-- Footer -->
       <div
-        class="flex w-[37rem] sm:w-full flex-col md:flex-row justify-center md:justify-between items-center bg-blue-50 px-4 py-3 text-sm dark:bg-gray-700"
-      >
+        class="flex w-[37rem] sm:w-full flex-col md:flex-row justify-center md:justify-between items-center bg-blue-50 px-4 py-3 text-sm dark:bg-gray-700">
         <span class="text-blue-600 dark:text-blue-300">
           {{ t("products.footer.showing") }} {{ paginatedProducts.length }}
           {{ t("products.footer.of") }} {{ filteredProducts.length }}
@@ -226,17 +202,14 @@
         <!-- Pagination -->
         <div
           v-if="totalPages > 1"
-          class="flex justify-center items-center gap-2 py-4"
-        >
+          class="flex justify-center items-center gap-2 py-4">
           <button
             class="px-3 py-2.5 flex rounded-md border border-gray-300 hover:text-blue-500 hover:border-blue-400 disabled:border-slate-600 disabled:text-slate-600 disabled:opacity-50 transition-all dark:border-gray-600 dark:text-gray-100 dark:hover:text-blue-400"
             :disabled="currentPage === 1"
-            @click="prevPage"
-          >
+            @click="prevPage">
             <Icon
               name="lucide:chevron-left"
-              :class="['w-4 h-4', locale === 'ar' ? 'rotate-180' : '']"
-            />
+              :class="['w-4 h-4', locale === 'ar' ? 'rotate-180' : '']" />
           </button>
 
           <button
@@ -248,22 +221,23 @@
                 ? 'bg-blue-600 text-white border-blue-600 dark:bg-blue-500 dark:border-blue-500'
                 : 'bg-white text-gray-700 border-gray-200 hover:border-blue-400 dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600',
             ]"
-            @click="goToPage(page)"
-          >
+            @click="goToPage(page)">
             {{ page }}
           </button>
 
-          <span v-if="endPage < totalPages" class="text-gray-500 dark:text-gray-400">...</span>
+          <span
+            v-if="endPage < totalPages"
+            class="text-gray-500 dark:text-gray-400"
+            >...</span
+          >
 
           <button
             class="px-3 py-2.5 flex rounded-md border border-gray-300 hover:text-blue-500 hover:border-blue-400 disabled:border-slate-600 disabled:text-slate-600 disabled:opacity-50 transition-all dark:border-gray-600 dark:text-gray-100 dark:hover:text-blue-400"
             :disabled="currentPage === totalPages"
-            @click="nextPage"
-          >
+            @click="nextPage">
             <Icon
               name="lucide:chevron-right"
-              :class="['w-4 h-4', locale === 'ar' ? 'rotate-180' : '']"
-            />
+              :class="['w-4 h-4', locale === 'ar' ? 'rotate-180' : '']" />
           </button>
         </div>
 
@@ -277,7 +251,6 @@
     </div>
   </div>
 </template>
-
 
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount, computed } from "vue";

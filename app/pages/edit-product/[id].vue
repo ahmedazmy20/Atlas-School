@@ -1,6 +1,6 @@
 <template>
   <div
-    class="p-6 min-h-screen md:px-28 bg-[#F6FAFF] dark:bg-gray-950 transition-colors duration-300">
+    class="p-6 min-h-screen md:px-28 bg-[#F6FAFF] dark:bg-gray-800 transition-colors duration-300">
     <!-- الفورم -->
     <form
       class="bg-white dark:bg-gray-900 shadow-md md:w-11/12 lg:w-9/12 xl:w-6/12 mx-auto rounded-2xl p-6 space-y-6 transition-colors duration-300"

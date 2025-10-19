@@ -1,8 +1,8 @@
 <template>
   <div
-    class="p-6 min-h-screen bg-[#F6FAFF] dark:bg-gray-900 transition-colors duration-300 md:px-28">
+    class="p-6 min-h-screen bg-[#F6FAFF] dark:bg-gray-800 transition-colors duration-300 md:px-28">
       <form
-        class="bg-white dark:bg-gray-800 shadow-md md:w-11/12 lg:w-9/12 xl:w-6/12 mx-auto rounded-2xl p-6 space-y-6 transition-colors duration-300"
+        class="bg-white dark:bg-gray-900 shadow-md md:w-11/12 lg:w-9/12 xl:w-6/12 mx-auto rounded-2xl p-6 space-y-6 transition-colors duration-300"
         @submit.prevent="onSubmit">
         <!-- name in arabic and english -->
         <div class="grid md:grid-cols-2 gap-6">
