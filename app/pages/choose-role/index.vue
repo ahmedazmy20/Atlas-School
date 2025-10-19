@@ -70,7 +70,7 @@ const BackToLogin = () => {
     class="bg-[#fcf8f4] dark:bg-gray-900 min-h-screen flex flex-col justify-center transition-colors duration-300">
     <div
       :class="selectedRole ? 'mt-0' : '2xl:mt-32'"
-      class="flex flex-col px-5 items-center pt-15 justify-center max-h-screen gap-2 md:gap-6 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+      class="flex flex-col px-5 items-center pt-15 justify-center gap-2 md:gap-6 text-gray-900 dark:text-gray-100 transition-colors duration-300">
       <div>
         <p>{{ t("role.welcome") }}, {{ user?.englishField }}</p>
       </div>

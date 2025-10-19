@@ -66,7 +66,7 @@ const login = handleSubmit(async (values) => {
 
 <template>
   <div
-    class="min-h-screen flex flex-col justify-center items-center px-4 transition-colors duration-300 bg-gray-50 dark:bg-gray-900"
+    class="min-h-screen flex flex-col justify-center items-center px-4 transition-colors duration-300 dark:bg-gray-900"
     :dir="locale === 'ar' ? 'rtl' : 'ltr'">
     <form @submit.prevent="login">
       <div

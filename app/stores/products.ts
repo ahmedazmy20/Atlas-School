@@ -25,18 +25,30 @@ export const useProductsStore = defineStore("products", {
         const data = await res.json();
 
         // save to state
-        this.products = data.map((p) => ({
-          id: p.id,
-          sku: `PROD-${p.id}`,
-          name: p.title,
-          category: p.category,
-          price: p.price,
-          stock: Math.floor(Math.random() * 100) + 1,
-          status: Math.random() > 0.5 ? "Active" : "Inactive",
-          image: p.image,
-        }));
+        this.products = data.map((p) => {
+          const randomStock = Math.floor(Math.random() * 100); 
+          const status =
+            randomStock === 0
+              ? "Out of Stock"
+              : Math.random() > 0.5
+              ? "Active"
+              : "Inactive";
+
+          return {
+            id: p.id,
+            sku: `PROD-${p.id}`,
+            name: p.title,
+            category: p.category,
+            price: p.price.toFixed(2),
+            stock: randomStock,
+            status,
+            image: p.image,
+            description: p.description,
+          };
+        });
       } catch (error) {
         console.error("Error fetching products:", error);
+        this.error = "Failed to fetch products";
       } finally {
         this.loading = false;
       }
@@ -48,7 +60,6 @@ export const useProductsStore = defineStore("products", {
     },
 
     // Add new product
-
     addProduct(newProduct: {
       name_en: string;
       name_ar: string;
@@ -63,15 +74,18 @@ export const useProductsStore = defineStore("products", {
         ? Math.max(...this.products.map((p) => p.id)) + 1
         : 1;
 
+      const finalStatus =
+        newProduct.quantity === 0 ? "Out of Stock" : newProduct.status;
+
       this.products.push({
         id,
         sku: newProduct.sku,
-        name: newProduct.name_en, // ممكن تختار تعرض الاسم الانجليزي
+        name: newProduct.name_en,
         category: newProduct.category,
         price: Number(newProduct.price).toFixed(2),
         stock: newProduct.quantity,
-        status: newProduct.status,
-        image: "", // ممكن تضيف رابط الصورة لو عندك
+        status: finalStatus,
+        image: "",
         description: newProduct.description,
       });
     },
@@ -88,7 +102,14 @@ export const useProductsStore = defineStore("products", {
     }) {
       const index = this.products.findIndex((p) => p.id === updatedProduct.id);
       if (index !== -1) {
-        this.products[index] = { ...this.products[index], ...updatedProduct };
+        const product = { ...this.products[index], ...updatedProduct };
+
+        // Update status based on stock 0
+        if (product.stock === 0) {
+          product.status = "Out of Stock";
+        }
+
+        this.products[index] = product;
       }
     },
 

@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="show"
-    class="fixed inset-0 mb-0 bg-black/40 flex justify-center items-center z-50">
+    class="fixed inset-0 mb-0 bg-black/55 dark:bg-white/10 dark:backdrop-blur-sm flex justify-center items-center z-50">
     <div
       class="bg-white dark:bg-gray-900 dark:text-gray-100 rounded-lg w-11/12 sm:w-3/4 lg:w-1/3 p-6 relative shadow-lg max-h-[80vh] overflow-y-auto transition-colors duration-300">
       <h2 class="text-2xl font-semibold mb-4">
