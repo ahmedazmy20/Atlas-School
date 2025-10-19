@@ -1,6 +1,5 @@
 <template>
-  <div
-    class="container mx-auto py-5 2xl:px-32 space-y-6 dark:bg-gray-900">
+  <div class="container mx-auto py-5 2xl:px-32 space-y-6 dark:bg-gray-900">
     <ConfirmDelete
       :show="showDeleteModal"
       :product="selectedProduct"

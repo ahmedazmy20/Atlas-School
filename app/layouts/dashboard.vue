@@ -10,7 +10,7 @@
         <SideBar />
 
         <main
-          class="flex-1 ps-5 pe-1 md:p-9 container dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-all duration-300"
+          class="flex-1 ltr:pl-5 rtl:pl-1 pr-1 md:p-9 container dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-all duration-300"
           :class="{
             'ltr:ml-72 rtl:mr-72': !collapsed, // sidebar open
             'ltr:ml-16 md:ltr:ml-20 rtl:mr-20': collapsed, // sidebar collapsed
