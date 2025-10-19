@@ -5,7 +5,7 @@ export const useLanguage = () => {
   const { locale, setLocale } = useI18n();
 
   // تغيير اللغة
-  const switchLanguage = (lang: string) => {
+  const switchLanguage = (lang: "en" | "ar") => {
     setLocale(lang);
     locale.value = lang;
     document.cookie = `i18n_redirected=${lang};path=/`;
@@ -14,8 +14,9 @@ export const useLanguage = () => {
 
   // عند تحميل الصفحة
   onBeforeMount(() => {
-    const match = document.cookie.match(/i18n_redirected=([a-zA-Z\-]+)/);
-    const savedLang = match?.[1] || "en";
+    const match = document.cookie.match(/i18n_redirected=([a-zA-Z-]+)/);
+    const savedLang = match?.[1] === "ar" ? "ar" : "en";
+
     setLocale(savedLang);
     locale.value = savedLang;
     document.documentElement.setAttribute(

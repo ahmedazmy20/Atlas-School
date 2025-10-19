@@ -33,7 +33,7 @@
           </div>
           <div class="ml-4">
             <div
-              class="w-12 h-12 rounded-full bg-[#4376f7] dark:bg-[#43caf7] dark:group-hover:bg-[#4376f7] flex items-center justify-center">
+              class="w-12 h-12 rounded-full bg-[#4376f7] dark:bg-[#43caf7] dark:group-hover:bg-[#4376f7] transition-all duration-300 flex items-center justify-center">
               <Icon name="lucide:users" class="w-6 h-6" />
             </div>
           </div>

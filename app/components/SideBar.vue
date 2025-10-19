@@ -1,6 +1,6 @@
 <template>
   <aside
-    class="fixed z-10 top-[60px] xl:top-[75px] left-0 rtl:right-0 bottom-0 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 flex flex-col shadow-2xl transition-all duration-300"
+    class="fixed z-10 top-[60px] xl:top-[75px] left-0 rtl:right-0 bottom-0 bg-white dark:bg-gray-900 border-r border-l border-gray-200 dark:border-gray-700 flex flex-col shadow-2xl transition-all duration-300"
     :class="collapsed ? 'w-20' : 'w-72'">
     <!-- Header -->
     <div

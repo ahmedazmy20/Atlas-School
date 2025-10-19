@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-white dark:bg-[#121023] py-6 rounded-2xl border border-gray-300 dark:border-gray-700 shadow-sm transition-colors duration-300">
+    class="bg-white dark:bg-[#1D2838] py-6 rounded-2xl border border-gray-300 dark:border-gray-700 shadow-sm transition-colors duration-300">
     <!-- notification header -->
     <div
       class="flex flex-col md:flex-row gap-2 md:gap-0 md:items-center bg-blue-50 dark:bg-[#2a2a3a] py-3 px-6 justify-between mb-4 transition-colors duration-300">
