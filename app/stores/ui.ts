@@ -12,7 +12,7 @@ export const useUIStore = defineStore("ui", {
 
     setSidebarByScreen() {
       if (typeof window !== "undefined") {
-        this.sidebarCollapsed = window.innerWidth < 1024; // يخفي في الشاشات الصغيرة
+        this.sidebarCollapsed = window.innerWidth < 1024; 
       }
     },
   },

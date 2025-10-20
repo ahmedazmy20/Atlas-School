@@ -1,55 +1,64 @@
 <template>
   <aside
-    class="fixed z-10 top-[60px] xl:top-[75px] bottom-0 bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 flex flex-col shadow-2xl transition-all duration-500 ease-in-out will-change-transform overflow-x-hidden"
+    class="fixed z-40 top-[60px] xl:top-[75px] bottom-0 bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 flex flex-col shadow-2xl overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] will-change-transform"
     :class="[
       isRTL
         ? 'rtl:right-0 border-l dark:border-gray-700'
         : 'left-0 border-r dark:border-gray-700',
-      collapsed
+
+      // 💡 في الشاشات الصغيرة: خارج الشاشة لما تكون مقفولة
+      collapsed && isMobile
         ? isRTL
-          ? 'translate-x-full xl:translate-x-0  xl:w-20'
-          : '-translate-x-full xl:translate-x-0 xl:w-20'
-        : 'translate-x-0  md:w-72',
+          ? 'translate-x-full'
+          : '-translate-x-full'
+        : 'translate-x-0',
+
+      // 💡 في الشاشات الكبيرة: فقط تغيير العرض
+      !isMobile ? (collapsed ? 'w-20' : 'w-72') : 'w-52',
     ]">
     <!-- Header -->
     <div
-      class="flex items-center gap-3 p-4 border-b border-gray-100 dark:border-gray-700 transition-all duration-300">
+      class="flex items-center gap-3 p-4 border-b border-gray-100 dark:border-gray-700 transition-all duration-500">
       <div
-        class="w-10 h-10 bg-blue-600 text-white flex items-center justify-center rounded-md">
+        class="w-10 h-10 bg-blue-600 text-white flex items-center justify-center rounded-md shrink-0">
         <Icon name="lucide:graduation-cap" class="w-6 h-6" />
       </div>
 
-      <!-- Labels -->
       <div
-        v-if="showLabels"
-        class="transition-opacity duration-300 ease-in-out opacity-0"
-        :class="{ 'opacity-100': showLabels }">
-        <p class="font-semibold text-blue-900 dark:text-blue-300">
+        class="overflow-hidden transition-all duration-300 delay-150"
+        :class="
+          collapsed && !isMobile ? 'opacity-0 w-0' : 'opacity-100 w-auto'
+        ">
+        <p class="font-semibold text-blue-900 dark:text-blue-300 truncate">
           {{ t("sidebar.title") }}
         </p>
-        <p class="text-sm text-gray-500 dark:text-gray-400">
+        <p class="text-sm text-gray-500 dark:text-gray-400 truncate">
           {{ t("sidebar.subtitle") }}
         </p>
       </div>
     </div>
 
-    <!-- Dynamic Links -->
+    <!-- Links -->
     <nav
-      class="flex-1 p-4 space-y-2 overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600 scrollbar-track-transparent transition-colors">
+      class="flex-1 p-4 space-y-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600 scrollbar-track-transparent transition-all duration-500">
       <NuxtLink
         v-for="(link, index) in sidebarLinks"
         :key="index"
         :to="link.to"
-        class="group flex items-center gap-3 px-3 py-3 rounded-lg font-semibold text-blue-700 dark:text-blue-300 transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-gray-800 [&.router-link-exact-active]:bg-blue-700 [&.router-link-exact-active]:text-white [&.router-link-exact-active:hover]:bg-blue-700"
+        class="group flex items-center gap-3 px-3 py-3 rounded-lg font-semibold text-blue-700 dark:text-blue-300 transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-gray-800 [&.router-link-exact-active]:bg-blue-700 [&.router-link-exact-active]:text-white"
         @click="onLinkClick">
-        <Icon :name="link.icon" class="w-5 h-5" />
-        <transition name="fade" mode="default">
-          <span
-            v-if="showLabels"
-            class="block overflow-x-hidden transition-opacity duration-500 ease-in-out">
-            {{ t(link.label) }}
-          </span>
-        </transition>
+        <Icon
+          :name="link.icon"
+          class="w-5 h-5 shrink-0 transition-all duration-300" />
+        <span
+          class="transition-all duration-500 delay-150 truncate min-w-0"
+          :class="
+            collapsed && !isMobile
+              ? 'opacity-0 w-0 hidden'
+              : 'opacity-100 w-auto block'
+          ">
+          {{ t(link.label) }}
+        </span>
       </NuxtLink>
     </nav>
   </aside>
@@ -58,38 +67,35 @@
 <script setup>
 import { useUIStore } from "@/stores/ui";
 import { useI18n } from "vue-i18n";
-import { computed, ref, watch } from "vue";
+import { computed, ref, onMounted, onUnmounted } from "vue";
 
 const { t, locale } = useI18n();
 const uiStore = useUIStore();
 const collapsed = computed(() => uiStore.sidebarCollapsed);
-
-// ✅ تحديد إذا كانت اللغة RTL (مثل العربية)
 const isRTL = computed(() => locale.value === "ar");
 
-// transition state for showing/hiding labels
-const showLabels = ref(!collapsed.value);
+// if the screen is less than 1024px, set isMobile to true
+const isMobile = ref(false);
 
-watch(collapsed, (newVal) => {
-  if (newVal) {
-    showLabels.value = false;
-  } else {
-    setTimeout(() => {
-      showLabels.value = true;
-    }, 200);
-  }
+const checkMobile = () => {
+  isMobile.value = window.innerWidth < 1024;
+};
+
+onMounted(() => {
+  checkMobile();
+  window.addEventListener("resize", checkMobile);
 });
 
-const isSmallScreen = () =>
-  typeof window !== "undefined" && window.innerWidth < 1024;
+onUnmounted(() => {
+  window.removeEventListener("resize", checkMobile);
+});
 
 function onLinkClick() {
-  if (isSmallScreen()) {
+  if (isMobile.value) {
     uiStore.sidebarCollapsed = true;
   }
 }
 
-// Sidebar Links Data
 const sidebarLinks = [
   { to: "/dash-board", icon: "lucide:home", label: "sidebar.dashboard" },
   { to: "", icon: "lucide:graduation-cap", label: "sidebar.subtitle" },
@@ -109,13 +115,4 @@ const sidebarLinks = [
 ];
 </script>
 
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease-in-out;
-}
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>
+<style scoped></style>

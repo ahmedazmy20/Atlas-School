@@ -6,13 +6,13 @@
       <NavBar class="fixed top-0 left-0 right-0 z-50" />
 
       <!-- Page content under Navbar -->
-      <div class="flex pt-[70px]">
+      <div class="flex pt-[70px] justify-center">
         <SideBar />
 
         <main
           class="flex-1 ltr:px-5 rtl:px-5 pr-1 md:p-9 container dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-all duration-300"
           :class="{
-            'xl:ltr:ml-72 xl:rtl:mr-72': !collapsed, // sidebar open on large screens
+            'md:ltr:ml-72 md:rtl:mr-72': !collapsed, // sidebar open on large screens
           }">
           <slot />
         </main>
