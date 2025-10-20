@@ -12,22 +12,23 @@ const schema = toTypedSchema(
   z.object({
     id: z
       .string()
-      .nonempty("Id is required")
-      .min(3, "Id must be at least 3 characters")
-      .max(6, "Id must be less than 7 characters"),
+      .nonempty(t("validation.idRequired"))
+      .regex(/^[0-9]+$/, t("validation.idNumberOnly"))
+      .min(3, t("validation.idMin"))
+      .max(6, t("validation.idMax")),
     password: z
       .string()
-      .nonempty("Password is required")
-      .min(4, "Password must be at least 4 characters")
-      .max(8, "Password must be less than 9 characters"),
+      .nonempty(t("validation.passwordRequired"))
+      .min(4, t("validation.passwordMin"))
+      .max(8, t("validation.passwordMax")),
     arabicField: z
       .string()
-      .nonempty("هذا الحقل مطلوب")
-      .regex(/^[\u0600-\u06FF\s]+$/, "الرجاء إدخال حروف عربية فقط"),
+      .nonempty(t("validation.arabicRequired"))
+      .regex(/^[\u0600-\u06FF\s]+$/, t("validation.arabicOnly")),
     englishField: z
       .string()
-      .nonempty("This field is required")
-      .regex(/^[A-Za-z\s]+$/, "Please enter English letters only"),
+      .nonempty(t("validation.englishRequired"))
+      .regex(/^[A-Za-z\s]+$/, t("validation.englishOnly")),
   })
 );
 
@@ -36,6 +37,8 @@ const { handleSubmit } = useForm({
   initialValues: {
     id: "",
     password: "",
+    arabicField: "",
+    englishField: "",
   },
 });
 

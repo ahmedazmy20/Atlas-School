@@ -1,9 +1,8 @@
-// stores/ui.ts
 import { defineStore } from "pinia";
 
 export const useUIStore = defineStore("ui", {
   state: () => ({
-    sidebarCollapsed: true as boolean,
+    sidebarCollapsed: false,
   }),
 
   actions: {
@@ -12,10 +11,8 @@ export const useUIStore = defineStore("ui", {
     },
 
     setSidebarByScreen() {
-      // make sidebar collapsed by default on small screens and expanded on large screens
       if (typeof window !== "undefined") {
-        const isLargeScreen = window.matchMedia("(min-width: 1024px)").matches;
-        this.sidebarCollapsed = !isLargeScreen; // collapsed on small screens, expanded on large screens
+        this.sidebarCollapsed = window.innerWidth < 1024; // يخفي في الشاشات الصغيرة
       }
     },
   },

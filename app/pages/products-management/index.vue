@@ -81,7 +81,7 @@
 
     <!-- third part (table) -->
     <div
-      class="border border-gray-200 rounded-md bg-white w-[20rem] overflow-x-scroll sm:w-full shadow-sm md:overflow-x-auto dark:bg-gray-800 dark:border-gray-700">
+      class="border border-gray-200 rounded-md bg-white w-[100%] overflow-x-scroll sm:w-full shadow-sm md:overflow-x-auto dark:bg-gray-800 dark:border-gray-700">
       <table class="min-w-full border-collapse text-sm">
         <thead
           class="bg-blue-50 text-gray-700 font-medium dark:bg-gray-700 dark:text-gray-200">

@@ -15,36 +15,43 @@ const { t, locale } = useI18n();
 const router = useRouter();
 const user = useState("user");
 
-const roles = [
+const roles = computed(() => [
   {
     icon: GraduationCap,
-    role: "Administrator",
-    numBranchs: "3 branches available",
+    key: "admin",
+    role: t("role.admin"),
+    numBranchs: t("role.threebranch"),
   },
-  { icon: GraduationCap, role: "Teacher", numBranchs: "2 branches available" },
   {
     icon: GraduationCap,
-    role: "Student Affairs",
-    numBranchs: "1 Main Campusvailable",
+    key: "teacher",
+    role: t("role.teacher"),
+    numBranchs: t("role.towbranch"),
   },
-];
+  {
+    icon: GraduationCap,
+    key: "student",
+    role: t("role.student"),
+    numBranchs: t("role.onebranch"),
+  },
+]);
 
 const branches = [
-  { icon: School, name: "Main Campus" },
-  { icon: School, name: "North Branch" },
-  { icon: School, name: "South Branch" },
+  { icon: School, key: "main", name: "Main Campus" },
+  { icon: School, key: "north", name: "North Branch" },
+  { icon: School, key: "south", name: "South Branch" },
 ];
 
 const selectedRole = ref("");
 const selectedBranch = ref("");
 
 const filteredBranches = computed(() => {
-  if (selectedRole.value === "Administrator") return branches;
-  else if (selectedRole.value === "Teacher")
+  if (selectedRole.value === "admin") return branches;
+  else if (selectedRole.value === "teacher")
     return branches.filter(
       (b) => b.name === "Main Campus" || b.name === "North Branch"
     );
-  else if (selectedRole.value === "Student Affairs")
+  else if (selectedRole.value === "student")
     return branches.filter((b) => b.name === "South Branch");
   return [];
 });
@@ -72,7 +79,10 @@ const BackToLogin = () => {
       :class="selectedRole ? 'mt-0' : '2xl:mt-32'"
       class="flex flex-col px-5 items-center pt-15 justify-center gap-2 md:gap-6 text-gray-900 dark:text-gray-100 transition-colors duration-300">
       <div>
-        <p>{{ t("role.welcome") }}, {{ user?.englishField }}</p>
+        <p>
+          {{ t("role.welcome") }},
+          {{ locale === "ar" ? user?.arabicField : user?.englishField }}
+        </p>
       </div>
 
       <div
@@ -96,12 +106,12 @@ const BackToLogin = () => {
           :key="role.role"
           class="flex flex-col justify-center items-center bg-[#fcf8f8] dark:bg-gray-800 border-2 shadow-md rounded-lg cursor-pointer transition-all duration-500 flex-grow min-w-[10rem] max-w-[17rem] md:w-[12rem] h-[10rem] md:h-[15rem] md:px-11 md:py-1"
           :class="
-            selectedRole === role.role
+            selectedRole === role.key
               ? 'border-blue-500 '
               : 'border-gray-200 dark:border-gray-700'
           "
           @click="
-            selectedRole = role.role;
+            selectedRole = role.key;
             selectedBranch = '';
           ">
           <div
@@ -129,7 +139,7 @@ const BackToLogin = () => {
         </div>
       </div>
 
-      <!-- زر الرجوع في الموبايل -->
+      <!-- change role btn for mobile -->
       <transition name="fade">
         <button
           v-if="selectedRole"
@@ -138,14 +148,14 @@ const BackToLogin = () => {
         </button>
       </transition>
 
-      <!-- فروع -->
+      <!-- Branches -->
       <transition name="fade">
         <div
           v-if="selectedRole"
           class="bg-white dark:bg-gray-800 w-full max-w-4xl rounded-2xl py-5 mb-3 transition-colors duration-300">
           <h2
             class="text-2xl font-bold text-center text-gray-900 dark:text-gray-100">
-            Select Your Branch
+            {{ t("role.selectbranch") }}
           </h2>
 
           <div
@@ -174,9 +184,9 @@ const BackToLogin = () => {
                     class="w-8 h-8 text-[#6c5245] dark:text-gray-300" />
                 </div>
                 <div class="flex flex-col">
-                  <h2 class="font-bold">{{ branch.name }}</h2>
+                  <h2 class="font-bold">{{ t(`role.branch${branch.key}`) }}</h2>
                   <p class="text-gray-500 dark:text-gray-400">
-                    Branch Location
+                    {{ t("role.branchlocation") }}
                   </p>
                 </div>
                 <strong v-if="selectedBranch === branch.name">
@@ -189,7 +199,7 @@ const BackToLogin = () => {
         </div>
       </transition>
 
-      <!-- الأزرار -->
+      <!-- buttons -->
       <div class="flex gap-2 md:gap-5 mt-3 mb-10 text-white">
         <button
           class="bg-blue-500 hover:bg-blue-600 md:font-semibold px-4 md:px-11 py-2 rounded-xl transition-colors duration-200 flex items-center"
@@ -197,8 +207,7 @@ const BackToLogin = () => {
           <component
             :is="locale === 'en' ? ArrowLeft : ArrowRight"
             class="text-[0.2rem] me-2" />
-          {{ t("role.back") }}
-          <span class="hidden md:inline ms-1">{{ t("role.tologin") }}</span>
+          <span class="hidden md:inline ms-1">{{ t("role.logout") }}</span>
         </button>
 
         <button

@@ -1,7 +1,16 @@
 <template>
   <aside
-    class="fixed z-10 top-[60px] xl:top-[75px] left-0 rtl:right-0 bottom-0 bg-white dark:bg-gray-900 border-r border-l border-gray-200 dark:border-gray-700 flex flex-col shadow-2xl transition-all duration-300"
-    :class="collapsed ? 'w-20' : 'w-72'">
+    class="fixed z-10 top-[60px] xl:top-[75px] bottom-0 bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 flex flex-col shadow-2xl transition-all duration-500 ease-in-out will-change-transform overflow-x-hidden"
+    :class="[
+      isRTL
+        ? 'rtl:right-0 border-l dark:border-gray-700'
+        : 'left-0 border-r dark:border-gray-700',
+      collapsed
+        ? isRTL
+          ? 'translate-x-full xl:translate-x-0 xl:w-20'
+          : '-translate-x-full xl:translate-x-0 xl:w-20'
+        : 'translate-x-0 w-72',
+    ]">
     <!-- Header -->
     <div
       class="flex items-center gap-3 p-4 border-b border-gray-100 dark:border-gray-700 transition-all duration-300">
@@ -10,7 +19,11 @@
         <Icon name="lucide:graduation-cap" class="w-6 h-6" />
       </div>
 
-      <div v-if="!collapsed" class="transition-opacity duration-200">
+      <!-- Labels -->
+      <div
+        v-if="showLabels"
+        class="transition-opacity duration-300 ease-in-out opacity-0"
+        :class="{ 'opacity-100': showLabels }">
         <p class="font-semibold text-blue-900 dark:text-blue-300">
           {{ t("sidebar.title") }}
         </p>
@@ -30,9 +43,13 @@
         class="group flex items-center gap-3 px-3 py-3 rounded-lg font-semibold text-blue-700 dark:text-blue-300 transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-gray-800 [&.router-link-exact-active]:bg-blue-700 [&.router-link-exact-active]:text-white [&.router-link-exact-active:hover]:bg-blue-700"
         @click="onLinkClick">
         <Icon :name="link.icon" class="w-5 h-5" />
-        <span v-if="!collapsed" class="transition-opacity duration-200">
-          {{ t(link.label) }}
-        </span>
+        <transition name="fade" mode="out-in">
+          <span
+            v-if="showLabels"
+            class="opacity-100 transition-opacity duration-500 ease-in-out">
+            {{ t(link.label) }}
+          </span>
+        </transition>
       </NuxtLink>
     </nav>
   </aside>
@@ -41,11 +58,27 @@
 <script setup>
 import { useUIStore } from "@/stores/ui";
 import { useI18n } from "vue-i18n";
-import { computed } from "vue";
+import { computed, ref, watch } from "vue";
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
 const uiStore = useUIStore();
 const collapsed = computed(() => uiStore.sidebarCollapsed);
+
+// ✅ تحديد إذا كانت اللغة RTL (مثل العربية)
+const isRTL = computed(() => locale.value === "ar");
+
+// transition state for showing/hiding labels
+const showLabels = ref(!collapsed.value);
+
+watch(collapsed, (newVal) => {
+  if (newVal) {
+    showLabels.value = false;
+  } else {
+    setTimeout(() => {
+      showLabels.value = true;
+    }, 200);
+  }
+});
 
 const isSmallScreen = () =>
   typeof window !== "undefined" && window.innerWidth < 1024;
@@ -77,22 +110,12 @@ const sidebarLinks = [
 </script>
 
 <style scoped>
-::-webkit-scrollbar {
-  width: 6px;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
 }
-::-webkit-scrollbar-thumb {
-  background-color: #cbd5e1;
-  border-radius: 6px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background-color: #94a3b8;
-}
-
-/* وضع الداكن */
-.dark ::-webkit-scrollbar-thumb {
-  background-color: #4b5563;
-}
-.dark ::-webkit-scrollbar-thumb:hover {
-  background-color: #6b7280;
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

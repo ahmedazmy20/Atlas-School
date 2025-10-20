@@ -36,13 +36,12 @@
     "onebranch": "2 branches available",
 
     "changerole": "Change Role",
-    "back": "Back",
-    "tologin": "to Login",
+    "logout": "Log Out",
     "selectbranch": "Select Your Branch",
 
-    "branch1": "Main Campus",
-    "branch2": "North Branch",
-    "branch3": "South Branch",
+    "branchmain": "Main Campus",
+    "branchnorth": "North Branch",
+    "branchsouth": "South Branch",
     "branchlocation": "Branch Location",
 
     "Continue": "Continue to Dashboard"
@@ -280,5 +279,18 @@
       "clothes": "Clothes",
       "food": "Food"
     }
+  },
+  "validation": {
+    "idRequired": "ID is required",
+    "idNumberOnly": "ID must contain numbers only",
+    "idMin": "ID must be at least 3 characters",
+    "idMax": "ID must be less than 7 characters",
+    "passwordRequired": "Password is required",
+    "passwordMin": "Password must be at least 4 characters",
+    "passwordMax": "Password must be less than 9 characters",
+    "arabicRequired": "This field is required",
+    "arabicOnly": "Please enter Arabic letters only",
+    "englishRequired": "This field is required",
+    "englishOnly": "Please enter English letters only"
   }
 }

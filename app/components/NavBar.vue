@@ -117,12 +117,12 @@
         </div>
         <div class="flex flex-col text-right">
           <span
-            class="font-semibold text-gray-800 dark:text-gray-100 text-xs 2xl:text-sm"
-            >{{ t("header.user.name") }}</span
-          >
-          <span class="text-xs text-gray-500 dark:text-gray-400">{{
-            t("header.user.role")
-          }}</span>
+            class="font-semibold text-gray-800 dark:text-gray-100 text-xs 2xl:text-sm">
+            {{ userName || t("header.user.name") }}
+          </span>
+          <span class="text-xs text-gray-500 dark:text-gray-400">
+            {{ userRole ? t(`role.${userRole}`) : t("header.user.role") }}
+          </span>
         </div>
       </div>
     </div>
@@ -135,6 +135,12 @@ import { useLanguage } from "~/composables/useLanguage";
 import { useI18n } from "vue-i18n";
 import { useUIStore } from "@/stores/ui";
 
+interface User {
+  role?: string;
+  arabicField?: string;
+  englishField?: string;
+}
+
 const uiStore = useUIStore();
 function toggleMenu() {
   uiStore.toggleSidebar();
@@ -142,8 +148,19 @@ function toggleMenu() {
 
 const { t } = useI18n();
 const { locale, switchLanguage } = useLanguage();
+// Provide a type for the user state so it's not `unknown`
+const user = useState<User | null>("user", () => null);
 
-const languages = [
+const userName = computed(() =>
+  locale.value === "ar" ? user.value?.arabicField : user.value?.englishField
+);
+
+// Expose a typed computed for the role to use in the template
+const userRole = computed(() => user.value?.role ?? null);
+
+type LangCode = "ar" | "en";
+
+const languages: { code: LangCode; label: string; flag: string }[] = [
   { code: "ar", label: "العربية", flag: "https://flagcdn.com/sa.svg" },
   { code: "en", label: "English", flag: "https://flagcdn.com/us.svg" },
 ];
@@ -159,7 +176,7 @@ function toggle() {
   open.value = !open.value;
 }
 
-function select(langCode: string) {
+function select(langCode: LangCode) {
   switchLanguage(langCode);
   open.value = false;
 }
