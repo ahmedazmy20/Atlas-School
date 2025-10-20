@@ -55,7 +55,7 @@ function handleLogin(data) {
 
     <!-- Right ثابت -->
     <div
-      class="right relative w-full min-h-screen hidden lg:flex flex-col items-center justify-center text-white text-2xl font-bold transition-colors duration-300 bg-[#2e6aecd8] dark:bg-gradient-to-br dark:from-blue-900 dark:to-blue-700">
+      class="right relative w-full min-h-screen hidden lg:flex flex-col items-center justify-center text-white text-2xl font-bold transition-colors duration-300 bg-[#2e6aecd8] dark:bg-gradient-to-br dark:from-[#1a3a6a] dark:to-[#27364c]">
       <div
         class="absolute inset-0 opacity-20"
         style="
@@ -64,7 +64,7 @@ function handleLogin(data) {
 
       <div
         class="relative z-10 flex flex-col items-center justify-center text-center px-8">
-        <!-- العنوان -->
+        <!-- title -->
         <div class="flex flex-col items-center">
           <div
             class="p-5 rounded-2xl bg-[#5b8af0e7] dark:bg-blue-700 mb-4 inline-block border border-white/30">
@@ -82,13 +82,13 @@ function handleLogin(data) {
           </p>
         </div>
 
-        <!-- البطاقات -->
+        <!-- cards -->
         <div
           class="cards grid grid-cols-2 gap-6 p-8 mt-6 max-w-[700px] w-full justify-center">
           <div
             v-for="card in cards"
             :key="card.title"
-            class="card border border-white/30 bg-[#5b8af0c4] dark:bg-blue-700/70 rounded-xl px-7 py-7 hover:bg-[#5F92F1] dark:hover:bg-blue-600 transition-all duration-300 flex flex-col items-center">
+            class="card border border-white/30 bg-[#5b8af0c4] dark:bg-[#3469cb] rounded-xl px-7 py-7 hover:bg-[#5F92F1] dark:hover:bg-[#2363da] transition-all duration-300 flex flex-col items-center">
             <component
               :is="card.icon"
               class="w-9 h-9 mb-3 text-white dark:text-gray-300" />

@@ -7,9 +7,9 @@
         : 'left-0 border-r dark:border-gray-700',
       collapsed
         ? isRTL
-          ? 'translate-x-full xl:translate-x-0 xl:w-20'
+          ? 'translate-x-full xl:translate-x-0  xl:w-20'
           : '-translate-x-full xl:translate-x-0 xl:w-20'
-        : 'translate-x-0 w-72',
+        : 'translate-x-0  md:w-72',
     ]">
     <!-- Header -->
     <div
@@ -43,10 +43,10 @@
         class="group flex items-center gap-3 px-3 py-3 rounded-lg font-semibold text-blue-700 dark:text-blue-300 transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-gray-800 [&.router-link-exact-active]:bg-blue-700 [&.router-link-exact-active]:text-white [&.router-link-exact-active:hover]:bg-blue-700"
         @click="onLinkClick">
         <Icon :name="link.icon" class="w-5 h-5" />
-        <transition name="fade" mode="out-in">
+        <transition name="fade" mode="default">
           <span
             v-if="showLabels"
-            class="opacity-100 transition-opacity duration-500 ease-in-out">
+            class="block overflow-x-hidden transition-opacity duration-500 ease-in-out">
             {{ t(link.label) }}
           </span>
         </transition>
@@ -112,7 +112,7 @@ const sidebarLinks = [
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease-in-out;
 }
 .fade-enter-from,
 .fade-leave-to {

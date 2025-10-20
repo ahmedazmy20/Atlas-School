@@ -69,11 +69,11 @@ const login = handleSubmit(async (values) => {
 
 <template>
   <div
-    class="flex flex-col justify-center items-center px-4 transition-colors duration-300 dark:bg-gray-800"
+    class="flex flex-col justify-center items-center px-4 transition-colors duration-300"
     :dir="locale === 'ar' ? 'rtl' : 'ltr'">
     <form @submit.prevent="login">
       <div
-        class="flex flex-col justify-center items-center gap-3 md:min-w-md rounded-2xl px-8 py-4 md:py-14 mx-auto shadow-2xl bg-white dark:bg-gray-700 transition-colors duration-300">
+        class="flex flex-col justify-center items-center gap-3 md:min-w-md rounded-2xl px-8 py-4 md:py-14 mx-auto shadow-2xl  dark:shadow-[#1a3a6a] bg-white dark:bg-[#27364c] transition-colors duration-300">
         <!-- العنوان -->
         <h1
           class="text-xl md:text-3xl font-bold text-gray-800 dark:text-gray-100">
@@ -170,9 +170,9 @@ const login = handleSubmit(async (values) => {
           </div>
         </div>
 
-        <!-- زر تسجيل الدخول -->
+        <!-- Submit -->
         <UButton
-          class="mt-4 w-full flex items-center justify-center py-3 bg-[#2B67EC] hover:bg-[#2B67EC]/90 active:bg-[#2B67EC]/80 dark:bg-blue-600 dark:hover:bg-blue-500 transition-colors duration-300"
+          class="mt-4 w-full flex items-center justify-center py-3 bg-[#2B67EC] hover:bg-[#2B67EC]/90 active:bg-[#2B67EC]/80 dark:bg-blue-800 dark:text-white/70 dark:hover:bg-blue-700 transition-colors duration-300"
           type="submit">
           <span v-if="!isLoading">{{ t("signIn") }}</span>
           <span v-else>{{ t("Signing") }}</span>
