@@ -14,84 +14,88 @@
           class="w-5 h-5 text-gray-700 dark:text-gray-200" />
       </UButton>
 
-      <!-- School Manager Dropdown -->
-      <details
-        class="group relative border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 font-medium rounded-md bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-        <summary
-          class="flex items-center justify-between gap-3 px-3 py-1.5 cursor-pointer rounded-lg">
-          <span class="truncate min-w-0">{{ t("header.schoolManager") }}</span>
-          <Icon
-            name="lucide:chevron-down"
-            class="w-4 h-4 transition-transform duration-300 group-open:rotate-180" />
-        </summary>
+      <div class="hidden lg:flex items-center gap-4">
+        <!-- School Manager Dropdown -->
+        <details
+          class="group relative border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 font-medium rounded-md bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+          <summary
+            class="flex items-center justify-between gap-3 px-3 py-1.5 cursor-pointer rounded-lg">
+            <span class="truncate min-w-0">{{
+              t("header.schoolManager")
+            }}</span>
+            <Icon
+              name="lucide:chevron-down"
+              class="w-4 h-4 transition-transform duration-300 group-open:rotate-180" />
+          </summary>
 
-        <div
-          class="absolute left-0 top-full mt-1 w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg space-y-1 z-50">
-          <NuxtLink
-            class="block cursor-pointer px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md">
-            {{ t("header.manager1") }}
-          </NuxtLink>
-          <NuxtLink
-            class="block cursor-pointer px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md">
-            {{ t("header.manager2") }}
-          </NuxtLink>
-        </div>
-      </details>
+          <div
+            class="absolute left-0 top-full mt-1 w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg space-y-1 z-50">
+            <NuxtLink
+              class="block cursor-pointer px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md">
+              {{ t("header.manager1") }}
+            </NuxtLink>
+            <NuxtLink
+              class="block cursor-pointer px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md">
+              {{ t("header.manager2") }}
+            </NuxtLink>
+          </div>
+        </details>
 
-      <!-- Branch Dropdown -->
-      <details
-        class="group relative border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 font-medium rounded-md bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-        <summary
-          class="flex items-center justify-between gap-3 px-3 py-1.5 cursor-pointer rounded-lg">
-          <span class="truncate min-w-0">{{ t("header.branch") }}</span>
-          <Icon
-            name="lucide:chevron-down"
-            class="w-4 h-4 transition-transform duration-300 group-open:rotate-180" />
-        </summary>
+        <!-- Branch Dropdown -->
+        <details
+          class="group relative border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 font-medium rounded-md bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+          <summary
+            class="flex items-center justify-between gap-3 px-3 py-1.5 cursor-pointer rounded-lg">
+            <span class="truncate min-w-0">{{ t("header.branch") }}</span>
+            <Icon
+              name="lucide:chevron-down"
+              class="w-4 h-4 transition-transform duration-300 group-open:rotate-180" />
+          </summary>
 
-        <div
-          class="absolute left-0 top-full mt-1 w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg space-y-1 z-50">
-          <NuxtLink
-            class="block cursor-pointer px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md">
-            {{ t("header.branch1") }}
-          </NuxtLink>
-          <NuxtLink
-            class="block cursor-pointer px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md">
-            {{ t("header.branch2") }}
-          </NuxtLink>
-        </div>
-      </details>
+          <div
+            class="absolute left-0 top-full mt-1 w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg space-y-1 z-50">
+            <NuxtLink
+              class="block cursor-pointer px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md">
+              {{ t("header.branch1") }}
+            </NuxtLink>
+            <NuxtLink
+              class="block cursor-pointer px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md">
+              {{ t("header.branch2") }}
+            </NuxtLink>
+          </div>
+        </details>
 
-      <!-- Year Dropdown -->
-      <details
-        class="group relative border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 font-medium rounded-md bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-        <summary
-          class="flex items-center justify-between gap-3 px-3 py-1.5 cursor-pointer rounded-lg">
-          <span class="truncate min-w-0">{{ t("header.year") }}</span>
-          <Icon
-            name="lucide:chevron-down"
-            class="w-4 h-4 transition-transform duration-300 group-open:rotate-180" />
-        </summary>
+        <!-- Year Dropdown -->
+        <details
+          class="group relative border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 font-medium rounded-md bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+          <summary
+            class="flex items-center justify-between gap-3 px-3 py-1.5 cursor-pointer rounded-lg">
+            <span class="truncate min-w-0">{{ t("header.year") }}</span>
+            <Icon
+              name="lucide:chevron-down"
+              class="w-4 h-4 transition-transform duration-300 group-open:rotate-180" />
+          </summary>
 
-        <div
-          class="absolute left-0 top-full mt-1 w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg space-y-1 z-50">
-          <NuxtLink
-            class="block cursor-pointer px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md">
-            {{ t("header.year1") }}
-          </NuxtLink>
-          <NuxtLink
-            class="block cursor-pointer px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md">
-            {{ t("header.year2") }}
-          </NuxtLink>
-        </div>
-      </details>
+          <div
+            class="absolute left-0 top-full mt-1 w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg space-y-1 z-50">
+            <NuxtLink
+              class="block cursor-pointer px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md">
+              {{ t("header.year1") }}
+            </NuxtLink>
+            <NuxtLink
+              class="block cursor-pointer px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md">
+              {{ t("header.year2") }}
+            </NuxtLink>
+          </div>
+        </details>
+      </div>
 
       <!-- Search -->
       <div class="relative hidden sm:block">
         <UInput
           placeholder="Search..."
           icon="lucide:search"
-          class="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-md w-56 text-gray-700 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500" />
+          class="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-md text-gray-700 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500" />
       </div>
     </div>
 

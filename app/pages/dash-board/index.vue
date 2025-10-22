@@ -20,10 +20,10 @@
       <!-- right -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div
-          class="flex group bg-[#002be9c2] w-full mx-auto hover:shadow-lg hover:-translate-y-1 transition-all duration-300 items-center justify-between text-white px-6 py-10 rounded-2xl shadow-sm border border-transparent dark:bg-[#00AFE9] dark:hover:bg-[#002be9c2]">
+          class="flex group bg-[#002be9c2] w-full mx-auto hover:shadow-lg hover:-translate-y-1 transition-all duration-300 items-center justify-between text-white px-6 py-3 xl:py-10 rounded-2xl shadow-sm border border-transparent dark:bg-[#00AFE9] dark:hover:bg-[#002be9c2]">
           <div class="text-left rtl:text-right">
             <p class="text-sm">{{ t("dashboard.students.title") }}</p>
-            <h3 class="text-3xl py-1 font-extrabold">
+            <h3 class="text-2xl xl:text-3xl py-1 font-extrabold">
               {{ t("dashboard.students.count") }}
             </h3>
             <p class="text-sm">
@@ -40,10 +40,12 @@
         </div>
 
         <div
-          class="flex group hover:bg-[#002be9c2] w-full mx-auto hover:shadow-lg hover:-translate-y-1 transition-all duration-300 items-center justify-between bg-[#00AFE9] text-white px-6 py-10 rounded-2xl shadow-sm border border-transparent">
+          class="flex group hover:bg-[#002be9c2] w-full mx-auto hover:shadow-lg hover:-translate-y-1 transition-all duration-300 items-center justify-between bg-[#00AFE9] text-white px-6 py-3 xl:py-10 rounded-2xl shadow-sm border border-transparent">
           <div class="text-left rtl:text-right">
-            <p class="text-sm">{{ t("dashboard.staff.title") }}</p>
-            <h3 class="text-3xl py-1 font-extrabold">
+            <p class="text-sm">
+              {{ t("dashboard.staff.title") }}
+            </p>
+            <h3 class="text-2xl xl:text-3xl py-1 font-extrabold">
               {{ t("dashboard.staff.count") }}
             </h3>
             <p class="text-sm">{{ t("dashboard.staff.status") }}</p>
