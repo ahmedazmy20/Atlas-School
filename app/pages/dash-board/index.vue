@@ -27,7 +27,7 @@
               {{ t("dashboard.students.count") }}
             </h3>
             <p class="text-sm">
-              <Icon name="lucide:trending-up " />
+              <Icon name="lucide:trending-up" />
               {{ t("dashboard.students.change") }}
             </p>
           </div>

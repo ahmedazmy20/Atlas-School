@@ -73,7 +73,6 @@
         </UButton>
       </div>
     </div>
-
     <ViewProduct
       :show="showViewModal"
       :product="viewedProduct"
@@ -86,22 +85,22 @@
         <thead
           class="bg-blue-50 text-gray-700 font-medium dark:bg-gray-700 dark:text-gray-200">
           <tr>
-            <th class="px-4 py-3 text-left rtl:text-right">
+            <th class="px-4 py-3 text-start">
               {{ t("products.table.sku") }}
             </th>
-            <th class="px-4 py-3 text-left rtl:text-right">
+            <th class="px-4 py-3 text-start">
               {{ t("products.table.name") }}
             </th>
-            <th class="px-4 py-3 text-left rtl:text-right">
+            <th class="px-4 py-3 text-start">
               {{ t("products.table.category") }}
             </th>
-            <th class="px-4 py-3 text-left rtl:text-right">
+            <th class="px-4 py-3 text-start">
               {{ t("products.table.price") }}
             </th>
-            <th class="px-4 py-3 text-left rtl:text-right">
+            <th class="px-4 py-3 text-start">
               {{ t("products.table.stock") }}
             </th>
-            <th class="px-4 py-3 text-left rtl:text-right">
+            <th class="px-4 py-3 text-start">
               {{ t("products.table.status") }}
             </th>
             <th class="px-4 py-3 text-center">

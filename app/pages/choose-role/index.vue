@@ -13,7 +13,7 @@ import {
 
 const { t, locale } = useI18n();
 const router = useRouter();
-const user = useState("user");
+const user = useCookie("user");
 
 const roles = computed(() => [
   {
@@ -98,6 +98,7 @@ const BackToLogin = () => {
       </p>
 
       <!-- Roles -->
+
       <div
         :class="selectedRole ? 'hidden md:flex ' : 'flex'"
         class="flex gap-5 p-4 justify-start md:justify-center overflow-x-auto md:overflow-visible w-full">
@@ -143,7 +144,11 @@ const BackToLogin = () => {
       <transition name="fade">
         <button
           v-if="selectedRole"
-          class="text-white block md:hidden bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-xl md:font-bold md:text-xl duration-200 transition-all mb-3">
+          class="text-white block md:hidden bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-xl md:font-bold md:text-xl duration-200 transition-all mb-3"
+          @click="
+            selectedRole = '';
+            selectedBranch = '';
+          ">
           {{ t("role.changerole") }}
         </button>
       </transition>

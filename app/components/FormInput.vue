@@ -7,6 +7,7 @@ import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
 const { locale } = useLanguage();
+const router = useRouter();
 
 const schema = toTypedSchema(
   z.object({
@@ -43,24 +44,30 @@ const { handleSubmit } = useForm({
 });
 
 const isLoading = ref(false);
-const router = useRouter();
 
-const user = useState("user", () => ({
-  id: "",
-  role: "",
-  branch: "",
-  arabicField: "",
-  englishField: "",
-}));
+// using cookies to save user data
+const user = useCookie("user", {
+  default: () => ({
+    id: "",
+    role: "",
+    branch: "",
+    arabicField: "",
+    englishField: "",
+  }),
+});
 
 const login = handleSubmit(async (values) => {
   isLoading.value = true;
+
   setTimeout(() => {
-    user.value.id = values.id;
-    user.value.arabicField = values.arabicField;
-    user.value.englishField = values.englishField;
-    user.value.role = "";
-    user.value.branch = "";
+    user.value = {
+      id: values.id,
+      arabicField: values.arabicField,
+      englishField: values.englishField,
+      role: "",
+      branch: "",
+    };
+
     router.push("/choose-role");
     isLoading.value = false;
   }, 1500);
@@ -73,8 +80,8 @@ const login = handleSubmit(async (values) => {
     :dir="locale === 'ar' ? 'rtl' : 'ltr'">
     <form @submit.prevent="login">
       <div
-        class="flex flex-col justify-center items-center gap-3 md:min-w-md rounded-2xl px-8 py-4 md:py-14 mx-auto shadow-2xl  dark:shadow-[#1a3a6a] bg-white dark:bg-[#27364c] transition-colors duration-300">
-        <!-- العنوان -->
+        class="flex flex-col justify-center items-center gap-3 md:min-w-md rounded-2xl px-8 py-4 md:py-14 mx-auto shadow-2xl dark:shadow-[#1a3a6a] bg-white dark:bg-[#27364c] transition-colors duration-300">
+        <!-- Header -->
         <h1
           class="text-xl md:text-3xl font-bold text-gray-800 dark:text-gray-100">
           {{ t("Welcome") }}

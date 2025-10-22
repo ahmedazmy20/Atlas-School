@@ -48,7 +48,7 @@
     "students": {
       "title": "إجمالي الطلاب",
       "count": "١,٢٤٧",
-      "change": "+٥.٢٪ عن الشهر الماضي"
+      "change": "+٥.٢ عن الشهر الماضي"
     },
     "staff": {
       "title": "الموظفون النشطون",
@@ -115,7 +115,26 @@
     "printing": "الطباعة",
     "withdrawals": "طلبات الانسحاب",
     "studentAcademic": "الأداء الأكاديمي للطلاب",
-    "dropout": "الطلاب المنسحبون"
+    "dropout": "الطلاب المنسحبون",
+    "finance": "الإدارة المالية",
+    "revenues": "الإيرادات",
+    "expenses": "المصروفات",
+    "reports": "التقارير المالية",
+
+    "evaluation": "التقييم",
+    "exams": "الاختبارات",
+    "results": "النتائج",
+
+    "studentReports": "تقارير الطلاب",
+    "teacherReports": "تقارير المعلمين",
+
+    "transportation": "النقل والمواصلات",
+    "routes": "المسارات",
+    "drivers": "السائقون",
+
+    "certificates": "الشهادات",
+    "studentCertificates": "شهادات الطلاب",
+    "teacherCertificates": "شهادات المعلمين"
   },
   "header": {
     "schoolManager": "مدير المدرسة",

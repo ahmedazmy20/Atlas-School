@@ -15,31 +15,31 @@
       </UButton>
 
       <!-- School Manager Dropdown -->
-      <UDropdown class="min-w-[10rem] hidden xl:block">
+      <UPopover class="min-w-[10rem] hidden xl:block">
         <UButton
           class="border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 font-medium px-3 py-1.5 rounded-md bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
           {{ t("header.schoolManager") }}
           <Icon name="lucide:chevron-down" class="w-4 h-4 ml-1" />
         </UButton>
-      </UDropdown>
+      </UPopover>
 
       <!-- Branch Dropdown -->
-      <UDropdown class="min-w-[170px] hidden xl:block">
+      <UPopover class="min-w-[170px] hidden xl:block">
         <UButton
           class="border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 font-medium px-3 py-1.5 rounded-md bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
           {{ t("header.branch") }}
           <Icon name="lucide:chevron-down" class="w-4 h-4 ml-1" />
         </UButton>
-      </UDropdown>
+      </UPopover>
 
       <!-- Year Dropdown -->
-      <UDropdown class="min-w-[150px] hidden xl:block">
+      <UPopover class="min-w-[150px] hidden xl:block">
         <UButton
           class="border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 font-medium px-3 py-1.5 rounded-md bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
           {{ t("header.year") }}
           <Icon name="lucide:chevron-down" class="w-4 h-4 ml-1" />
         </UButton>
-      </UDropdown>
+      </UPopover>
 
       <!-- Search -->
       <div class="relative hidden sm:block">
@@ -141,6 +141,10 @@ interface User {
   englishField?: string;
 }
 
+// Provide a type for the user state so it's not `unknown`
+const user = useCookie<User | null>("user", {
+  default: () => null,
+});
 const uiStore = useUIStore();
 function toggleMenu() {
   uiStore.toggleSidebar();
@@ -148,8 +152,6 @@ function toggleMenu() {
 
 const { t } = useI18n();
 const { locale, switchLanguage } = useLanguage();
-// Provide a type for the user state so it's not `unknown`
-const user = useState<User | null>("user", () => null);
 
 const userName = computed(() =>
   locale.value === "ar" ? user.value?.arabicField : user.value?.englishField

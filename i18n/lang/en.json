@@ -54,7 +54,7 @@
     "students": {
       "title": "Total Students",
       "count": "1,247",
-      "change": "+5.2% from last month"
+      "change": "+5.2 from last month"
     },
     "staff": {
       "title": "Active Staff",
@@ -121,7 +121,26 @@
     "printing": "Printing Press",
     "withdrawals": "Withdrawals",
     "studentAcademic": "Student Academic Pe...",
-    "dropout": "Dropout Students"
+    "dropout": "Dropout Students",
+    "finance": "Finance",
+    "revenues": "Revenues",
+    "expenses": "Expenses",
+    "reports": "Reports",
+
+    "evaluation": "Evaluation",
+    "exams": "Exams",
+    "results": "Results",
+
+    "studentReports": "Student Reports",
+    "teacherReports": "Teacher Reports",
+
+    "transportation": "Transportation",
+    "routes": "Routes",
+    "drivers": "Drivers",
+
+    "certificates": "Certificates",
+    "studentCertificates": "Student Certificates",
+    "teacherCertificates": "Teacher Certificates"
   },
   "header": {
     "schoolManager": "School Manager",
