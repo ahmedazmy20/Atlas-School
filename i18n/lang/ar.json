@@ -140,6 +140,12 @@
     "schoolManager": "مدير المدرسة",
     "branch": "فرع الاختبار",
     "year": "٢٠٢٥ / ٢٠٢٦",
+    "manager1": "مدير ١ ",
+    "manager2": "مدير ٢",
+    "branch1": "فرع القاهرة",
+    "branch2": "فرع الاسكندرية",
+    "year1": "٢٠٢٦ / ٢٠٢٧",
+    "year2": "٢٠٢٧ / ٢٠٢٨",
     "searchPlaceholder": "بحث...",
     "language": {
       "english": "الإنجليزية",

@@ -146,6 +146,12 @@
     "schoolManager": "School Manager",
     "branch": "Testing Branch",
     "year": "2025 / 2026",
+    "manager1": "Manager 1",
+    "manager2": "Manager 2",
+    "branch1": "Cairo Branch",
+    "branch2": "Alexandria Branch",
+    "year1": "2026 / 2027",
+    "year2": "2027 / 2028",
     "searchPlaceholder": "Search...",
     "language": {
       "english": "English",

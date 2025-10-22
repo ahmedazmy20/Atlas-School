@@ -9,28 +9,30 @@ const { t } = useI18n();
 const { locale } = useLanguage();
 const router = useRouter();
 
-const schema = toTypedSchema(
-  z.object({
-    id: z
-      .string()
-      .nonempty(t("validation.idRequired"))
-      .regex(/^[0-9]+$/, t("validation.idNumberOnly"))
-      .min(3, t("validation.idMin"))
-      .max(6, t("validation.idMax")),
-    password: z
-      .string()
-      .nonempty(t("validation.passwordRequired"))
-      .min(4, t("validation.passwordMin"))
-      .max(8, t("validation.passwordMax")),
-    arabicField: z
-      .string()
-      .nonempty(t("validation.arabicRequired"))
-      .regex(/^[\u0600-\u06FF\s]+$/, t("validation.arabicOnly")),
-    englishField: z
-      .string()
-      .nonempty(t("validation.englishRequired"))
-      .regex(/^[A-Za-z\s]+$/, t("validation.englishOnly")),
-  })
+const schema = computed(() =>
+  toTypedSchema(
+    z.object({
+      id: z
+        .string()
+        .nonempty(t("validation.idRequired"))
+        .regex(/^[0-9]+$/, t("validation.idNumberOnly"))
+        .min(3, t("validation.idMin"))
+        .max(6, t("validation.idMax")),
+      password: z
+        .string()
+        .nonempty(t("validation.passwordRequired"))
+        .min(4, t("validation.passwordMin"))
+        .max(8, t("validation.passwordMax")),
+      arabicField: z
+        .string()
+        .nonempty(t("validation.arabicRequired"))
+        .regex(/^[\u0600-\u06FF\s]+$/, t("validation.arabicOnly")),
+      englishField: z
+        .string()
+        .nonempty(t("validation.englishRequired"))
+        .regex(/^[A-Za-z\s]+$/, t("validation.englishOnly")),
+    })
+  )
 );
 
 const { handleSubmit } = useForm({
