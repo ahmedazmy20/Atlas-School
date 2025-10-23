@@ -87,7 +87,7 @@ const BackToLogin = () => {
 
       <div
         class="w-16 h-16 hidden md:w-20 md:min-h-20 bg-blue-100 dark:bg-gray-700 rounded-full md:flex items-center justify-center">
-        <BookOpen class="text-blue-500 dark:text-blue-400 w-10 h-10" />
+        <img src="/atlas.png" alt="Atlas Logo" />
       </div>
 
       <h1 class="text-2xl md:text-4xl font-bold">{{ t("role.choose") }}</h1>
@@ -207,17 +207,17 @@ const BackToLogin = () => {
       <!-- buttons -->
       <div class="flex gap-2 md:gap-5 mt-3 mb-10 text-white">
         <button
-          class="bg-blue-500 hover:bg-blue-600 md:font-semibold px-4 md:px-11 py-2 rounded-xl transition-colors duration-200 flex items-center"
+          class="bg-blue-500 cursor-pointer hover:bg-blue-600 md:font-semibold px-4 md:px-11 py-2 rounded-xl transition-colors duration-200 flex items-center"
           @click="BackToLogin">
           <component
             :is="locale === 'en' ? ArrowLeft : ArrowRight"
-            class="text-[0.2rem] me-2" />
+            class="text-[0.2rem]" />
           <span class="hidden md:inline ms-1">{{ t("role.logout") }}</span>
         </button>
 
         <button
           :disabled="!selectedBranch"
-          class="text-white px-4 md:px-11 py-2 rounded-xl md:font-bold md:text-xl duration-200 transition-all"
+          class="text-white cursor-pointer px-4 md:px-11 py-2 rounded-xl md:font-bold md:text-xl duration-200 transition-all"
           :class="[
             !selectedBranch
               ? 'bg-blue-300 cursor-not-allowed'

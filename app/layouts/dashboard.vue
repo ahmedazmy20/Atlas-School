@@ -10,7 +10,7 @@
         <SideBar />
 
         <main
-          class="flex-1 ltr:px-5 rtl:px-5 pr-1 md:p-9 container dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-all duration-300"
+          class="flex-1 ltr:px-2 md:ltr:px-4 rtl:px-2 md:rtl:px-4 pr-2 md:p-9 container dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-all duration-300"
           :class="{
             'md:ltr:ml-52 lg:ltr:ml-72 md:rtl:mr-52 lg:rtl:mr-72 ': !collapsed, // sidebar open on large screens
             'lg:ms-20': collapsed,

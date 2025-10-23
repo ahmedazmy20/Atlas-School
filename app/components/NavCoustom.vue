@@ -23,7 +23,7 @@
       <!-- Titles -->
       <div>
         <h2
-          class="text-xl font-semibold text-gray-800 dark:text-gray-100 leading-tight">
+          class="md:text-xl font-semibold text-gray-800 dark:text-gray-100 leading-tight">
           {{ mainTitle }}
         </h2>
         <p class="text-sm text-gray-500 dark:text-gray-400">
@@ -47,31 +47,29 @@ const goBack = () => {
   router.back();
 };
 
-// تحديد إذا كانت الصفحة تعديل أو إضافة
+// indicate if the page is edit or add
 const isEdit = computed(() => route.name?.toString().includes("edit-product"));
 
-// المنتج الحالي في حالة التعديل
+// get the product based on the id
 const product = computed(() => {
   if (!isEdit.value) return null;
   const id = Number(route.params.id);
   return productsStore.products.find((p) => p.id === id);
 });
 
-// الأيقونة حسب الصفحة
+// icon based on the page is edit or add
 const iconName = computed(() =>
   isEdit.value ? "lucide:edit-3" : "lucide:plus"
 );
 
-// العنوان الرئيسي حسب الصفحة
+// the main title based on the page is edit or add
 const mainTitle = computed(() =>
   isEdit.value
-    ? ` ${$t("productNav.edit.mainTitle")} ${
-        product.value ? `(${product.value.name})` : ""
-      }`
+    ? ` ${product.value ? `(${product.value.name.slice(0, 20)})` : ""}`
     : ` ${$t("productNav.add.mainTitle")}`
 );
 
-// العنوان الفرعي حسب الصفحة
+// the sub title based on the page is edit or add
 const subTitle = computed(() =>
   isEdit.value ? "Edit Product" : "Add New Product"
 );

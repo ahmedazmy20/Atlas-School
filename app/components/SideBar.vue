@@ -6,22 +6,22 @@
         ? 'rtl:right-0 border-l dark:border-gray-700'
         : 'left-0 border-r dark:border-gray-700',
 
-      // 💡 في الشاشات الصغيرة: خارج الشاشة لما تكون مقفولة
+      // in mobile change position outside screen in closed state
       collapsed && isMobile
         ? isRTL
           ? 'translate-x-full'
           : '-translate-x-full'
         : 'translate-x-0',
 
-      // 💡 في الشاشات الكبيرة: فقط تغيير العرض
-      !isMobile ? (collapsed ? 'w-20' : 'w-72') : 'w-52',
+      // in large screens change width
+      !isMobile ? (collapsed ? 'w-20' : 'w-72') : 'w-fit md:w-52',
     ]">
     <!-- Header -->
     <div
       class="flex items-center gap-3 p-4 border-b border-gray-100 dark:border-gray-700 transition-all duration-500">
       <div
-        class="w-10 h-10 bg-blue-600 text-white flex items-center justify-center rounded-md shrink-0">
-        <Icon name="lucide:graduation-cap" class="w-6 h-6" />
+        class="w-10 h-10 border border-gray-200 dark:border-gray-700 text-white flex items-center justify-center rounded-md shrink-0">
+        <img src="/atlas.png" alt="Atlas Logo" />
       </div>
 
       <div
@@ -83,7 +83,6 @@
               </span>
             </div>
 
-            <!-- السهم -->
             <Icon
               name="lucide:chevron-down"
               class="w-4 h-4 transition-transform duration-300 group-open:rotate-180" />

@@ -67,8 +67,11 @@ function handleLogin(data) {
         <!-- title -->
         <div class="flex flex-col items-center">
           <div
-            class="p-5 rounded-2xl bg-[#5b8af0e7] dark:bg-blue-700 mb-4 inline-block border border-white/30">
-            <School class="w-10 h-10 text-white" />
+            class="p-2 rounded-2xl bg-[#f2f2f4e7] dark:bg-[#c6ebe3d8] mb-4 inline-block border border-white/30">
+            <img
+              src="/atlas.png"
+              alt="Atlas Logo"
+              class="w-15 h-15 object-contain" >
           </div>
           <h2 class="mb-4 font-bold text-4xl text-white dark:text-gray-300">
             {{ t("school") }}

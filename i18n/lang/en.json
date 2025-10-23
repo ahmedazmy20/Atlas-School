@@ -1,5 +1,5 @@
 {
-  "Welcome": "Welcome to Learning",
+  "Welcome": "Welcome to Atlas School",
   "access": "Access your educational dashboard",
   "staff": "Staff/Student ID",
   "password": "Password",
@@ -7,7 +7,7 @@
   "name-ar": "Name (Arabic)",
   "signIn": "Sign In",
   "Signing": "Signing in...",
-  "school": "Your School Name",
+  "school": "Atlas School",
   "education": "Excellence in Education",
   "Empowering": "Empowering minds and shaping futures through innovative learning experiences",
   "knowledge": "Knowledge",
@@ -110,7 +110,7 @@
     }
   },
   "sidebar": {
-    "title": "Ibn Khaldun",
+    "title": "Atlas",
     "subtitle": "Schools Management",
     "dashboard": "Dashboard",
     "products": "Products Management",

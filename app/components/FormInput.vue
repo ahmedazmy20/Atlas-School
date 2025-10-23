@@ -85,15 +85,16 @@ const login = handleSubmit(async (values) => {
         class="flex flex-col justify-center items-center gap-3 md:min-w-md rounded-2xl px-8 py-4 md:py-14 mx-auto shadow-2xl dark:shadow-[#1a3a6a] bg-white dark:bg-[#27364c] transition-colors duration-300">
         <!-- Header -->
         <h1
-          class="text-xl md:text-3xl font-bold text-gray-800 dark:text-gray-100">
+          class="text-lg md:text-3xl font-bold text-gray-800 dark:text-gray-100">
           {{ t("Welcome") }}
         </h1>
         <p
           class="md:font-semibold text-gray-500 dark:text-gray-400 text-center">
           {{ t("access") }}
         </p>
+        <img src="/atlas.png" alt="Atlas Logo" />
 
-        <div class="input mt-10 w-full flex flex-col gap-4">
+        <div class="input w-full flex flex-col gap-4">
           <!-- ID -->
           <div class="flex flex-col gap-1">
             <label

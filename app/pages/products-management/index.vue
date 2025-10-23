@@ -8,7 +8,7 @@
 
     <!-- first part -->
     <div
-      class="flex flex-col w-[100%] sm:w-full sm:flex-row sm:justify-between sm:items-center">
+      class="flex flex-col w-full sm:flex-row sm:justify-between sm:items-center">
       <div class="text-start">
         <h1 class="md:text-3xl font-bold text-[#1C398E] dark:text-blue-400">
           {{ t("products.title") }}
@@ -28,7 +28,7 @@
 
     <!-- second part -->
     <div
-      class="flex flex-col sm:flex-row md:items-center w-[100%] sm:w-full gap-4 border border-gray-200 rounded-md p-4 bg-white shadow-sm dark:bg-gray-800 dark:border-gray-700">
+      class="flex flex-col sm:flex-row md:items-center w-full gap-4 border border-gray-200 rounded-md p-4 bg-white shadow-sm dark:bg-gray-800 dark:border-gray-700">
       <!-- Search -->
       <div class="relative flex-1">
         <UInput
@@ -73,6 +73,7 @@
         </UButton>
       </div>
     </div>
+
     <ViewProduct
       :show="showViewModal"
       :product="viewedProduct"
@@ -80,127 +81,134 @@
 
     <!-- third part (table) -->
     <div
-      class="border border-gray-200 rounded-md bg-white w-[100%] overflow-x-scroll sm:w-full shadow-sm md:overflow-x-auto dark:bg-gray-800 dark:border-gray-700">
-      <table class="min-w-full border-collapse text-sm">
-        <thead
-          class="bg-blue-50 text-gray-700 font-medium dark:bg-gray-700 dark:text-gray-200">
-          <tr>
-            <th class="px-4 py-3 text-start">
-              {{ t("products.table.sku") }}
-            </th>
-            <th class="px-4 py-3 text-start">
-              {{ t("products.table.name") }}
-            </th>
-            <th class="px-4 py-3 text-start">
-              {{ t("products.table.category") }}
-            </th>
-            <th class="px-4 py-3 text-start">
-              {{ t("products.table.price") }}
-            </th>
-            <th class="px-4 py-3 text-start">
-              {{ t("products.table.stock") }}
-            </th>
-            <th class="px-4 py-3 text-start">
-              {{ t("products.table.status") }}
-            </th>
-            <th class="px-4 py-3 text-center">
-              {{ t("products.table.actions") }}
-            </th>
-          </tr>
-        </thead>
+      class="border border-gray-200 rounded-md bg-white w-full shadow-sm dark:bg-gray-800 dark:border-gray-700 flex flex-col">
+      <!-- Table Wrapper -->
+      <div class="relative overflow-x-auto max-h-[65vh]">
+        <table class="min-w-full border-collapse text-sm">
+          <thead
+            class="bg-blue-50 text-gray-700 font-medium dark:bg-gray-700 dark:text-gray-200">
+            <tr>
+              <th class="px-4 py-3 text-start">
+                {{ t("products.table.sku") }}
+              </th>
+              <th class="px-4 py-3 text-start">
+                {{ t("products.table.name") }}
+              </th>
+              <th class="px-4 py-3 text-start">
+                {{ t("products.table.category") }}
+              </th>
+              <th class="px-4 py-3 text-start">
+                {{ t("products.table.price") }}
+              </th>
+              <th class="px-4 py-3 text-start">
+                {{ t("products.table.stock") }}
+              </th>
+              <th class="px-8 py-3 text-start">
+                {{ t("products.table.status") }}
+              </th>
+              <th class="px-4 py-3 text-center">
+                {{ t("products.table.actions") }}
+              </th>
+            </tr>
+          </thead>
 
-        <tbody v-if="productsStore.loading">
-          <tr
-            v-for="i in 5"
-            :key="i"
-            class="border-b border-gray-200 dark:border-gray-700">
-            <td v-for="n in 7" :key="n" class="px-4 py-3">
-              <USkeleton class="h-4 w-full rounded" />
-            </td>
-          </tr>
-        </tbody>
+          <tbody v-if="productsStore.loading">
+            <tr
+              v-for="i in 5"
+              :key="i"
+              class="border-b border-gray-200 dark:border-gray-700">
+              <td v-for="n in 7" :key="n" class="px-4 py-3">
+                <USkeleton class="h-4 w-full rounded" />
+              </td>
+            </tr>
+          </tbody>
 
-        <tbody v-else>
-          <tr
-            v-for="product in paginatedProducts"
-            :key="product.id"
-            class="border-b border-gray-200 hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-700">
-            <td class="ps-2 md:px-4 py-3 text-blue-600 dark:text-blue-400">
-              {{ product.sku }}
-            </td>
-            <td class="px-2 md:px-4 py-3 md:font-medium dark:text-gray-100">
-              {{ product.name.slice(0, 20) }}...
-            </td>
-            <td class="px-2 md:px-4 py-3 dark:text-gray-100">
-              {{ product.category }}
-            </td>
-            <td class="px-2 md:px-4 py-3 dark:text-gray-100">
-              {{ product.price }}
-            </td>
-            <td class="px-2 md:px-4 py-3 dark:text-gray-100">
-              {{ product.stock }}
-            </td>
-            <td class="px-2 md:px-4 py-3">
-              <span
-                :class="[
-                  'px-2 py-1 rounded-full text-xs font-semibold',
-                  product.status === 'Active'
-                    ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300'
-                    : 'bg-red-100 text-red-600 dark:bg-red-900 dark:text-red-300',
-                ]">
-                {{ product.status }}
-              </span>
-            </td>
-            <td class="px-4 py-3">
-              <div class="flex gap-2 justify-center">
-                <UButton
-                  variant="ghost"
-                  size="sm"
-                  class="p-2 hover:bg-red-50 dark:hover:bg-red-900"
-                  @click="
-                    deleteProduct({ ...product, price: Number(product.price) })
-                  ">
-                  <Icon
-                    name="lucide:trash-2"
-                    class="w-4 h-4 text-red-600 dark:text-red-400" />
-                </UButton>
-                <UButton
-                  variant="ghost"
-                  size="sm"
-                  class="p-2 hover:bg-blue-50 dark:hover:bg-blue-900"
-                  @click="editProduct(product.id)">
-                  <Icon
-                    name="lucide:edit-3"
-                    class="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                </UButton>
-                <UButton
-                  variant="ghost"
-                  size="sm"
-                  class="p-2 hover:bg-blue-50 dark:hover:bg-blue-900"
-                  @click="viewProduct(product.id)">
-                  <Icon
-                    name="lucide:eye"
-                    class="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                </UButton>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+          <tbody v-else>
+            <tr
+              v-for="product in paginatedProducts"
+              :key="product.id"
+              class="border-b border-gray-200 hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-700">
+              <td class="ps-2 md:px-4 py-3 text-blue-600 dark:text-blue-400">
+                {{ product.sku }}
+              </td>
+              <td class="px-2 md:px-4 py-3 md:font-medium dark:text-gray-100">
+                {{ product.name.slice(0, 10) }}...
+              </td>
+              <td class="px-2 md:px-4 py-3 dark:text-gray-100">
+                {{ product.category }}
+              </td>
+              <td class="px-2 md:px-4 py-3 dark:text-gray-100">
+                {{ product.price }}
+              </td>
+              <td class="px-2 md:px-4 py-3 dark:text-gray-100">
+                {{ product.stock }}
+              </td>
+              <td class="text-center md:px-4 py-3">
+                <span
+                  :class="[
+                    'py-1 rounded-full text-xs font-semibold',
+                    product.status === 'Active'
+                      ? 'bg-green-100 text-green-700 dark:bg-green-900 px-2 dark:text-green-300'
+                      : product.status === 'Out of Stock'
+                      ? 'bg-red-100 text-red-600 dark:bg-red-900 px-2 dark:text-red-300'
+                      : 'bg-yellow-100 text-yellow-600 px-2 dark:bg-yellow-900 dark:text-yellow-300',
+                  ]">
+                  {{ product.status }}
+                </span>
+              </td>
+              <td class="px-4 py-3">
+                <div class="flex gap-2 justify-center">
+                  <UButton
+                    variant="ghost"
+                    size="sm"
+                    class="p-2 hover:bg-red-50 dark:hover:bg-red-900"
+                    @click="
+                      deleteProduct({
+                        ...product,
+                        price: Number(product.price),
+                      })
+                    ">
+                    <Icon
+                      name="lucide:trash-2"
+                      class="w-4 h-4 text-red-600 dark:text-red-400" />
+                  </UButton>
+                  <UButton
+                    variant="ghost"
+                    size="sm"
+                    class="p-2 hover:bg-blue-50 dark:hover:bg-blue-900"
+                    @click="editProduct(product.id)">
+                    <Icon
+                      name="lucide:edit-3"
+                      class="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                  </UButton>
+                  <UButton
+                    variant="ghost"
+                    size="sm"
+                    class="p-2 hover:bg-blue-50 dark:hover:bg-blue-900"
+                    @click="viewProduct(product.id)">
+                    <Icon
+                      name="lucide:eye"
+                      class="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                  </UButton>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-      <!-- Footer -->
+      <!-- table footer (pagination) -->
       <div
-        class="flex w-[37rem] sm:w-full flex-col md:flex-row justify-center md:justify-between items-center bg-blue-50 px-4 py-3 text-sm dark:bg-gray-700">
+        class="w-full flex flex-col md:flex-row justify-center md:justify-between items-center bg-blue-50 px-4 py-3 text-sm border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600">
         <span class="text-blue-600 dark:text-blue-300">
           {{ t("products.footer.showing") }} {{ paginatedProducts.length }}
           {{ t("products.footer.of") }} {{ filteredProducts.length }}
           {{ t("products.footer.products") }}
         </span>
 
-        <!-- Pagination -->
         <div
           v-if="totalPages > 1"
-          class="flex justify-center items-center gap-2 py-4">
+          class="flex px-2 justify-center items-center gap-2 py-4">
           <button
             class="px-3 py-2.5 flex rounded-md border border-gray-300 hover:text-blue-500 hover:border-blue-400 disabled:border-slate-600 disabled:text-slate-600 disabled:opacity-50 transition-all dark:border-gray-600 dark:text-gray-100 dark:hover:text-blue-400"
             :disabled="currentPage === 1"
@@ -223,12 +231,6 @@
             {{ page }}
           </button>
 
-          <span
-            v-if="endPage < totalPages"
-            class="text-gray-500 dark:text-gray-400"
-            >...</span
-          >
-
           <button
             class="px-3 py-2.5 flex rounded-md border border-gray-300 hover:text-blue-500 hover:border-blue-400 disabled:border-slate-600 disabled:text-slate-600 disabled:opacity-50 transition-all dark:border-gray-600 dark:text-gray-100 dark:hover:text-blue-400"
             :disabled="currentPage === totalPages"
@@ -239,11 +241,12 @@
           </button>
         </div>
 
-        <div class="flex gap-6 text-blue-600 dark:text-blue-300">
+        <div
+          class="flex md:flex-col gap-x-6 gap-y-2 text-blue-600 dark:text-blue-300">
           <span>{{ t("products.footer.totalStock") }}: {{ totalStock }}</span>
-          <span>
-            {{ t("products.footer.totalValue") }}: SAR {{ totalValue }}
-          </span>
+          <span
+            >{{ t("products.footer.totalValue") }}: SAR {{ totalValue }}</span
+          >
         </div>
       </div>
     </div>
@@ -317,24 +320,23 @@ const pageSize = 5;
 const currentPage = ref(1);
 const windowSize = 3; // Number of pages to display
 
-const startPage = computed(() => {
-  // the first page in the current window
-  return Math.floor((currentPage.value - 1) / windowSize) * windowSize + 1;
-});
-
-const endPage = computed(() => {
-  // the last page in the current window
-  return Math.min(startPage.value + windowSize - 1, totalPages.value);
-});
-
 const totalPages = computed(() =>
   Math.ceil(filteredProducts.value.length / pageSize)
 );
 
 const visiblePages = computed(() => {
-  // Pages to display in pagination
+  // 3 Pages to display in pagination
   const pages = [];
-  for (let i = startPage.value; i <= endPage.value; i++) {
+  let start = Math.max(currentPage.value - Math.floor(windowSize / 2), 1);
+  let end = start + windowSize - 1;
+
+  // Ensure start and end are within bounds
+  if (end > totalPages.value) {
+    end = totalPages.value;
+    start = Math.max(end - windowSize + 1, 1);
+  }
+
+  for (let i = start; i <= end; i++) {
     pages.push(i);
   }
   return pages;
@@ -428,3 +430,19 @@ const totalValue = computed(() =>
     .toFixed(2)
 );
 </script>
+<style scoped>
+::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+::-webkit-scrollbar-track {
+  background: #343333;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+</style>
